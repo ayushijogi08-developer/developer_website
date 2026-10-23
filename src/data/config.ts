@@ -19,8 +19,8 @@ export const BRAND_CONFIG = {
   // TODO: Add registered custom domain when provided by client (e.g. 'kunjtechnologies.in')
   domain: "", // [TODO: Domain pending client purchase]
 
-  // TODO: Add official business email when created (e.g. 'contact@kunjtechnologies.in')
-  email: "", // [TODO: Business email pending client setup]
+  // Verified business email
+  email: "darshanjogi36@gmail.com",
 
   socialLinks: [
     {
