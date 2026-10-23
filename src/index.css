@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #F4F0EA;
+    color: #111110;
+    font-family: 'General Sans', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    /* Mobile body text: 16px / 1.6 line-height */
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  section[id] {
+    scroll-margin-top: 85px;
+  }
+
+  /* ── Mobile-first section padding ── */
+  @media (max-width: 767px) {
+    section[id] {
+      scroll-margin-top: 64px;
+    }
+  }
+}
+
+/* ── Custom Paper Texture Overlay ── */
+.bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* ── Custom Stamp Border & Dotted Accent Lines ── */
+.border-ruled {
+  border-bottom: 1.5px dashed rgba(17, 17, 16, 0.25);
+}
+
+.stamp-badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1.5px solid #111110;
+  box-shadow: 2px 2px 0px #111110;
+  transform: rotate(-1.5deg);
+}
+
+/* ── MOBILE: lighten stamp badge ── */
+@media (max-width: 767px) {
+  .stamp-badge {
+    border-width: 1px;
+    box-shadow: 0 2px 8px rgba(17, 17, 16, 0.08);
+    transform: rotate(0deg);
+  }
+}
+
+/* ── Lenis smooth scrolling helper ── */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════
+   MOBILE DESIGN SYSTEM (< 768px)
+   ══════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+  /* ── Mobile section spacing: 56-72px vertical, 20px sides ── */
+  .mobile-section-pad {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  /* ── Mobile card shadow: soft instead of hard offset ── */
+  .mobile-card-soft {
+    border-width: 1px !important;
+    box-shadow: 0 8px 24px rgba(17, 17, 16, 0.08) !important;
+  }
+
+  /* ── Mobile: keep hard shadow ONLY on primary CTA ── */
+  .mobile-cta-hard {
+    border-width: 2px !important;
+    box-shadow: 3px 3px 0px #111110 !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   TOUCH DEVICE OVERRIDES (pointer: coarse)
+   ══════════════════════════════════════════ */
+
+@media (pointer: coarse) {
+  /* Hide custom cursor completely */
+  .custom-cursor-wrapper {
+    display: none !important;
+  }
+  /* Disable hover-only interactions */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ══════════════════════════════════════════
+   BOTTOM ACTION BAR — safe-area support
+   ══════════════════════════════════════════ */
+
+.bottom-action-bar {
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+}
+
+/* ══════════════════════════════════════════
+   BODY SCROLL LOCK (for mobile menu overlay)
+   ══════════════════════════════════════════ */
+
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* ══════════════════════════════════════════
+   PREFERS REDUCED MOTION
+   ══════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-marquee,
+  .animate-marquee-slow,
+  .animate-pulse-subtle {
+    animation: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   MOCKUP FLOAT ANIMATION (Hero)
+   ══════════════════════════════════════════ */
+
+@keyframes mockupFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes mockupContentScroll {
+  0%, 15% { transform: translateY(0); }
+  40%, 55% { transform: translateY(-30px); }
+  75%, 100% { transform: translateY(0); }
+}
+
+.animate-mockup-float {
+  animation: mockupFloat 4s ease-in-out infinite;
+}
+
+.animate-mockup-content-scroll {
+  animation: mockupContentScroll 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-mockup-float,
+  .animate-mockup-content-scroll {
+    animation: none !important;
+  }
+}
