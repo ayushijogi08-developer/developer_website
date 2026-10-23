@@ -45,7 +45,7 @@ export const Pricing: React.FC = () => {
         {/* Horizontal Swipe Carousel on Mobile (88% width, snap), Grid on Desktop */}
         <div
           ref={scrollRef}
-          className="flex overflow-x-auto snap-x snap-mandatory gap-4 scrollbar-none pb-4 md:grid md:grid-cols-3 md:gap-6 items-stretch select-none"
+          className="flex overflow-x-auto snap-x snap-mandatory gap-4 scrollbar-none pt-6 pb-6 px-1 md:px-0 md:grid md:grid-cols-3 md:gap-6 items-stretch select-none"
         >
           {PRICING_DATA.plans.map((plan) => {
             const isHighlighted = plan.highlighted;
@@ -55,19 +55,19 @@ export const Pricing: React.FC = () => {
                 key={plan.name}
                 className={`w-[88vw] max-w-[340px] flex-shrink-0 snap-center md:w-auto relative bg-card rounded-lg flex flex-col justify-between transition-all duration-300 ${
                   isHighlighted 
-                    ? 'border-2 border-ink shadow-lift z-10' 
-                    : 'border border-ink/15 shadow-mobile-soft md:shadow-card'
+                    ? 'border-2 border-ink shadow-lift z-20 md:-translate-y-1' 
+                    : 'border border-ink/15 shadow-mobile-soft md:shadow-card z-10'
                 }`}
               >
                 {/* Stamp Badge onto Recommended Plan */}
                 {isHighlighted && plan.badge && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-vermilion text-paper font-mono text-[11px] font-bold px-3.5 py-1 rounded-badge shadow-sm whitespace-nowrap flex items-center gap-1.5 border border-ink z-20">
-                    <Sparkles className="w-3 h-3 text-paper" />
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-30 bg-vermilion-text text-paper font-mono text-[11px] font-bold px-3.5 py-1 rounded-badge shadow-md border border-ink whitespace-nowrap flex items-center gap-1.5 pointer-events-none">
+                    <Sparkles className="w-3 h-3" />
                     <span>{plan.badge}</span>
                   </div>
                 )}
 
-                <div className={`p-5 sm:p-6 ${isHighlighted ? 'bg-paper-dark/30 pt-7 sm:pt-7' : ''}`}>
+                <div className={`p-5 sm:p-6 ${isHighlighted ? 'bg-paper-dark/30' : ''}`}>
                   <h3 className="font-display font-bold text-xl sm:text-2xl text-ink mb-1.5">
                     {plan.name}
                   </h3>
@@ -81,7 +81,7 @@ export const Pricing: React.FC = () => {
                   <ul className="space-y-2.5 my-4">
                     {plan.features.map((feature, fIdx) => (
                       <li key={fIdx} className="flex items-start gap-2.5">
-                        <div className={`mt-0.5 rounded-full p-0.5 flex-shrink-0 ${isHighlighted ? 'bg-vermilion text-paper' : 'bg-ink/10 text-ink'}`}>
+                        <div className={`mt-0.5 rounded-full p-0.5 flex-shrink-0 ${isHighlighted ? 'bg-vermilion-text text-paper' : 'bg-ink/10 text-ink'}`}>
                           <Check className="w-3 h-3" />
                         </div>
                         <span className="font-sans text-xs sm:text-sm text-ink-muted leading-snug">
@@ -96,7 +96,7 @@ export const Pricing: React.FC = () => {
                     href="#contact"
                     className={`w-full min-h-[44px] flex items-center justify-center gap-2 font-sans font-bold text-sm py-3 rounded-badge transition-all ${
                       isHighlighted
-                        ? 'bg-vermilion hover:bg-vermilion-dark text-paper border-2 border-ink shadow-sm'
+                        ? 'bg-vermilion-text hover:bg-vermilion-dark text-paper border-2 border-ink shadow-sm'
                         : 'bg-paper hover:bg-paper-dark text-ink border border-ink/30'
                     }`}
                   >
