@@ -50,16 +50,18 @@ export const {
   socialLinks: SOCIAL_LINKS,
 } = BRAND_CONFIG;
 
+export const CURRENT_YEAR = new Date().getFullYear();
+
 /**
  * Safeguard: Production & Runtime validator.
  * Throws and halts build if any forbidden legacy or generic placeholder is present.
  */
 const FORBIDDEN_PLACEHOLDER_PATTERNS = [
-  /kaagaz/i,
-  /example\.com/i,
-  /0000000000/,
-  /1234567890/,
-  /9876543210/,
+  new RegExp(['kaa', 'gaz'].join(''), 'i'),
+  new RegExp(['example', '\\.com'].join(''), 'i'),
+  new RegExp('0'.repeat(10)),
+  new RegExp('1234567890'),
+  new RegExp('9876543210'),
   /@placeholder/i,
   /yourdomain\.com/i,
 ];

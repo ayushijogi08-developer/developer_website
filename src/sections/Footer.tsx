@@ -1,6 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { BRAND_NAME, BRAND_INITIALS, TAGLINE, NAV_LINKS, MERGED_SERVICES_DATA, WHATSAPP_NUMBER, WHATSAPP_MESSAGE, EMAIL, SOCIAL_LINKS } from '../data/siteData';
+import { BRAND_NAME, BRAND_INITIALS, TAGLINE, NAV_LINKS, MERGED_SERVICES_DATA, WHATSAPP_NUMBER, WHATSAPP_MESSAGE, EMAIL, SOCIAL_LINKS, CURRENT_YEAR } from '../data/siteData';
 import { PhoneCall, Mail, ArrowUpRight } from 'lucide-react';
 import { Reveal } from '../components/motion/Reveal';
 
@@ -135,7 +134,7 @@ export const Footer: React.FC = () => {
 
         {/* Dynamic Copyright Notice */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 font-mono text-[11px] text-paper-dark">
-          <p>© {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.</p>
+          <p>© {CURRENT_YEAR} {BRAND_NAME}. All rights reserved.</p>
           <p className="flex items-center gap-1.5">
             <span>Designed and built by {BRAND_NAME}</span>
             <span className="text-vermilion">✦</span>

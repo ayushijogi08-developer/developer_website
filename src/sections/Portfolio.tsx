@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PROJECTS_DATA, type ProjectItem } from '../data/projects';
 import { WHATSAPP_NUMBER, BRAND_NAME, DOMAIN } from '../data/siteData';
@@ -143,12 +143,13 @@ export const Portfolio: React.FC = () => {
     setActiveIndex(Math.min(Math.max(0, newIndex), filteredProjects.length - 1));
   };
 
-  useEffect(() => {
+  const switchTab = (tab: "websites" | "apps") => {
+    setActiveTab(tab);
     setActiveIndex(0);
     if (scrollRef.current) {
       scrollRef.current.scrollLeft = 0;
     }
-  }, [activeTab]);
+  };
 
   return (
     <section id="work" className="py-12 md:py-24 bg-ink text-paper border-b border-paper/15 relative overflow-hidden">
@@ -180,7 +181,7 @@ export const Portfolio: React.FC = () => {
         <div className="sticky top-16 z-30 bg-ink/95 backdrop-blur-md py-3 border-b border-paper/15 mb-6">
           <div className="flex items-center bg-paper/10 p-1 rounded-badge max-w-sm border border-paper/20">
             <button
-              onClick={() => setActiveTab("websites")}
+              onClick={() => switchTab("websites")}
               className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-badge font-mono text-xs font-bold uppercase transition-all min-h-[40px] ${
                 activeTab === "websites"
                   ? 'bg-vermilion text-paper shadow-sm'
@@ -192,7 +193,7 @@ export const Portfolio: React.FC = () => {
             </button>
 
             <button
-              onClick={() => setActiveTab("apps")}
+              onClick={() => switchTab("apps")}
               className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-badge font-mono text-xs font-bold uppercase transition-all min-h-[40px] ${
                 activeTab === "apps"
                   ? 'bg-vermilion text-paper shadow-sm'

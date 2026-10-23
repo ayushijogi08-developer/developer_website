@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { BRAND_NAME, BRAND_INITIALS } from '../data/siteData';
+import { BRAND_NAME, BRAND_INITIALS, CURRENT_YEAR } from '../data/siteData';
 
 export const IntroLoader: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
   const [percent, setPercent] = useState(0);
@@ -58,7 +58,7 @@ export const IntroLoader: React.FC<{ onComplete: () => void }> = ({ onComplete }
           />
           LOADING (TAP ANYWHERE TO SKIP)
         </span>
-        <span className="font-mono text-vermilion">{BRAND_INITIALS} © {new Date().getFullYear()}</span>
+        <span className="font-mono text-vermilion">{BRAND_INITIALS} © {CURRENT_YEAR}</span>
       </div>
 
       <div className="my-auto max-w-4xl">

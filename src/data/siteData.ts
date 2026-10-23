@@ -13,6 +13,7 @@ import {
   EMAIL,
   DOMAIN,
   SOCIAL_LINKS,
+  CURRENT_YEAR,
 } from './config';
 
 export {
@@ -30,6 +31,7 @@ export {
   EMAIL,
   DOMAIN,
   SOCIAL_LINKS,
+  CURRENT_YEAR,
 };
 
 
