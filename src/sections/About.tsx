@@ -1,12 +1,12 @@
 import React from 'react';
-import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from '../data/siteData';
 import { getSectionConfig } from '../config/sectionsConfig';
-import { Check, Code2, User } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { Reveal } from '../components/motion/Reveal';
+import { CTA_CONFIG } from '../data/cta';
+import { CtaButton } from '../components/CtaButton';
 
 export const About: React.FC = () => {
   const sectionInfo = getSectionConfig('about');
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace('+', '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
   return (
     <section id="about" className="py-12 md:py-24 bg-paper border-b border-ink/15 relative overflow-hidden">
@@ -27,33 +27,21 @@ export const About: React.FC = () => {
           </div>
         </Reveal>
 
-        <div className="space-y-8">
-
-          {/* Photo Slot at Top with Rounded / Arch Mask */}
-          <Reveal delay={0.1}>
-            <div className="text-center">
-              <div className="w-40 h-52 sm:w-48 sm:h-60 rounded-t-[100px] border-2 border-ink bg-paper-dark shadow-mobile-soft flex flex-col items-center justify-center p-4 mx-auto relative group overflow-hidden">
-                <div className="w-16 h-16 rounded-full bg-vermilion/15 border border-vermilion/40 flex items-center justify-center mb-3 text-vermilion-text">
-                  <User className="w-8 h-8" />
-                </div>
-                <span className="font-mono text-[10px] font-bold uppercase text-ink-muted leading-tight">
-                  DEVELOPER PHOTO PLACEHOLDER
-                </span>
-                <span className="font-display font-bold text-sm text-ink mt-1">
-                  Darshan Jogi
-                </span>
-                <span className="font-mono text-[9px] text-emerald-700 font-bold uppercase mt-1 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                  ● AVAILABLE
-                </span>
-              </div>
-            </div>
-          </Reveal>
+        <div className="space-y-6 sm:space-y-8">
 
           {/* 3-Line Intro */}
-          <Reveal delay={0.2}>
+          <Reveal delay={0.1}>
             <div className="bg-card border border-ink/15 rounded-lg p-5 sm:p-6 shadow-mobile-soft">
+              <div className="flex flex-wrap items-center gap-2.5 mb-3">
+                <span className="font-display font-bold text-lg sm:text-xl text-ink">
+                  Darshan Jogi
+                </span>
+                <span className="font-mono text-[10px] text-emerald-700 font-bold uppercase bg-emerald-500/10 px-2.5 py-0.5 rounded border border-emerald-500/20">
+                  ● REPLIES WITHIN 1 HOUR
+                </span>
+              </div>
               <p className="font-sans text-base sm:text-lg text-ink leading-relaxed font-medium">
-                I'm Darshan — I build custom websites and apps for shop owners, manufacturers, and local businesses in Akola and across Maharashtra. I handle everything directly from code to Google setup, so you never deal with sales reps or middleman agencies.
+                I’m Darshan — I build custom websites and apps for shop owners, manufacturers, and local businesses. I handle everything directly from code to Google setup, so you never deal with sales reps or middleman agencies.
               </p>
             </div>
           </Reveal>
@@ -84,18 +72,10 @@ export const About: React.FC = () => {
             </div>
           </Reveal>
 
-          {/* Direct WhatsApp Action Button */}
+          {/* Direct WhatsApp Text Link */}
           <Reveal delay={0.4}>
             <div className="pt-2">
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 bg-vermilion-text hover:bg-vermilion-dark text-paper font-sans font-bold text-sm px-6 py-3.5 rounded-badge border border-ink shadow-sm transition-all"
-              >
-                <Code2 className="w-4.5 h-4.5" />
-                <span>Talk Directly with Darshan on WhatsApp →</span>
-              </a>
+              <CtaButton cta={CTA_CONFIG.aboutTertiary} />
             </div>
           </Reveal>
 

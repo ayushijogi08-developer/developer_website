@@ -8,6 +8,11 @@ export interface ProjectItem {
   whatItDoes: string[];
   liveUrl?: string;
   videoUrl?: string;
+  previewImage?: string;
+  previewWidth?: number;
+  previewHeight?: number;
+  previewAlt?: string;
+  previewCrop?: "full" | "text";
   screenshots?: string[];
   tech?: string[];
   clientLocation?: string;
@@ -43,6 +48,11 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "Direct WhatsApp appointment booking & Google Maps navigation"
     ],
     liveUrl: "https://hair-salon-web-ruddy.vercel.app/",
+    previewImage: "/portfolio/hair-city-salon.webp",
+    previewWidth: 1440,
+    previewHeight: 900,
+    previewCrop: "full",
+    previewAlt: "Hair City Salon & Academy live website showcase with editorial hair cuts, lookbook, and academy styling curriculum",
     clientLocation: "Akola, Maharashtra",
     layout: "catalog",
     tech: ["React 19", "Vite", "GSAP", "Lenis", "Vanilla CSS"],
@@ -75,6 +85,11 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "Interactive consultation booking system with client-side validation & WhatsApp link"
     ],
     liveUrl: "https://derma-web-gules.vercel.app/",
+    previewImage: "/portfolio/derma-care-clinic.webp",
+    previewWidth: 1440,
+    previewHeight: 900,
+    previewCrop: "full",
+    previewAlt: "Derma Care Clinic live website preview featuring clinical consultation booking, treatment modalities, and skin protocols",
     clientLocation: "Akola, Maharashtra",
     layout: "specs",
     tech: ["React 19", "Vite", "Lucide React", "Vanilla CSS", "Schema.org"],
@@ -106,6 +121,11 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "Admin panel to manage stock, products & orders"
     ],
     liveUrl: "https://baker-web-app-zeta.vercel.app/",
+    previewImage: "/portfolio/bakery-ordering.webp",
+    previewWidth: 1440,
+    previewHeight: 900,
+    previewCrop: "full",
+    previewAlt: "The Hidden Bakers live store website preview with artisan sourdough, celebration cakes, and online order tracking",
     clientLocation: "Live Project",
     layout: "menu",
     tech: ["React", "Node.js", "MongoDB", "Express"],
@@ -137,6 +157,11 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "Manufacturing process & safety standards"
     ],
     liveUrl: "https://stone-crusher-web-gamma.vercel.app/",
+    previewImage: "/portfolio/stone-crusher.webp",
+    previewWidth: 1440,
+    previewHeight: 900,
+    previewCrop: "full",
+    previewAlt: "Kalyan Stone Crushing Industries / JP Silica website preview showing M-Sand specifications, quarry fleet, and quotes",
     clientLocation: "Live Project",
     layout: "dashboard",
     tech: ["React", "Tailwind CSS", "Vite"],
@@ -167,6 +192,11 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "Direct availability enquiry desk"
     ],
     liveUrl: "https://wedding-venue-web.vercel.app/",
+    previewImage: "/portfolio/wedding-venue.webp",
+    previewWidth: 1440,
+    previewHeight: 900,
+    previewCrop: "full",
+    previewAlt: "Heritage Palace & Banquets luxury resort website preview with wedding lawns, archway banquets, and availability booking",
     clientLocation: "Live Project",
     layout: "hero-image",
     tech: ["React", "Tailwind CSS", "Vite"],
@@ -198,6 +228,9 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "Custom workout, diet plans & progress reports"
     ],
     clientLocation: "Practice Build",
+    previewWidth: 390,
+    previewHeight: 844,
+    previewAlt: "Gym Management App mobile interface mockup",
     tech: ["React Native", "TypeScript", "Node.js"],
     theme: {
       bg: "#111827",
@@ -227,6 +260,9 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "Digital QR code product catalog"
     ],
     clientLocation: "Practice Build",
+    previewWidth: 390,
+    previewHeight: 844,
+    previewAlt: "Grocery Store POS App mobile interface mockup",
     tech: ["React Native", "TypeScript", "PostgreSQL"],
     theme: {
       bg: "#064E3B",
@@ -256,6 +292,9 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "One-click downloadable PDF financial reports"
     ],
     clientLocation: "Own Product Build",
+    previewWidth: 390,
+    previewHeight: 844,
+    previewAlt: "FinanceWise Personal Tracker mobile interface mockup",
     tech: ["React Native", "Expo", "SQLite"],
     theme: {
       bg: "#1E1B4B",

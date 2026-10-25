@@ -1,6 +1,5 @@
 import React from 'react';
 import { getSectionConfig } from '../config/sectionsConfig';
-import { ArrowRight } from 'lucide-react';
 import { Reveal } from '../components/motion/Reveal';
 
 interface ChecklistGroup {
@@ -96,32 +95,6 @@ export const WhatYouGet: React.FC = () => {
             </Reveal>
           ))}
         </div>
-
-        {/* Compact CTA Banner */}
-        <Reveal delay={0.3}>
-          <div className="bg-ink text-paper border border-ink rounded-lg p-5 sm:p-8 shadow-mobile-soft flex flex-col md:flex-row md:items-center justify-between gap-5">
-            <div>
-              <span className="stamp-badge bg-vermilion-text text-paper text-[11px] mb-2 inline-block">
-                NEED SOMETHING CUSTOM?
-              </span>
-              <h3 className="font-display font-bold text-xl sm:text-2xl uppercase tracking-tight text-paper mt-1">
-                Let's Build Exactly What You Need
-              </h3>
-              <p className="font-sans text-xs sm:text-sm text-paper-dark leading-relaxed mt-1 max-w-xl">
-                Calculators, multi-location directories, product catalogs, or reservation desks — tell us what your trade requires.
-              </p>
-            </div>
-
-            <a
-              href="#contact"
-              className="flex-shrink-0 inline-flex items-center justify-center gap-2 bg-vermilion-text hover:bg-vermilion-dark text-paper font-sans font-bold text-sm px-6 py-3.5 min-h-[44px] rounded-badge border border-paper shadow-sm transition-all"
-            >
-              <span>Get Your Website</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
-        </Reveal>
-
       </div>
     </section>
   );

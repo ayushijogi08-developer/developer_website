@@ -12,6 +12,9 @@ import {
   WHATSAPP_MESSAGE,
   EMAIL,
   DOMAIN,
+  BRAND_LOGO,
+  BRAND_LOGO_MARK,
+  BRAND_LOGO_WHITE,
   SOCIAL_LINKS,
   CURRENT_YEAR,
 } from './config';
@@ -30,6 +33,9 @@ export {
   WHATSAPP_MESSAGE,
   EMAIL,
   DOMAIN,
+  BRAND_LOGO,
+  BRAND_LOGO_MARK,
+  BRAND_LOGO_WHITE,
   SOCIAL_LINKS,
   CURRENT_YEAR,
 };
@@ -82,9 +88,9 @@ export const WHAT_YOU_GET_DATA = [
 export const HERO_DATA = {
   headlineMain: "Your Business Deserves a",
   headlineAccent: "Professional Website.",
-  subheading: "We build websites and mobile apps that look great on phones, load fast, and help customers contact you.",
+  subheading: "We build websites and mobile apps that look great on phones, load fast, and help customers contact you. आपका बिज़नेस, आपकी वेबसाइट।",
   trustLine: "Built as practice builds & design concepts.",
-  badgeText: "EST. 2026 • HANDCRAFTED WEBSITES & APPS",
+  badgeText: "WEBSITES & APPS FOR LOCAL BUSINESSES",
   // // CHANGED: Replaced Construction Dealers and Manufacturers with Hair Salons and Dermatology Clinics
   marqueeItems: [
     "HAIR SALONS & ACADEMIES",
@@ -211,12 +217,12 @@ export const PORTFOLIO_DATA = {
   projects: [
     {
       id: "p1",
-      title: "Mithai & Co. Artisanal Bakery",
-      category: "Restaurant",
-      isDemo: true,
-      tag: "DEMO CONCEPT",
-      description: "Bakery showcase with eggless menu, festive gift hamper ordering, and WhatsApp delivery booking.",
-      clientLocation: "Jaipur, Rajasthan",
+      title: "The Hidden Bakers & Admin System",
+      category: "Bakery & Food Ordering",
+      isDemo: false,
+      tag: "WORKING BUILD",
+      description: "Online artisan bakery store with customer checkout, admin inventory management, and live order tracking.",
+      clientLocation: "Akola, Maharashtra",
       layout: "menu" as const,
       theme: {
         bg: "#FFF8F0",
@@ -229,9 +235,9 @@ export const PORTFOLIO_DATA = {
         tagBorder: "#E05A47",
         divider: "rgba(61,30,22,0.15)"
       },
-      badgeText: "100% EGGLESS • DAILY FRESH",
-      previewText: "Handcrafted Sweets & Custom Celebration Cakes",
-      highlights: ["Interactive Menu", "Direct Ordering", "Gift Hampers"],
+      badgeText: "WORKING BUILD • ARTISAN BAKERY",
+      previewText: "Artisanal Breads, Celebration Cakes & Online Ordering",
+      highlights: ["Online Ordering", "Admin System", "Live Tracking"],
       url: "baker-web-app-zeta.vercel.app"
     },
     // // NEW: Hair City Salon & Academy replacing Apex Building Supplies
@@ -452,7 +458,7 @@ export const ABOUT_DATA = {
 export const FAQ_DATA = [
   {
     q: "How much does a website cost?",
-    a: "It depends on how many pages and features you need. Basic websites start from ₹9,999. We'll give you a clear quote after a quick chat."
+    a: "It depends on how many pages and features you need.Static websites start from ₹9,999 and dynamic websites (with an admin panel) start from ₹24,999. We'll give you a clear quote after a quick chat."
   },
   {
     q: "How long does it take?",

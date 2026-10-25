@@ -2,8 +2,9 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { PROCESS_DATA } from '../data/siteData';
 import { getSectionConfig } from '../config/sectionsConfig';
-import { ArrowRight } from 'lucide-react';
 import { Reveal } from '../components/motion/Reveal';
+import { CTA_CONFIG } from '../data/cta';
+import { CtaButton } from '../components/CtaButton';
 
 export const Process: React.FC = () => {
   const sectionInfo = getSectionConfig('process');
@@ -86,21 +87,10 @@ export const Process: React.FC = () => {
 
         </div>
 
-        {/* Compact CTA Banner */}
-        <Reveal delay={0.3}>
-          <div className="mt-10 bg-paper-dark border border-ink/15 p-5 sm:p-6 rounded-lg shadow-mobile-soft flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-              <h4 className="font-display font-bold text-base sm:text-lg text-ink">Ready to get started?</h4>
-              <p className="font-sans text-xs sm:text-sm text-ink-muted">Send us a WhatsApp message to discuss your website.</p>
-            </div>
-
-            <a
-              href="#contact"
-              className="w-full sm:w-auto flex-shrink-0 min-h-[44px] bg-vermilion-text hover:bg-vermilion-dark text-paper font-sans font-bold text-sm px-6 py-3 rounded-badge border border-ink shadow-sm transition-all flex items-center justify-center gap-2"
-            >
-              <span>Get Your Website</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
+        {/* Tertiary Action: Step 1 on WhatsApp */}
+        <Reveal delay={0.2}>
+          <div className="mt-8 pt-4 border-t border-ink/10 flex items-center justify-start">
+            <CtaButton cta={CTA_CONFIG.processTertiary} />
           </div>
         </Reveal>
 

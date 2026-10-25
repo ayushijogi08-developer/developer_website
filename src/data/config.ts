@@ -22,6 +22,11 @@ export const BRAND_CONFIG = {
   // Verified business email
   email: "darshanjogi36@gmail.com",
 
+  // Official Brand Logos
+  logo: "/logo.png",
+  logoMark: "/logo-mark.png",
+  logoWhite: "/logo-white.png",
+
   socialLinks: [
     {
       name: "WhatsApp",
@@ -47,8 +52,38 @@ export const {
   whatsappMessage: WHATSAPP_MESSAGE,
   domain: DOMAIN,
   email: EMAIL,
+  logo: BRAND_LOGO,
+  logoMark: BRAND_LOGO_MARK,
+  logoWhite: BRAND_LOGO_WHITE,
   socialLinks: SOCIAL_LINKS,
 } = BRAND_CONFIG;
+
+export const HERO_CONFIG = {
+  heroDesktopImage: "/hero/desktop.webp",
+  heroDesktopProjectId: "p-heritage-palace",
+  heroDesktopAlt: "Heritage Palace and Banquets luxury wedding resort website preview",
+  heroDesktopWidth: 1440,
+  heroDesktopHeight: 2700,
+
+  heroMobileImage: "/hero/mobile.webp",
+  heroMobileProjectId: "p-hair-city",
+  heroMobileAlt: "Hair City salon and academy mobile website preview",
+  heroMobileWidth: 390,
+  heroMobileHeight: 1600,
+} as const;
+
+export const {
+  heroDesktopImage: HERO_DESKTOP_IMAGE,
+  heroDesktopProjectId: HERO_DESKTOP_PROJECT_ID,
+  heroDesktopAlt: HERO_DESKTOP_ALT,
+  heroDesktopWidth: HERO_DESKTOP_WIDTH,
+  heroDesktopHeight: HERO_DESKTOP_HEIGHT,
+  heroMobileImage: HERO_MOBILE_IMAGE,
+  heroMobileProjectId: HERO_MOBILE_PROJECT_ID,
+  heroMobileAlt: HERO_MOBILE_ALT,
+  heroMobileWidth: HERO_MOBILE_WIDTH,
+  heroMobileHeight: HERO_MOBILE_HEIGHT,
+} = HERO_CONFIG;
 
 export const CURRENT_YEAR = new Date().getFullYear();
 

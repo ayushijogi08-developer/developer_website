@@ -52,7 +52,7 @@ export const FloatingActions: React.FC = () => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with us on WhatsApp"
-        className="hidden md:flex fixed bottom-6 right-6 z-40 bg-paper/95 text-emerald-700 hover:text-paper hover:bg-emerald-700 p-3 rounded-full border-2 border-emerald-700 shadow-sm hover:scale-105 transition-all items-center justify-center backdrop-blur-md"
+        className="hidden md:flex fixed bottom-6 right-6 z-50 bg-paper/95 text-emerald-700 hover:text-paper hover:bg-emerald-700 p-3 rounded-full border-2 border-emerald-700 shadow-sm hover:scale-105 transition-all items-center justify-center backdrop-blur-md"
       >
         <MessageSquare className="w-5 h-5" />
       </a>

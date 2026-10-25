@@ -1,5 +1,5 @@
 import React from 'react';
-import { BRAND_NAME, BRAND_INITIALS, TAGLINE, NAV_LINKS, MERGED_SERVICES_DATA, WHATSAPP_NUMBER, WHATSAPP_MESSAGE, EMAIL, SOCIAL_LINKS, CURRENT_YEAR } from '../data/siteData';
+import { BRAND_NAME, BRAND_LOGO_WHITE, TAGLINE, NAV_LINKS, MERGED_SERVICES_DATA, WHATSAPP_NUMBER, WHATSAPP_MESSAGE, EMAIL, SOCIAL_LINKS, CURRENT_YEAR } from '../data/siteData';
 import { PhoneCall, Mail, ArrowUpRight } from 'lucide-react';
 import { Reveal } from '../components/motion/Reveal';
 
@@ -14,16 +14,17 @@ export const Footer: React.FC = () => {
         <Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-10 border-b border-paper/15">
 
-            {/* Brand Line */}
-            <div className="lg:col-span-4 space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 bg-vermilion text-paper font-display font-black text-lg flex items-center justify-center rounded-badge border border-paper">
-                  {BRAND_INITIALS}
-                </div>
-                <span className="font-display font-black text-xl tracking-tight">
-                  {BRAND_NAME}
-                </span>
-              </div>
+            {/* Brand Line - Official white lettering for dark footer */}
+            <div className="lg:col-span-4 space-y-4">
+              <a href="#" className="inline-block group" aria-label={BRAND_NAME}>
+                <img
+                  src={BRAND_LOGO_WHITE}
+                  alt={BRAND_NAME}
+                  width={220}
+                  height={210}
+                  className="h-20 sm:h-24 md:h-28 w-auto object-contain group-hover:scale-105 transition-transform"
+                />
+              </a>
 
               <p className="font-sans text-xs sm:text-sm text-paper-dark leading-relaxed max-w-xs">
                 {TAGLINE}. Fast, mobile-first websites and applications designed to build trust and get business enquiries.
@@ -36,7 +37,7 @@ export const Footer: React.FC = () => {
 
             {/* 2-Column Links Section */}
             <div className="lg:col-span-5 grid grid-cols-2 gap-6">
-              
+
               {/* Navigation Links Column */}
               <div>
                 <h4 className="font-mono text-xs uppercase text-vermilion-light font-bold tracking-wider mb-3">
@@ -134,7 +135,10 @@ export const Footer: React.FC = () => {
 
         {/* Dynamic Copyright Notice */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 font-mono text-[11px] text-paper-dark">
-          <p>© {CURRENT_YEAR} {BRAND_NAME}. All rights reserved.</p>
+          <p>
+            © {CURRENT_YEAR} {BRAND_NAME}. All rights reserved. ·{' '}
+            <a href="#policies" className="underline hover:text-vermilion-light">Privacy & Terms</a>
+          </p>
           <p className="flex items-center gap-1.5">
             <span>Designed and built by {BRAND_NAME}</span>
             <span className="text-vermilion">✦</span>

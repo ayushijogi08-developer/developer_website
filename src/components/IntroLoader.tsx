@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { BRAND_NAME, BRAND_INITIALS, CURRENT_YEAR } from '../data/siteData';
+import { BRAND_NAME, BRAND_INITIALS, BRAND_LOGO_MARK, CURRENT_YEAR } from '../data/siteData';
 
 export const IntroLoader: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
   const [percent, setPercent] = useState(0);
@@ -66,8 +66,15 @@ export const IntroLoader: React.FC<{ onComplete: () => void }> = ({ onComplete }
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="text-xs uppercase text-vermilion tracking-widest mb-3 font-mono flex items-center gap-2"
+          className="text-xs uppercase text-vermilion tracking-widest mb-3 font-mono flex items-center gap-2.5"
         >
+          <img
+            src={BRAND_LOGO_MARK}
+            alt={BRAND_NAME}
+            width={24}
+            height={16}
+            className="h-5 w-auto object-contain shrink-0"
+          />
           <span className="px-2 py-0.5 border border-vermilion/40 rounded-badge">{BRAND_NAME.toUpperCase()}</span>
           <span>[ 00 / 01 ]</span>
         </motion.div>

@@ -151,33 +151,67 @@ body.menu-open {
   }
   .animate-marquee,
   .animate-marquee-slow,
-  .animate-pulse-subtle {
+  .animate-pulse-subtle,
+  .animate-hero-float,
+  .animate-hero-scroll-desktop,
+  .animate-hero-scroll-mobile {
     animation: none !important;
+    transform: translate3d(0, 0, 0) !important;
   }
 }
 
 /* ══════════════════════════════════════════
-   MOCKUP FLOAT ANIMATION (Hero)
+   HERO LIVE PREVIEW ANIMATIONS
    ══════════════════════════════════════════ */
 
-@keyframes mockupFloat {
+@keyframes heroFloat {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-7px); }
 }
 
-@keyframes mockupContentScroll {
-  0%, 15% { transform: translateY(0); }
-  40%, 55% { transform: translateY(-30px); }
-  75%, 100% { transform: translateY(0); }
+@keyframes heroScrollDesktop {
+  0%, 6% {
+    transform: translate3d(0, 0, 0);
+  }
+  44%, 56% {
+    transform: translate3d(0, var(--scroll-dist-desktop, -650px), 0);
+  }
+  94%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-.animate-mockup-float {
-  animation: mockupFloat 4s ease-in-out infinite;
+@keyframes heroScrollMobile {
+  0%, 6% {
+    transform: translate3d(0, 0, 0);
+  }
+  44%, 56% {
+    transform: translate3d(0, var(--scroll-dist-mobile, -500px), 0);
+  }
+  94%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-.animate-mockup-content-scroll {
-  animation: mockupContentScroll 8s ease-in-out infinite;
+.animate-hero-float {
+  animation: heroFloat 5s ease-in-out infinite;
 }
+
+.animate-hero-scroll-desktop {
+  animation: heroScrollDesktop 14s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-hero-scroll-mobile {
+  animation: heroScrollMobile 11s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero-preview-pause:hover .animate-hero-scroll-desktop,
+.hero-preview-pause:hover .animate-hero-scroll-mobile {
+  animation-play-state: paused;
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   .animate-mockup-float,

@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MERGED_SERVICES_DATA } from '../data/siteData';
 import { getSectionConfig } from '../config/sectionsConfig';
-import { ChevronDown, Check, ArrowRight, Sparkles } from 'lucide-react';
+import { ChevronDown, Check, Sparkles } from 'lucide-react';
 import { Reveal } from '../components/motion/Reveal';
+import { CTA_CONFIG } from '../data/cta';
+import { CtaButton } from '../components/CtaButton';
 
 export const Services: React.FC = () => {
   const sectionInfo = getSectionConfig('services');
@@ -104,17 +106,6 @@ export const Services: React.FC = () => {
                                 </div>
                               ))}
                             </div>
-
-                            {/* Text Link */}
-                            <div className="pt-3 border-t border-ink/10">
-                              <a
-                                href="#contact"
-                                className="inline-flex items-center gap-1.5 font-sans font-bold text-sm text-vermilion-text hover:text-vermilion-dark hover:underline transition-colors"
-                              >
-                                <span>Get started with {service.title}</span>
-                                <ArrowRight className="w-4 h-4" />
-                              </a>
-                            </div>
                           </div>
                         </motion.div>
                       )}
@@ -123,6 +114,11 @@ export const Services: React.FC = () => {
                 </Reveal>
               );
             })}
+
+            {/* Tertiary Action under Services List */}
+            <div className="pt-2">
+              <CtaButton cta={CTA_CONFIG.servicesTertiary} />
+            </div>
           </div>
 
           {/* Desktop Preview Card (Hidden on mobile) */}

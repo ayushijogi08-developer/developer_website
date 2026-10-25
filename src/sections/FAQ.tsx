@@ -4,6 +4,7 @@ import { FAQ_DATA } from '../data/siteData';
 import { getSectionConfig } from '../config/sectionsConfig';
 import { Plus } from 'lucide-react';
 import { Reveal } from '../components/motion/Reveal';
+import { getWhatsAppUrl } from '../data/cta';
 
 export const FAQ: React.FC = () => {
   const sectionInfo = getSectionConfig('faq');
@@ -89,8 +90,13 @@ export const FAQ: React.FC = () => {
         {/* Extra Question Note */}
         <div className="mt-8 text-center font-mono text-xs text-ink-muted">
           HAVE A SPECIFIC QUESTION NOT LISTED HERE?{' '}
-          <a href="#contact" className="text-vermilion-text font-bold underline">
-            ASK US DIRECTLY ON WHATSAPP
+          <a
+            href={getWhatsAppUrl("Hi Kunj Technologies! I have a question that wasn't in your FAQ:")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-vermilion-text font-bold underline hover:text-vermilion-dark"
+          >
+            ASK US DIRECTLY ON WHATSAPP →
           </a>
         </div>
 

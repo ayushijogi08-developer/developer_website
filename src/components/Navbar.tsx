@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BRAND_NAME, BRAND_INITIALS, NAV_LINKS, WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from '../data/siteData';
+import { BRAND_NAME, BRAND_LOGO, NAV_LINKS, WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from '../data/siteData';
 import { PhoneCall, Menu, X, ArrowUpRight, MessageSquare } from 'lucide-react';
 import { Magnetic } from './motion/Magnetic';
+import { triggerFormCta, CTA_CONFIG } from '../data/cta';
 
 export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -69,14 +70,17 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
             
-            {/* Brand Logo and Name - guaranteed single line at 360px+ */}
-            <a href="#" className="flex items-center gap-2 sm:gap-2.5 shrink-0 group">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 bg-ink text-paper font-display font-black text-sm sm:text-base flex items-center justify-center rounded-badge group-hover:bg-vermilion transition-colors shrink-0">
-                {BRAND_INITIALS}
-              </div>
-              <span className="font-display font-black text-sm sm:text-lg md:text-xl tracking-tight text-ink whitespace-nowrap">
-                {BRAND_NAME}
-              </span>
+            {/* Brand Logo - Official black lettering for light header */}
+            <a href="#" className="flex items-center shrink-0 group py-1" aria-label={BRAND_NAME}>
+              <img
+                src={BRAND_LOGO}
+                alt={BRAND_NAME}
+                width={160}
+                height={114}
+                className={`w-auto object-contain shrink-0 group-hover:scale-105 transition-all duration-300 ${
+                  isScrolled ? 'h-12 sm:h-14 md:h-16' : 'h-16 sm:h-20 md:h-[84px] lg:h-[92px]'
+                }`}
+              />
             </a>
 
             {/* Desktop Navigation Links */}
@@ -108,10 +112,12 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
               <div className="hidden sm:block">
                 <Magnetic strength={0.25}>
                   <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-vermilion-text hover:bg-vermilion-dark text-paper font-sans font-bold text-xs sm:text-sm px-4 sm:px-5 py-2.5 rounded-badge border-2 border-ink shadow-stamp hover:shadow-stamp-hover hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all whitespace-nowrap"
+                    href="#contact"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      triggerFormCta(CTA_CONFIG.navbar.whatsappMessage);
+                    }}
+                    className="inline-flex items-center gap-2 bg-vermilion-text hover:bg-vermilion-dark text-paper font-sans font-bold text-xs sm:text-sm px-4 sm:px-5 py-2.5 rounded-badge border-2 border-ink shadow-stamp hover:shadow-stamp-hover hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all whitespace-nowrap cursor-pointer"
                   >
                     <span>Get Your Website</span>
                     <ArrowUpRight className="w-4 h-4" />

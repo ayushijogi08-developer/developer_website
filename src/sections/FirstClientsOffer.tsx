@@ -1,6 +1,8 @@
 import React from 'react';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { Reveal } from '../components/motion/Reveal';
+import { CTA_CONFIG } from '../data/cta';
+import { CtaButton } from '../components/CtaButton';
 
 export const FirstClientsOffer: React.FC = () => {
   return (
@@ -21,13 +23,9 @@ export const FirstClientsOffer: React.FC = () => {
               </p>
             </div>
 
-            <a
-              href="#contact"
-              className="w-full md:w-auto flex-shrink-0 inline-flex items-center justify-center gap-2 bg-vermilion-text hover:bg-vermilion-dark text-paper font-sans font-bold text-base px-6 py-3.5 min-h-[44px] rounded-badge border-2 border-ink shadow-sm transition-all"
-            >
-              <span>Get a free homepage preview</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
+            <div className="w-full md:w-auto flex-shrink-0">
+              <CtaButton cta={CTA_CONFIG.firstClientsOffer} className="w-full md:w-auto" />
+            </div>
           </div>
         </Reveal>
       </div>

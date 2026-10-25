@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE, EMAIL, BRAND_NAME } from '../data/siteData';
 import { getSectionConfig } from '../config/sectionsConfig';
@@ -11,6 +11,20 @@ export const ClientDeliverables: React.FC = () => {
   const [phoneError, setPhoneError] = useState('');
   const [industryError, setIndustryError] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  useEffect(() => {
+    const handlePrefill = (e: Event) => {
+      const customEvent = e as CustomEvent<{ message?: string; industry?: string }>;
+      if (customEvent.detail?.message) {
+        setFormData(prev => ({ ...prev, message: customEvent.detail.message! }));
+      }
+      if (customEvent.detail?.industry) {
+        setFormData(prev => ({ ...prev, industry: customEvent.detail.industry! }));
+      }
+    };
+    window.addEventListener('prefill-contact-form', handlePrefill);
+    return () => window.removeEventListener('prefill-contact-form', handlePrefill);
+  }, []);
 
   const validatePhone = (phoneStr: string) => {
     const cleanPhone = phoneStr.replace(/[^0-9+]/g, '');
@@ -56,12 +70,7 @@ export const ClientDeliverables: React.FC = () => {
   return (
     <section id="contact" className="py-12 md:py-24 bg-grain relative border-b border-ink/15 overflow-hidden">
 
-      {/* Slow Marquee Background */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none overflow-hidden flex items-center select-none">
-        <div className="whitespace-nowrap animate-marquee font-display font-black text-8xl uppercase tracking-tighter text-ink">
-          SHOPFRONT STUDIO • LOCAL BUSINESS WEBSITES • AKOLA • MAHARASHTRA • SHOPFRONT STUDIO • LOCAL BUSINESS WEBSITES •
-        </div>
-      </div>
+
 
       <div className="max-w-2xl mx-auto px-5 sm:px-6 relative z-10">
 
@@ -195,9 +204,8 @@ export const ClientDeliverables: React.FC = () => {
                         }}
                         onFocus={handleInputFocus}
                         placeholder="e.g. +91 98765 43210"
-                        className={`w-full bg-card border p-3 rounded-badge font-sans text-base text-ink placeholder:text-ink-muted focus:outline-none transition-all duration-200 min-h-[46px] ${
-                          phoneError ? 'border-red-600 focus:ring-2 focus:ring-red-200' : 'border-ink/30 focus:border-vermilion-text focus:ring-2 focus:ring-vermilion/20'
-                        }`}
+                        className={`w-full bg-card border p-3 rounded-badge font-sans text-base text-ink placeholder:text-ink-muted focus:outline-none transition-all duration-200 min-h-[46px] ${phoneError ? 'border-red-600 focus:ring-2 focus:ring-red-200' : 'border-ink/30 focus:border-vermilion-text focus:ring-2 focus:ring-vermilion/20'
+                          }`}
                       />
                       {phoneError && (
                         <span className="text-xs text-red-600 font-mono font-bold block mt-1">
@@ -220,9 +228,8 @@ export const ClientDeliverables: React.FC = () => {
                           if (industryError) setIndustryError('');
                         }}
                         onFocus={handleInputFocus}
-                        className={`w-full bg-card border p-3 rounded-badge font-sans text-base text-ink focus:outline-none transition-all duration-200 min-h-[46px] ${
-                          industryError ? 'border-red-600 focus:ring-2 focus:ring-red-200' : 'border-ink/30 focus:border-vermilion-text focus:ring-2 focus:ring-vermilion/20'
-                        }`}
+                        className={`w-full bg-card border p-3 rounded-badge font-sans text-base text-ink focus:outline-none transition-all duration-200 min-h-[46px] ${industryError ? 'border-red-600 focus:ring-2 focus:ring-red-200' : 'border-ink/30 focus:border-vermilion-text focus:ring-2 focus:ring-vermilion/20'
+                          }`}
                       >
                         <option value="" disabled>Select your business</option>
                         {/* // NEW: Added Hair Salon and Dermatology Clinic options, purged OEM / Manufacturer */}
