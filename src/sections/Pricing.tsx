@@ -41,7 +41,7 @@ const PLANS: Record<SiteType, Plan[]> = {
         '1-year domain & hosting setup',
         '1-year support included',
       ],
-      excluded: ['SEO optimisation'],
+
     },
     {
       name: 'Standard',
@@ -96,7 +96,7 @@ const PLANS: Record<SiteType, Plan[]> = {
         '1-year domain & hosting setup',
         '1-year support included',
       ],
-      excluded: ['SEO optimisation'],
+
     },
     {
       name: 'Standard',
