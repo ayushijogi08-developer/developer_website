@@ -11,7 +11,7 @@ import { Pricing } from './sections/Pricing';
 import { FAQ } from './sections/FAQ';
 import { ClientDeliverables } from './sections/ClientDeliverables';
 import { Footer } from './sections/Footer';
-import { TrustStrip, Testimonials, AfterLaunch, IntroVideo, Policies } from './sections/Extras';
+import { TrustStrip, Testimonials, IntroVideo, Policies } from './sections/Extras';
 import { FloatingActions } from './components/FloatingActions';
 
 import { ScrollProgress } from './components/motion/ScrollProgress';
@@ -41,7 +41,7 @@ export function App() {
         <About />
         <Testimonials />
         <Pricing />
-        <AfterLaunch />
+
         <FAQ />
         <ClientDeliverables />
         <Policies />

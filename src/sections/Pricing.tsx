@@ -38,7 +38,7 @@ const PLANS: Record<SiteType, Plan[]> = {
         'Mobile-first responsive layout',
         'One-tap Call & WhatsApp buttons',
         'Google Maps pin & location setup',
-        '1-year domain & hosting setup',
+
         '1-year support included',
       ],
 
@@ -58,7 +58,7 @@ const PLANS: Record<SiteType, Plan[]> = {
         'Enquiry / quotation request form',
         'Google Business profile setup',
         'Basic SEO: titles, descriptions, sitemap, speed tuning',
-        '1-year domain & hosting setup',
+
         '1-year support included',
       ],
     },
@@ -75,7 +75,7 @@ const PLANS: Record<SiteType, Plan[]> = {
         'Multi-location / branch listings',
         'PDF downloads & lead tracking (analytics)',
         'Advanced SEO: keyword research, schema, Search Console',
-        '1-year domain & hosting setup',
+
         'Priority support',
       ],
     },
@@ -93,7 +93,7 @@ const PLANS: Record<SiteType, Plan[]> = {
         'Edit text, photos and prices yourself',
         'Enquiries saved in a database',
         'Secure admin login',
-        '1-year domain & hosting setup',
+
         '1-year support included',
       ],
 
@@ -112,7 +112,7 @@ const PLANS: Record<SiteType, Plan[]> = {
         'Online booking or enquiry management',
         'Email / WhatsApp notifications',
         'Basic SEO: titles, descriptions, sitemap, speed tuning',
-        '1-year domain & hosting setup',
+
         '1-year support included',
       ],
     },
@@ -129,7 +129,7 @@ const PLANS: Record<SiteType, Plan[]> = {
         'Admin dashboard with reports',
         'Custom features built for your workflow',
         'Advanced SEO: keyword research, schema, Search Console',
-        '1-year domain & hosting setup',
+
         'Priority support',
       ],
     },
@@ -231,6 +231,10 @@ export const Pricing: React.FC = () => {
               : 'Dynamic: sites with an admin panel and database. You can update content, take bookings or orders.'}
           </p>
         </div>
+
+        <p className="text-center font-mono text-xs font-bold text-vermilion-text mb-2">
+          Every plan includes 1-year domain, hosting and support.
+        </p>
 
         {/* Plans: swipe carousel on mobile, grid on desktop */}
         <div
