@@ -59,17 +59,17 @@ export const {
 } = BRAND_CONFIG;
 
 export const HERO_CONFIG = {
-  heroDesktopImage: "/hero/desktop.webp",
+  heroDesktopImage: "/hero/desktop-v3.webp",
   heroDesktopProjectId: "p-heritage-palace",
-  heroDesktopAlt: "Heritage Palace and Banquets luxury wedding resort website preview",
+  heroDesktopAlt: "Heritage Lawns & Banquets wedding venue website preview",
   heroDesktopWidth: 1440,
-  heroDesktopHeight: 2700,
+  heroDesktopHeight: 2880,
 
-  heroMobileImage: "/hero/mobile.webp",
+  heroMobileImage: "/hero/mobile-v2.webp",
   heroMobileProjectId: "p-hair-city",
   heroMobileAlt: "Hair City salon and academy mobile website preview",
   heroMobileWidth: 390,
-  heroMobileHeight: 1600,
+  heroMobileHeight: 2072,
 } as const;
 
 export const {

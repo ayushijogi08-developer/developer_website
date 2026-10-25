@@ -13,6 +13,7 @@
     font-size: 16px;
     line-height: 1.6;
   }
+
   section[id] {
     scroll-margin-top: 85px;
   }
@@ -58,7 +59,8 @@
 }
 
 /* ── Lenis smooth scrolling helper ── */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -83,6 +85,7 @@ html.lenis, html.lenis body {
    ══════════════════════════════════════════ */
 
 @media (max-width: 767px) {
+
   /* ── Mobile section spacing: 56-72px vertical, 20px sides ── */
   .mobile-section-pad {
     padding-left: 20px;
@@ -109,10 +112,12 @@ html.lenis, html.lenis body {
    ══════════════════════════════════════════ */
 
 @media (pointer: coarse) {
+
   /* Hide custom cursor completely */
   .custom-cursor-wrapper {
     display: none !important;
   }
+
   /* Disable hover-only interactions */
   * {
     -webkit-tap-highlight-color: transparent;
@@ -143,12 +148,16 @@ body.menu-open {
    ══════════════════════════════════════════ */
 
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+
+  *,
+  ::before,
+  ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
   .animate-marquee,
   .animate-marquee-slow,
   .animate-pulse-subtle,
@@ -165,30 +174,49 @@ body.menu-open {
    ══════════════════════════════════════════ */
 
 @keyframes heroFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-7px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
 }
 
 @keyframes heroScrollDesktop {
-  0%, 6% {
+
+  0%,
+  6% {
     transform: translate3d(0, 0, 0);
   }
-  44%, 56% {
+
+  44%,
+  56% {
     transform: translate3d(0, var(--scroll-dist-desktop, -650px), 0);
   }
-  94%, 100% {
+
+  94%,
+  100% {
     transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes heroScrollMobile {
-  0%, 6% {
+
+  0%,
+  6% {
     transform: translate3d(0, 0, 0);
   }
-  44%, 56% {
+
+  44%,
+  56% {
     transform: translate3d(0, var(--scroll-dist-mobile, -500px), 0);
   }
-  94%, 100% {
+
+  94%,
+  100% {
     transform: translate3d(0, 0, 0);
   }
 }
@@ -214,8 +242,18 @@ body.menu-open {
 
 
 @media (prefers-reduced-motion: reduce) {
+
   .animate-mockup-float,
   .animate-mockup-content-scroll {
     animation: none !important;
   }
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

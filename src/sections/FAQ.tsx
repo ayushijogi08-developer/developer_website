@@ -16,7 +16,7 @@ export const FAQ: React.FC = () => {
 
   return (
     <section id="faq" className="py-12 md:py-24 bg-paper border-b border-ink/15 relative overflow-hidden">
-      <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <Reveal>

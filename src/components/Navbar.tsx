@@ -67,7 +67,7 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
           isScrolled ? 'py-3 bg-paper/90 backdrop-blur-md border-b border-ink/10 shadow-sm' : 'py-5 md:py-5 bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
             
             {/* Brand Logo - Official black lettering for light header */}

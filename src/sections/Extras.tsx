@@ -20,18 +20,12 @@ export const PRICE_TEXT = 'From ₹9,999';
 export const TIMELINE_TEXT = 'Live in 1–3 weeks';
 
 /* One line per demo, shown on each portfolio card. Keys = project ids. */
-export const CASE_STUDIES: Record<string, string> = {
-    'p-hair-city': 'Built for: salons that want WhatsApp bookings and a service lookbook.',
-    'p-derma-care': 'Built for: clinics that need appointments, treatments and trust in one place.',
-    'p-bakery-system': 'Built for: bakeries that want online orders and a simple admin panel.',
-    'p-stone-crusher': 'Built for: industrial suppliers who need product specs and quick enquiries.',
-    'p-heritage-palace': 'Built for: venues that want to show spaces and collect date requests.',
-};
+
 
 /* ───────── 1. Price + timeline strip (place right after Hero) ───────── */
 export const TrustStrip: React.FC = () => (
     <div className="bg-paper-dark/50 border-b border-ink/15">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center font-mono text-xs sm:text-sm text-ink">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center font-mono text-xs sm:text-sm text-ink">
             <div><span className="text-vermilion-text font-bold">{PRICE_TEXT}</span> · clear pricing, no hidden fees</div>
             <div><span className="text-vermilion-text font-bold">{TIMELINE_TEXT}</span> · from first call to launch</div>
             <div><span className="text-vermilion-text font-bold">WhatsApp support</span> · talk directly to the developer</div>
@@ -44,7 +38,7 @@ export const Testimonials: React.FC = () => {
     if (TESTIMONIALS.length === 0) return null;
     return (
         <section id="testimonials" className="py-12 md:py-20 bg-paper border-b border-ink/15">
-            <div className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
                 <div className="font-mono text-xs text-vermilion-text uppercase tracking-widest mb-2 font-bold">
                     [ CLIENT WORDS ]
                 </div>
@@ -86,7 +80,7 @@ const AFTER_LAUNCH = [
 
 export const AfterLaunch: React.FC = () => (
     <section id="after-launch" className="py-12 md:py-20 bg-paper border-b border-ink/15">
-        <div className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
             <div className="font-mono text-xs text-vermilion-text uppercase tracking-widest mb-2 font-bold">
                 [ AFTER LAUNCH ]
             </div>
@@ -110,7 +104,7 @@ export const IntroVideo: React.FC = () => {
     if (!INTRO_VIDEO_SRC) return null;
     return (
         <section id="intro-video" className="py-12 md:py-20 bg-paper-dark/40 border-b border-ink/15">
-            <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
+            <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
                 <h2 className="font-display font-black text-[clamp(1.5rem,5vw,2.5rem)] uppercase tracking-tight text-ink mb-6">
                     Meet your developer
                 </h2>
@@ -129,7 +123,7 @@ export const IntroVideo: React.FC = () => {
 /* ───────── 5. Privacy & Terms (place just above Footer) ───────── */
 export const Policies: React.FC = () => (
     <section id="policies" className="py-8 bg-paper border-b border-ink/15">
-        <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8 space-y-3 font-sans text-sm text-ink-muted">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 space-y-3 font-sans text-sm text-ink-muted">
             <details className="bg-card border border-ink/15 rounded-lg p-4">
                 <summary className="cursor-pointer font-bold text-ink">Privacy Policy</summary>
                 <p className="mt-3 leading-relaxed">

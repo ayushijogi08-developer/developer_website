@@ -15,8 +15,16 @@ export const Portfolio: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const scrollRef = useRef<HTMLDivElement>(null);
-  const websiteProjects = PROJECTS_DATA.filter((p) => p.tab === 'websites');
-
+  const WEBSITE_ORDER = [
+    'p-hair-city',
+    'p-derma-care',
+    'p-heritage-palace',
+    'p-stone-crusher',
+    'p-bakery-system',
+  ];
+  const websiteProjects = PROJECTS_DATA
+    .filter((p) => p.tab === 'websites')
+    .sort((a, b) => WEBSITE_ORDER.indexOf(a.id) - WEBSITE_ORDER.indexOf(b.id));
   // Update scroll index dots on horizontal scroll
   const handleScroll = () => {
     if (!scrollRef.current) return;
@@ -27,7 +35,7 @@ export const Portfolio: React.FC = () => {
 
   return (
     <section id="work" className="py-12 md:py-24 bg-ink text-paper border-b border-paper/15 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
 
         {/* Section Header */}
         <Reveal>

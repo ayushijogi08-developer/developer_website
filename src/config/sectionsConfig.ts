@@ -12,18 +12,16 @@ export interface SectionConfig {
 }
 
 export const SECTIONS_LIST: SectionConfig[] = [
-  { id: 'hero', number: '01', headerLabel: 'EST. 2026 • HANDCRAFTED WEBSITES', navLabel: 'Home', title: 'HOME' },
-  { id: 'why', number: '02', headerLabel: 'WHY YOU NEED A WEBSITE', navLabel: 'Why Us', title: 'WHY' },
-  { id: 'work', number: '03', headerLabel: 'SECTION 03 • OUR WORK', navLabel: 'Our Work', title: 'PORTFOLIO' },
-  { id: 'services', number: '04', headerLabel: 'SECTION 04 • SERVICES', navLabel: 'Services', title: 'SERVICES' },
-  { id: 'included', number: '05', headerLabel: 'SECTION 05 • WHAT YOU GET', navLabel: 'What You Get', title: 'WHAT YOU GET' },
-  { id: 'process', number: '06', headerLabel: 'SECTION 06 • HOW IT WORKS', navLabel: 'Process', title: 'PROCESS' },
-  { id: 'about', number: '07', headerLabel: 'SECTION 07 • ABOUT', navLabel: 'About', title: 'ABOUT' },
-  { id: 'pricing', number: '08', headerLabel: 'SECTION 08 • PRICING', navLabel: 'Pricing', title: 'PRICING' },
-  { id: 'faq', number: '09', headerLabel: 'SECTION 09 • FAQ', navLabel: 'FAQ', title: 'FAQ' },
-  { id: 'contact', number: '10', headerLabel: 'SECTION 10 • CONTACT', navLabel: 'Contact', title: 'CONTACT' },
+  { id: 'hero', number: '00', headerLabel: 'EST. 2026 • HANDCRAFTED WEBSITES', navLabel: 'Home', title: 'HOME' },
+  { id: 'work', number: '01', headerLabel: 'SECTION 01 • OUR WORK', navLabel: 'Our Work', title: 'PORTFOLIO' },
+  { id: 'services', number: '02', headerLabel: 'SECTION 02 • SERVICES', navLabel: 'Services', title: 'SERVICES' },
+  { id: 'included', number: '03', headerLabel: 'SECTION 03 • WHAT YOU GET', navLabel: 'What You Get', title: 'WHAT YOU GET' },
+  { id: 'process', number: '04', headerLabel: 'SECTION 04 • HOW IT WORKS', navLabel: 'Process', title: 'PROCESS' },
+  { id: 'about', number: '05', headerLabel: 'SECTION 05 • ABOUT', navLabel: 'About', title: 'ABOUT' },
+  { id: 'pricing', number: '06', headerLabel: 'SECTION 06 • PRICING', navLabel: 'Pricing', title: 'PRICING' },
+  { id: 'faq', number: '07', headerLabel: 'SECTION 07 • FAQ', navLabel: 'FAQ', title: 'FAQ' },
+  { id: 'contact', number: '08', headerLabel: 'SECTION 08 • CONTACT', navLabel: 'Contact', title: 'CONTACT' },
 ];
-
 export const TOTAL_SECTIONS = SECTIONS_LIST.length;
 
 export function getSectionConfig(id: string): SectionConfig {

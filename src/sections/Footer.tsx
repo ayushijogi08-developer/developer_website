@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className="bg-ink text-paper pt-10 pb-8 font-sans border-t-2 border-ink relative overflow-hidden select-none">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
 
         {/* Short Footer Grid: Brand Line, 2-Column Links, Contact & Social */}
         <Reveal>

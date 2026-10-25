@@ -72,11 +72,11 @@ export const ClientDeliverables: React.FC = () => {
 
 
 
-      <div className="max-w-2xl mx-auto px-5 sm:px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
         <Reveal>
-          <div className="mb-8 pb-4 border-b border-ink/15 text-center sm:text-left">
+          <div className="mb-8 pb-4 border-b border-ink/15 text-left">
             <div className="font-mono text-xs text-vermilion-text uppercase tracking-widest mb-1.5 font-bold">
               [ SECTION {sectionInfo.number} ] • CONTACT
             </div>
@@ -86,52 +86,55 @@ export const ClientDeliverables: React.FC = () => {
                 your site.
               </span>
             </h2>
-            <p className="font-sans text-ink-muted text-sm sm:text-base mt-2 leading-relaxed">
+            <p className="font-sans text-ink-muted text-sm sm:text-base mt-2 leading-relaxed max-w-xl">
               Send a message on WhatsApp or fill out the project inquiry form below. We reply fast with clear quotes.
             </p>
           </div>
         </Reveal>
 
-        {/* One Column Contact Container */}
-        <div className="space-y-6">
+        {/* Contact Layout: 2-column on desktop (lg+), stacked on mobile */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
           {/* Contact Details Bar (Readable on Dark Card) */}
-          <Reveal delay={0.1}>
-            <div className="bg-ink text-paper rounded-lg border border-ink p-5 sm:p-6 shadow-mobile-soft space-y-4">
-              <span className="stamp-badge bg-vermilion-text text-paper text-[11px]">
-                DIRECT FOUNDER CONTACT
-              </span>
-              <h3 className="font-display font-bold text-xl sm:text-2xl text-paper uppercase leading-snug">
-                Ready to Give Your Business a Professional Website?
-              </h3>
-              <p className="font-sans text-xs sm:text-sm text-paper-dark leading-relaxed">
-                Call us, WhatsApp us directly, or send your details using the form below.
-              </p>
+          <div className="lg:col-span-5">
+            <Reveal delay={0.1}>
+              <div className="bg-ink text-paper rounded-lg border border-ink p-5 sm:p-6 shadow-mobile-soft space-y-4">
+                <span className="stamp-badge bg-vermilion-text text-paper text-[11px]">
+                  DIRECT FOUNDER CONTACT
+                </span>
+                <h3 className="font-display font-bold text-xl sm:text-2xl text-paper uppercase leading-snug">
+                  Ready to Give Your Business a Professional Website?
+                </h3>
+                <p className="font-sans text-xs sm:text-sm text-paper-dark leading-relaxed">
+                  Call us, WhatsApp us directly, or send your details using the form.
+                </p>
 
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-paper/20 font-mono text-xs text-paper">
-                <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER.replace('+', '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-vermilion hover:text-paper transition-colors py-1"
-                >
-                  <PhoneCall className="w-4 h-4 flex-shrink-0" />
-                  <span>WhatsApp: {WHATSAPP_NUMBER}</span>
-                </a>
-                <a
-                  href={`mailto:${EMAIL}`}
-                  className="flex items-center gap-2 text-paper-dark hover:text-vermilion transition-colors py-1"
-                >
-                  <Mail className="w-4 h-4 flex-shrink-0" />
-                  <span>Email: {EMAIL}</span>
-                </a>
+                <div className="flex flex-col gap-3 pt-3 border-t border-paper/20 font-mono text-xs text-paper">
+                  <a
+                    href={`https://wa.me/${WHATSAPP_NUMBER.replace('+', '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-vermilion hover:text-paper transition-colors py-1"
+                  >
+                    <PhoneCall className="w-4 h-4 flex-shrink-0" />
+                    <span>WhatsApp: {WHATSAPP_NUMBER}</span>
+                  </a>
+                  <a
+                    href={`mailto:${EMAIL}`}
+                    className="flex items-center gap-2 text-paper-dark hover:text-vermilion transition-colors py-1"
+                  >
+                    <Mail className="w-4 h-4 flex-shrink-0" />
+                    <span>Email: {EMAIL}</span>
+                  </a>
+                </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
 
           {/* Form Container */}
-          <Reveal delay={0.2}>
-            <div className="bg-paper text-ink p-5 sm:p-7 rounded-lg border border-ink/30 shadow-mobile-soft">
+          <div className="lg:col-span-7">
+            <Reveal delay={0.2}>
+              <div className="bg-paper text-ink p-5 sm:p-7 rounded-lg border border-ink/30 shadow-mobile-soft">
               <AnimatePresence mode="wait">
                 {formSubmitted ? (
                   <motion.div
@@ -294,8 +297,9 @@ export const ClientDeliverables: React.FC = () => {
               </AnimatePresence>
             </div>
           </Reveal>
-
         </div>
+
+      </div>
 
       </div>
     </section>

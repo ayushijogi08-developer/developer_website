@@ -7,7 +7,7 @@ import { CtaButton } from '../components/CtaButton';
 export const FirstClientsOffer: React.FC = () => {
   return (
     <section id="offer" className="py-10 md:py-14 bg-vermilion/10 border-y border-vermilion/30 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
         <Reveal>
           <div className="bg-card border border-vermilion md:border-2 rounded-lg p-5 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-mobile-soft md:shadow-lift">
             <div className="space-y-2 text-left">

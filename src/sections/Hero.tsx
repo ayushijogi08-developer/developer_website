@@ -256,7 +256,7 @@ export const Hero: React.FC = () => {
 
         {/* ═══ DESKTOP HERO (md+) ═══ */}
         <div className="hidden md:block">
-          <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10 w-full pt-36 pb-24">
+          <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10 w-full pt-36 pb-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
 
               {/* Left Headline & Actions */}

@@ -20,7 +20,7 @@ const CHECKLIST_GROUPS: ChecklistGroup[] = [
   {
     heading: "Speed & Direct Contact",
     items: [
-      "Opens in under 2 seconds on 3G",
+      "Fast loading on every phone",
       "One tap WhatsApp & call buttons",
       "Instant quotation request form",
       "Touch optimized controls on mobile"
@@ -41,12 +41,12 @@ export const WhatYouGet: React.FC = () => {
   const sectionInfo = getSectionConfig('included');
 
   return (
-    <section id="included" className="py-12 md:py-24 bg-paper border-b border-ink/15 relative overflow-hidden">
+    <section id="included" className="py-12 md:py-14 bg-paper border-b border-ink/15 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-        
+
         {/* Compact Section Header */}
         <Reveal>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-ink/15 gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-6 pb-4 border-b border-ink/15 gap-4">
             <div>
               <div className="font-mono text-xs text-vermilion-text uppercase tracking-widest mb-1.5 font-bold flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-vermilion-text inline-block" />
@@ -67,10 +67,10 @@ export const WhatYouGet: React.FC = () => {
         </Reveal>
 
         {/* 3 Short Groups with 2-Column Checklist Grids */}
-        <div className="space-y-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-4 md:mb-0">
           {CHECKLIST_GROUPS.map((group, gIdx) => (
-            <Reveal key={gIdx} delay={gIdx * 0.08}>
-              <div className="bg-card border border-ink/15 rounded-lg p-5 sm:p-6 shadow-mobile-soft">
+            <Reveal key={gIdx} delay={gIdx * 0.08} className="h-full">
+              <div className="h-full bg-card border border-ink/15 rounded-lg p-5 sm:p-6 shadow-mobile-soft">
                 {/* Small Group Heading */}
                 <h3 className="font-mono text-xs uppercase tracking-wider font-bold text-vermilion-text mb-4 pb-2 border-b border-ink/10 flex items-center gap-2">
                   <span>[{String(gIdx + 1).padStart(2, '0')}]</span>
@@ -78,7 +78,7 @@ export const WhatYouGet: React.FC = () => {
                 </h3>
 
                 {/* Compact 2-Column Checklist Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="grid grid-cols-1 gap-3">
                   {group.items.map((itemText, iIdx) => (
                     <div key={iIdx} className="flex items-start gap-2.5">
                       {/* Icon-less tick */}

@@ -62,8 +62,8 @@ export const WHAT_YOU_GET_DATA = [
   {
     num: "02",
     title: "Fast on Every Phone",
-    desc: "Opens in under 2 seconds on any phone, tablet, or laptop. Even on slow 3G connections.",
-    features: ["Sub-second Load Times", "Touch-Optimized Controls", "Works Offline-Ready"]
+    desc: "Built lightweight so it opens quickly on any phone, tablet or laptop, even with a weak network signal.",
+    features: ["Optimized Images", "Lightweight Code", "Touch-Optimized Controls"]
   },
   {
     num: "03",
@@ -293,7 +293,7 @@ export const PORTFOLIO_DATA = {
     },
     {
       id: "p4",
-      title: "Grand Heritage Palace & Banquets",
+      title: "Grand Heritage Lawns & Banquets",
       category: "Lifestyle",
       isDemo: true,
       tag: "WORKING BUILD",

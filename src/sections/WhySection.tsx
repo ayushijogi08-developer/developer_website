@@ -24,7 +24,7 @@ const POINTS = [
 export const WhySection: React.FC = () => {
   return (
     <section id="why" className="py-14 md:py-20 bg-paper-dark/40 border-b border-ink/15 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
         <Reveal>
           <div className="mb-10 text-center max-w-2xl mx-auto">
             <span className="font-mono text-xs text-vermilion-text uppercase tracking-widest font-bold">

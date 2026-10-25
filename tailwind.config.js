@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        short: { raw: '(min-width: 768px) and (max-height: 820px)' },
+      },
       colors: {
         paper: "#F4F0EA",
         "paper-dark": "#E9E3D8",
