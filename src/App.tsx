@@ -14,7 +14,6 @@ import { Footer } from './sections/Footer';
 import { TrustStrip, Testimonials, IntroVideo, Policies } from './sections/Extras';
 import { FloatingActions } from './components/FloatingActions';
 
-import { ScrollProgress } from './components/motion/ScrollProgress';
 
 export function App() {
 
@@ -24,9 +23,6 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-paper text-ink font-sans selection:bg-vermilion selection:text-paper relative pb-16 md:pb-0">
-
-      <ScrollProgress />
-
 
       <Navbar />
 
