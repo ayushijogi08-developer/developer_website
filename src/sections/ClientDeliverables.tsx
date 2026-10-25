@@ -1,9 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE, EMAIL, BRAND_NAME } from '../data/siteData';
 import { getSectionConfig } from '../config/sectionsConfig';
-import { Mail, PhoneCall, Send, CheckCircle2, RefreshCw } from 'lucide-react';
+import {
+  Mail,
+  PhoneCall,
+  Send,
+  CheckCircle2,
+  RefreshCw,
+  ChevronDown,
+  Check,
+  Scissors,
+  Sparkles,
+  UtensilsCrossed,
+  Hotel,
+  Factory,
+  Store,
+} from 'lucide-react';
 import { Reveal } from '../components/motion/Reveal';
+
+interface BusinessTypeOption {
+  value: string;
+  label: string;
+  desc: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const BUSINESS_TYPES: BusinessTypeOption[] = [
+  {
+    value: 'Hair Salon / Barbering / Academy',
+    label: 'Hair Salon, Barbering & Academy',
+    desc: 'Salons, barbershops, parlours, styling academies',
+    icon: Scissors,
+  },
+  {
+    value: 'Skin, Hair & Laser Clinic',
+    label: 'Skin, Hair & Laser Clinic',
+    desc: 'Dermatologists, cosmetology & wellness centres',
+    icon: Sparkles,
+  },
+  {
+    value: 'Bakery / Cafe / Restaurant',
+    label: 'Bakery, Cafe & Restaurant',
+    desc: 'Eateries, cafes, bakeries, cloud kitchens',
+    icon: UtensilsCrossed,
+  },
+  {
+    value: 'Hotel / Resort / Banquet',
+    label: 'Hotel, Resort & Banquet',
+    desc: 'Hotels, guest houses, marriage halls & event venues',
+    icon: Hotel,
+  },
+  {
+    value: 'Stone Crusher / Quarry',
+    label: 'Stone Crusher & Mining Quarry',
+    desc: 'Crusher plants, aggregate mining & construction supply',
+    icon: Factory,
+  },
+  {
+    value: 'Other Local Business',
+    label: 'Other Local Business / Service',
+    desc: 'Retail shops, distribution, professional services',
+    icon: Store,
+  },
+];
 
 export const ClientDeliverables: React.FC = () => {
   const sectionInfo = getSectionConfig('contact');
@@ -11,6 +71,26 @@ export const ClientDeliverables: React.FC = () => {
   const [phoneError, setPhoneError] = useState('');
   const [industryError, setIndustryError] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown on click outside or escape key
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsDropdownOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   useEffect(() => {
     const handlePrefill = (e: Event) => {
@@ -217,32 +297,134 @@ export const ClientDeliverables: React.FC = () => {
                       )}
                     </div>
 
-                    {/* Business Type */}
-                    <div>
-                      <label htmlFor="input-industry" className="block text-xs font-mono font-bold uppercase mb-1.5 text-ink">
+                    {/* Business Type Custom Dropdown */}
+                    <div ref={dropdownRef} className="relative">
+                      <label id="input-industry-label" className="block text-xs font-mono font-bold uppercase mb-1.5 text-ink">
                         Business Type *
                       </label>
-                      <select
+
+                      <button
                         id="input-industry"
-                        required
-                        value={formData.industry}
-                        onChange={(e) => {
-                          setFormData({ ...formData, industry: e.target.value });
-                          if (industryError) setIndustryError('');
-                        }}
-                        onFocus={handleInputFocus}
-                        className={`w-full bg-card border p-3 rounded-badge font-sans text-base text-ink focus:outline-none transition-all duration-200 min-h-[46px] ${industryError ? 'border-red-600 focus:ring-2 focus:ring-red-200' : 'border-ink/30 focus:border-vermilion-text focus:ring-2 focus:ring-vermilion/20'
-                          }`}
+                        type="button"
+                        role="combobox"
+                        aria-expanded={isDropdownOpen}
+                        aria-haspopup="listbox"
+                        aria-labelledby="input-industry-label"
+                        onClick={() => setIsDropdownOpen((prev) => !prev)}
+                        className={`w-full bg-card border p-3 rounded-badge font-sans text-left flex items-center justify-between gap-3 min-h-[50px] transition-all duration-200 outline-none cursor-pointer ${
+                          isDropdownOpen
+                            ? 'border-vermilion-text ring-2 ring-vermilion/20 shadow-sm'
+                            : industryError
+                              ? 'border-red-600 focus:ring-2 focus:ring-red-200'
+                              : 'border-ink/30 hover:border-ink/50 focus:border-vermilion-text focus:ring-2 focus:ring-vermilion/20'
+                        }`}
                       >
-                        <option value="" disabled>Select your business</option>
-                        {/* // NEW: Added Hair Salon and Dermatology Clinic options, purged OEM / Manufacturer */}
-                        <option value="Hair Salon / Barbering / Academy">Hair Salon / Barbering / Academy</option>
-                        <option value="Skin, Hair & Laser Clinic">Skin, Hair & Laser Clinic</option>
-                        <option value="Bakery / Cafe / Restaurant">Bakery / Cafe / Restaurant</option>
-                        <option value="Hotel / Resort / Banquet">Hotel / Resort / Banquet</option>
-                        <option value="Stone Crusher / Quarry">Stone Crusher / Quarry</option>
-                        <option value="Other Local Business">Other Local Business</option>
-                      </select>
+                        {(() => {
+                          const selectedOption = BUSINESS_TYPES.find((b) => b.value === formData.industry);
+                          const SelectedIcon = selectedOption?.icon;
+
+                          if (selectedOption && SelectedIcon) {
+                            return (
+                              <span className="flex items-center gap-2.5 min-w-0">
+                                <span className="w-7 h-7 rounded-md bg-vermilion-text/10 text-vermilion-text flex items-center justify-center shrink-0">
+                                  <SelectedIcon className="w-4 h-4" />
+                                </span>
+                                <span className="font-sans font-semibold text-ink text-sm sm:text-base truncate">
+                                  {selectedOption.label}
+                                </span>
+                              </span>
+                            );
+                          }
+
+                          return (
+                            <span className="font-sans text-sm sm:text-base text-ink-muted">
+                              {formData.industry || 'Select your business type...'}
+                            </span>
+                          );
+                        })()}
+
+                        <ChevronDown
+                          className={`w-4 h-4 shrink-0 transition-transform duration-200 ${
+                            isDropdownOpen ? 'rotate-180 text-vermilion-text' : 'text-ink-muted'
+                          }`}
+                        />
+                      </button>
+
+                      {/* Hidden form input for standard validation and autofill compatibility */}
+                      <input type="hidden" name="industry" value={formData.industry} />
+
+                      {/* Floating Custom Dropdown Menu */}
+                      <AnimatePresence>
+                        {isDropdownOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                            transition={{ duration: 0.15, ease: 'easeOut' }}
+                            role="listbox"
+                            aria-labelledby="input-industry-label"
+                            className="absolute top-[calc(100%+6px)] left-0 right-0 z-50 bg-paper border-2 border-ink rounded-xl shadow-stamp shadow-2xl p-1.5 max-h-[320px] overflow-y-auto space-y-1"
+                          >
+                            <div className="px-2.5 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-ink-muted flex items-center justify-between border-b border-ink/10 pb-1.5 mb-1">
+                              <span>Choose Your Industry</span>
+                              <span>{BUSINESS_TYPES.length} Categories</span>
+                            </div>
+
+                            {BUSINESS_TYPES.map((item) => {
+                              const isSelected = formData.industry === item.value;
+                              const ItemIcon = item.icon;
+                              return (
+                                <button
+                                  key={item.value}
+                                  type="button"
+                                  role="option"
+                                  aria-selected={isSelected}
+                                  onClick={() => {
+                                    setFormData((prev) => ({ ...prev, industry: item.value }));
+                                    if (industryError) setIndustryError('');
+                                    setIsDropdownOpen(false);
+                                  }}
+                                  className={`w-full text-left p-2.5 rounded-lg transition-all duration-150 flex items-center justify-between gap-3 group cursor-pointer ${
+                                    isSelected
+                                      ? 'bg-card border border-ink/20 shadow-sm'
+                                      : 'hover:bg-card/80 border border-transparent hover:border-ink/10'
+                                  }`}
+                                >
+                                  <div className="flex items-center gap-3 min-w-0">
+                                    <span
+                                      className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                                        isSelected
+                                          ? 'bg-vermilion-text text-paper shadow-sm'
+                                          : 'bg-paper-dark text-ink group-hover:bg-vermilion-text/10 group-hover:text-vermilion-text'
+                                      }`}
+                                    >
+                                      <ItemIcon className="w-4 h-4" />
+                                    </span>
+                                    <div className="min-w-0">
+                                      <div
+                                        className={`font-display font-bold text-xs sm:text-sm leading-tight truncate ${
+                                          isSelected ? 'text-vermilion-text' : 'text-ink'
+                                        }`}
+                                      >
+                                        {item.label}
+                                      </div>
+                                      <div className="font-sans text-[11px] text-ink-muted leading-tight mt-0.5 truncate">
+                                        {item.desc}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  {isSelected && (
+                                    <span className="w-5 h-5 rounded-full bg-emerald-600 text-paper flex items-center justify-center shrink-0">
+                                      <Check className="w-3 h-3" strokeWidth={3} />
+                                    </span>
+                                  )}
+                                </button>
+                              );
+                            })}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
                       {industryError && (
                         <span className="text-xs text-red-600 font-mono font-bold block mt-1">
                           {industryError}
