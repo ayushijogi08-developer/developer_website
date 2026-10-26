@@ -194,7 +194,7 @@ body.menu-open {
 
   44%,
   56% {
-    transform: translate3d(0, var(--scroll-dist-desktop, -650px), 0);
+    transform: translate3d(0, var(--scroll-dist-desktop, -460px), 0);
   }
 
   94%,
@@ -212,7 +212,7 @@ body.menu-open {
 
   44%,
   56% {
-    transform: translate3d(0, var(--scroll-dist-mobile, -500px), 0);
+    transform: translate3d(0, var(--scroll-dist-mobile, -380px), 0);
   }
 
   94%,

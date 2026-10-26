@@ -92,27 +92,56 @@ export const Hero: React.FC = () => {
     : 'hair-salon-web-ruddy.vercel.app';
 
   // Dynamic measurement of scroll travel distances via ResizeObserver
-  const desktopFrameRef = useRef<HTMLDivElement>(null);
-  const desktopImgRef = useRef<HTMLImageElement>(null);
-  const mobileFrameRef = useRef<HTMLDivElement>(null);
-  const mobileImgRef = useRef<HTMLImageElement>(null);
+  // Separate refs for mobile (< md) and desktop (md+) to prevent ref collision
+  const mDesktopFrameRef = useRef<HTMLDivElement>(null);
+  const mDesktopImgRef = useRef<HTMLImageElement>(null);
+  const mPhoneFrameRef = useRef<HTMLDivElement>(null);
+  const mPhoneImgRef = useRef<HTMLImageElement>(null);
 
-  const [desktopScrollDist, setDesktopScrollDist] = useState(650);
-  const [mobileScrollDist, setMobileScrollDist] = useState(500);
+  const dDesktopFrameRef = useRef<HTMLDivElement>(null);
+  const dDesktopImgRef = useRef<HTMLImageElement>(null);
+  const dPhoneFrameRef = useRef<HTMLDivElement>(null);
+  const dPhoneImgRef = useRef<HTMLImageElement>(null);
+
+  // Exact initial fallbacks calculated from aspect ratios:
+  // Desktop: 1440x2880 (2:1) in 16:10 frame -> factor 1.375
+  // Mobile: 390x2072 (5.31:1) in 9:18 frame -> factor 3.31
+  const [mDesktopScrollDist, setMDesktopScrollDist] = useState(460);
+  const [mPhoneScrollDist, setMPhoneScrollDist] = useState(380);
+  const [dDesktopScrollDist, setDDesktopScrollDist] = useState(620);
+  const [dPhoneScrollDist, setDPhoneScrollDist] = useState(560);
 
   const updateMeasurements = useCallback(() => {
-    if (desktopFrameRef.current && desktopImgRef.current) {
-      const frameH = desktopFrameRef.current.clientHeight;
-      const imgH = desktopImgRef.current.clientHeight;
-      if (imgH > frameH) {
-        setDesktopScrollDist(Math.round(imgH - frameH));
+    // 1. Mobile Hero - Desktop mockup
+    if (mDesktopFrameRef.current && mDesktopImgRef.current) {
+      const frameH = mDesktopFrameRef.current.clientHeight;
+      const imgH = mDesktopImgRef.current.clientHeight;
+      if (frameH > 0 && imgH > frameH) {
+        setMDesktopScrollDist(Math.round(imgH - frameH));
       }
     }
-    if (mobileFrameRef.current && mobileImgRef.current) {
-      const frameH = mobileFrameRef.current.clientHeight;
-      const imgH = mobileImgRef.current.clientHeight;
-      if (imgH > frameH) {
-        setMobileScrollDist(Math.round(imgH - frameH));
+    // 2. Mobile Hero - Phone mockup
+    if (mPhoneFrameRef.current && mPhoneImgRef.current) {
+      const frameH = mPhoneFrameRef.current.clientHeight;
+      const imgH = mPhoneImgRef.current.clientHeight;
+      if (frameH > 0 && imgH > frameH) {
+        setMPhoneScrollDist(Math.round(imgH - frameH));
+      }
+    }
+    // 3. Desktop Hero - Desktop mockup
+    if (dDesktopFrameRef.current && dDesktopImgRef.current) {
+      const frameH = dDesktopFrameRef.current.clientHeight;
+      const imgH = dDesktopImgRef.current.clientHeight;
+      if (frameH > 0 && imgH > frameH) {
+        setDDesktopScrollDist(Math.round(imgH - frameH));
+      }
+    }
+    // 4. Desktop Hero - Phone mockup
+    if (dPhoneFrameRef.current && dPhoneImgRef.current) {
+      const frameH = dPhoneFrameRef.current.clientHeight;
+      const imgH = dPhoneImgRef.current.clientHeight;
+      if (frameH > 0 && imgH > frameH) {
+        setDPhoneScrollDist(Math.round(imgH - frameH));
       }
     }
   }, []);
@@ -122,12 +151,27 @@ export const Hero: React.FC = () => {
       updateMeasurements();
     });
 
-    if (desktopFrameRef.current) ro.observe(desktopFrameRef.current);
-    if (desktopImgRef.current) ro.observe(desktopImgRef.current);
-    if (mobileFrameRef.current) ro.observe(mobileFrameRef.current);
-    if (mobileImgRef.current) ro.observe(mobileImgRef.current);
+    const targets = [
+      mDesktopFrameRef.current,
+      mDesktopImgRef.current,
+      mPhoneFrameRef.current,
+      mPhoneImgRef.current,
+      dDesktopFrameRef.current,
+      dDesktopImgRef.current,
+      dPhoneFrameRef.current,
+      dPhoneImgRef.current,
+    ];
 
-    return () => ro.disconnect();
+    targets.forEach((el) => {
+      if (el) ro.observe(el);
+    });
+
+    window.addEventListener('resize', updateMeasurements, { passive: true });
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', updateMeasurements);
+    };
   }, [updateMeasurements]);
 
   return (
@@ -209,8 +253,8 @@ export const Hero: React.FC = () => {
           <div
             className="relative mt-6 mb-3 w-full max-w-[340px] mx-auto hero-preview-pause"
             style={{
-              '--scroll-dist-desktop': `-${desktopScrollDist}px`,
-              '--scroll-dist-mobile': `-${mobileScrollDist}px`,
+              '--scroll-dist-desktop': `-${mDesktopScrollDist}px`,
+              '--scroll-dist-mobile': `-${mPhoneScrollDist}px`,
             } as React.CSSProperties}
           >
             <motion.div
@@ -237,9 +281,9 @@ export const Hero: React.FC = () => {
                 </div>
 
                 {/* 16:10 Viewport */}
-                <div ref={desktopFrameRef} className="w-full aspect-[16/10] overflow-hidden relative bg-black/10">
+                <div ref={mDesktopFrameRef} className="w-full aspect-[16/10] overflow-hidden relative bg-black/10">
                   <img
-                    ref={desktopImgRef}
+                    ref={mDesktopImgRef}
                     src={HERO_DESKTOP_IMAGE}
                     alt={HERO_DESKTOP_ALT}
                     width={HERO_DESKTOP_WIDTH}
@@ -255,9 +299,9 @@ export const Hero: React.FC = () => {
               {/* Front Layer: Phone Frame 38% width overlapping bottom-right corner */}
               <div className="absolute -bottom-4 right-1 w-[38%] max-w-[130px] bg-slate-950 text-paper border-2 border-slate-700 rounded-2xl p-1 shadow-2xl z-20">
                 <div className="w-8 h-1 bg-slate-800 rounded-full mx-auto mb-1" />
-                <div ref={mobileFrameRef} className="w-full aspect-[9/18] rounded-xl overflow-hidden relative bg-slate-900">
+                <div ref={mPhoneFrameRef} className="w-full aspect-[9/18] rounded-xl overflow-hidden relative bg-slate-900">
                   <img
-                    ref={mobileImgRef}
+                    ref={mPhoneImgRef}
                     src={HERO_MOBILE_IMAGE}
                     alt={HERO_MOBILE_ALT}
                     width={HERO_MOBILE_WIDTH}
@@ -393,8 +437,8 @@ export const Hero: React.FC = () => {
                 <div
                   className="relative w-full max-w-[530px] xl:max-w-[570px] mx-auto lg:mr-auto lg:ml-0 hero-preview-pause"
                   style={{
-                    '--scroll-dist-desktop': `-${desktopScrollDist}px`,
-                    '--scroll-dist-mobile': `-${mobileScrollDist}px`,
+                    '--scroll-dist-desktop': `-${dDesktopScrollDist}px`,
+                    '--scroll-dist-mobile': `-${dPhoneScrollDist}px`,
                   } as React.CSSProperties}
                 >
                   <motion.div
@@ -426,11 +470,11 @@ export const Hero: React.FC = () => {
 
                       {/* 16:10 Viewport with Continuous Smooth Scroll */}
                       <div
-                        ref={desktopFrameRef}
+                        ref={dDesktopFrameRef}
                         className="w-full aspect-[16/10] overflow-hidden relative bg-black/10"
                       >
                         <img
-                          ref={desktopImgRef}
+                          ref={dDesktopImgRef}
                           src={HERO_DESKTOP_IMAGE}
                           alt={HERO_DESKTOP_ALT}
                           width={HERO_DESKTOP_WIDTH}
@@ -456,7 +500,6 @@ export const Hero: React.FC = () => {
 
                       {/* Screen Viewport with Continuous Smooth Scroll (11s offset) */}
                       <div
-                        ref={mobileFrameRef}
                         className="w-full aspect-[9/18] rounded-[14px] overflow-hidden relative bg-slate-900 flex flex-col"
                       >
                         {/* Status bar */}
@@ -466,9 +509,9 @@ export const Hero: React.FC = () => {
                         </div>
 
                         {/* Scrolling Image */}
-                        <div className="flex-1 overflow-hidden relative">
+                        <div ref={dPhoneFrameRef} className="flex-1 overflow-hidden relative">
                           <img
-                            ref={mobileImgRef}
+                            ref={dPhoneImgRef}
                             src={HERO_MOBILE_IMAGE}
                             alt={HERO_MOBILE_ALT}
                             width={HERO_MOBILE_WIDTH}
