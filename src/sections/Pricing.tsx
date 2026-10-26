@@ -163,11 +163,10 @@ const RUNNING_COSTS = [
   },
 ];
 
-type BillingCycle = 'monthly' | 'quarterly' | 'yearly';
+type BillingCycle = 'monthly' | 'yearly';
 
 const BILLING_OPTIONS: { id: BillingCycle; label: string; per: string; months: number; badge?: string }[] = [
   { id: 'monthly', label: 'Monthly', per: 'month', months: 1 },
-  { id: 'quarterly', label: 'Quarterly', per: '3 months', months: 3, badge: 'Save 10%' },
   { id: 'yearly', label: 'Yearly', per: 'year', months: 12, badge: '2 months free' },
 ];
 
@@ -186,20 +185,20 @@ const MAINTENANCE: {
 }[] = [
     {
       name: 'Care Basic',
-      prices: { monthly: '₹499', quarterly: '₹1,349', yearly: '₹4,990' },
+      prices: { monthly: '₹499', yearly: '₹4,990' },
       points: ['Uptime monitoring', 'Monthly backup', 'Up to 2 small content edits / month'],
       yearlyBonus: '1 bonus content edit / month (yearly only)',
     },
     {
       name: 'Care Plus',
-      prices: { monthly: '₹999', quarterly: '₹2,699', yearly: '₹9,990' },
+      prices: { monthly: '₹999', yearly: '₹9,990' },
       featured: true,
       points: ['Everything in Care Basic', 'Up to 5 content edits / month', 'Monthly speed & SEO check'],
       yearlyBonus: '2 bonus content edits / month (yearly only)',
     },
     {
       name: 'Care Pro',
-      prices: { monthly: '₹1,999', quarterly: '₹5,399', yearly: '₹19,990' },
+      prices: { monthly: '₹1,999', yearly: '₹19,990' },
       points: ['Everything in Care Plus', 'Up to 10 edits / month', 'Priority replies on WhatsApp'],
       yearlyBonus: '3 bonus content edits / month (yearly only)',
     },
@@ -641,9 +640,7 @@ export const Pricing: React.FC = () => {
             <p className="mt-3 font-sans text-xs text-ink-muted">
               {billing === 'yearly'
                 ? 'Best value: pay for 10 months, get 12, plus bonus edits.'
-                : billing === 'quarterly'
-                  ? 'Save 10% compared to monthly billing.'
-                  : 'Switch to yearly and get 2 months free.'}
+                : 'Billed monthly, 3-month minimum. Switch to yearly and get 2 months free.'}
             </p>
 
             <div
@@ -728,7 +725,7 @@ export const Pricing: React.FC = () => {
                     {billing === 'monthly' ? (
                       <>
                         <span className="block">Billed monthly</span>
-                        <span className="block">Minimum 3 months</span>
+                        <span className="block">3-month minimum commitment</span>
                       </>
                     ) : (
                       <>
@@ -765,7 +762,7 @@ export const Pricing: React.FC = () => {
 
           {/* Terms */}
           <p className="mx-auto mt-4 max-w-3xl text-center font-sans text-[11px] leading-relaxed text-ink-muted/80">
-            Care plans have a minimum term of 3 months, paid in advance. Unused edits do not carry over.
+            Monthly care plans have a minimum commitment of 3 months (no month-to-month cancellation). Yearly plans are paid upfront. Unused edits do not carry over.
           </p>
         </div>
 

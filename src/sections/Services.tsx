@@ -13,6 +13,9 @@ export const Services: React.FC = () => {
 
   const activeService = MERGED_SERVICES_DATA.find((s) => s.id === expandedId) || MERGED_SERVICES_DATA[0];
 
+  // Split "Custom Quote • For bakeries..." into a price badge and an audience line
+  const [priceLabel, ...audienceParts] = activeService.tagline.split(' • ');
+  const audienceLabel = audienceParts.join(' • ');
   const toggleAccordion = (id: string) => {
     setExpandedId(prev => (prev === id ? null : id));
   };
@@ -20,7 +23,7 @@ export const Services: React.FC = () => {
   return (
     <section id="services" className="py-14 md:py-28 bg-grain border-b border-ink/15 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <Reveal>
           <div className="mb-10 pb-6 border-b border-ink/15">
@@ -42,7 +45,7 @@ export const Services: React.FC = () => {
         </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* Main Services Accordion Column */}
           <div className="lg:col-span-7 space-y-3">
             {MERGED_SERVICES_DATA.map((service, index) => {
@@ -50,9 +53,8 @@ export const Services: React.FC = () => {
 
               return (
                 <Reveal key={service.id} delay={index * 0.05}>
-                  <div className={`bg-card border rounded-lg overflow-hidden transition-all duration-200 ${
-                    isOpen ? 'border-ink/40 shadow-mobile-soft' : 'border-ink/15 hover:border-ink/30'
-                  }`}>
+                  <div className={`bg-card border rounded-lg overflow-hidden transition-all duration-200 ${isOpen ? 'border-ink/40 shadow-mobile-soft' : 'border-ink/15 hover:border-ink/30'
+                    }`}>
                     {/* Clean 56px+ Tappable Row */}
                     <button
                       onClick={() => toggleAccordion(service.id)}
@@ -73,9 +75,8 @@ export const Services: React.FC = () => {
                       <motion.div
                         animate={{ rotate: isOpen ? 180 : 0 }}
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                        className={`w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 transition-colors ${
-                          isOpen ? 'bg-vermilion-text text-paper border-vermilion-text' : 'bg-paper text-ink border-ink/20'
-                        }`}
+                        className={`w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 transition-colors ${isOpen ? 'bg-vermilion-text text-paper border-vermilion-text' : 'bg-paper text-ink border-ink/20'
+                          }`}
                       >
                         <ChevronDown className="w-4 h-4" />
                       </motion.div>
@@ -134,58 +135,43 @@ export const Services: React.FC = () => {
 
               <motion.div
                 key={activeService.id}
-                initial={{ opacity: 0.8, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className="p-6 rounded-lg border flex flex-col justify-between"
-                style={{
-                  backgroundColor: activeService.theme.bg,
-                  borderColor: activeService.theme.tagBorder,
-                }}
+                className="rounded-lg bg-ink p-6 sm:p-7"
               >
-                <div>
-                  <div
-                    className="inline-block px-2.5 py-1 rounded font-mono text-xs font-bold uppercase mb-3 border"
-                    style={{
-                      backgroundColor: activeService.theme.tagBg,
-                      color: activeService.theme.tagText,
-                      borderColor: activeService.theme.tagBorder,
-                    }}
-                  >
-                    {activeService.tagline}
-                  </div>
-
-                  <h3
-                    className="font-display font-bold text-2xl mb-2"
-                    style={{ color: activeService.theme.title }}
-                  >
-                    {activeService.title}
-                  </h3>
-
-                  <p
-                    className="text-sm leading-relaxed font-sans mb-4"
-                    style={{ color: activeService.theme.body }}
-                  >
-                    {activeService.description}
-                  </p>
+                {/* Price badge + audience */}
+                <div className="flex flex-wrap items-center gap-2 mb-4">
+                  <span className="inline-block px-2.5 py-1 rounded bg-vermilion-text text-paper font-mono text-[11px] font-bold uppercase tracking-wider">
+                    {priceLabel}
+                  </span>
+                  {audienceLabel && (
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-paper/70">
+                      {audienceLabel}
+                    </span>
+                  )}
                 </div>
 
-                <div
-                  className="pt-4 border-t space-y-2"
-                  style={{ borderColor: activeService.theme.divider }}
-                >
-                  <span
-                    className="font-mono text-xs uppercase font-bold tracking-wider block mb-2"
-                    style={{ color: activeService.theme.muted }}
-                  >
-                    WHAT YOU GET:
+                <h3 className="font-display font-bold text-2xl text-paper mb-2">
+                  {activeService.title}
+                </h3>
+
+                <p className="font-sans text-sm leading-relaxed text-paper/75 mb-5">
+                  {activeService.description}
+                </p>
+
+                <div className="pt-4 border-t border-paper/15">
+                  <span className="font-mono text-[11px] uppercase font-bold tracking-widest text-paper/50 block mb-3">
+                    What you get
                   </span>
-                  {activeService.deliverables.map((del, idx) => (
-                    <div key={idx} className="flex items-start gap-2 text-xs font-semibold">
-                      <span style={{ color: activeService.theme.accent }} className="font-bold">✓</span>
-                      <span style={{ color: activeService.theme.body }}>{del}</span>
-                    </div>
-                  ))}
+                  <ul className="space-y-2.5">
+                    {activeService.deliverables.map((del, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5 font-sans text-sm text-paper">
+                        <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-vermilion-light" />
+                        <span>{del}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </motion.div>
             </div>

@@ -88,10 +88,10 @@ export const WHAT_YOU_GET_DATA = [
 export const HERO_DATA = {
   headlineMain: "Your Business Deserves a",
   headlineAccent: "Professional Website.",
-  subheading: "We build websites and mobile apps that look great on phones, load fast, and help customers contact you.",
+  subheading: "Kunj Technologies builds websites and mobile apps for local businesses in Akola and across Maharashtra. They look great on phones, load fast, and help customers contact you.",
   subheadingHindi: "आपका बिज़नेस, आपकी वेबसाइट।",
   trustLine: "Built as practice builds & design concepts.",
-  badgeText: "WEBSITES & APPS FOR LOCAL BUSINESSES",
+  badgeText: "WEBSITE & APP DEVELOPER IN AKOLA",
   // // CHANGED: Replaced Construction Dealers and Manufacturers with Hair Salons and Dermatology Clinics
   marqueeItems: [
     "HAIR SALONS & ACADEMIES",
