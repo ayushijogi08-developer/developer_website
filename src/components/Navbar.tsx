@@ -125,8 +125,8 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
               <button
                 onClick={() => mobileMenuOpen ? closeMenu() : openMenu()}
                 className={`lg:hidden min-h-[44px] min-w-[44px] p-2.5 border rounded-badge transition-colors flex items-center justify-center ${mobileMenuOpen
-                    ? 'bg-paper/10 border-paper/30 text-paper'
-                    : 'bg-paper-dark/60 border-ink/20 text-ink active:bg-ink active:text-paper'
+                  ? 'bg-paper/10 border-paper/30 text-paper'
+                  : 'bg-paper-dark/60 border-ink/20 text-ink active:bg-ink active:text-paper'
                   }`}
                 aria-label="Toggle Menu"
                 aria-expanded={mobileMenuOpen}
