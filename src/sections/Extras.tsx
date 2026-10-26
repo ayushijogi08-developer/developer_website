@@ -1,4 +1,6 @@
 import React from 'react';
+import { ChevronDown } from 'lucide-react';
+import { EMAIL } from '../data/siteData';
 
 /* ─────────────────────────────────────────────
    EDIT THESE VALUES (only real information!)
@@ -121,25 +123,69 @@ export const IntroVideo: React.FC = () => {
 };
 
 /* ───────── 5. Privacy & Terms (place just above Footer) ───────── */
+const POLICY_LIST: { title: string; points: string[] }[] = [
+    {
+        title: 'Privacy Policy',
+        points: [
+            'When you use WhatsApp, phone, email or the enquiry form, we receive only the details you choose to share, such as your name, phone number and business information.',
+            'The enquiry form opens WhatsApp with your message ready. Nothing is sent until you press Send in WhatsApp.',
+            'We use your details only to reply to your enquiry and deliver your project.',
+            'We do not sell or share your details with third parties.',
+            'To ask us to delete your details, message us on WhatsApp or email us.',
+        ],
+    },
+    {
+        title: 'Terms of Service',
+        points: [
+            'Project scope, price and timeline are agreed in writing (WhatsApp or email) before work starts.',
+            'Content you provide, such as text, logos and photos, must be yours to use.',
+            'Timelines depend on you sending content and feedback on time.',
+            'Your first year of domain and hosting is included. You own your domain.',
+            'Support covers fixes and small updates within the agreed support period. New pages and new features are quoted separately.',
+            'Optional care plans have a minimum term of 3 months, paid in advance.',
+        ],
+    },
+];
+
 export const Policies: React.FC = () => (
-    <section id="policies" className="py-8 bg-paper border-b border-ink/15">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 space-y-3 font-sans text-sm text-ink-muted">
-            <details className="bg-card border border-ink/15 rounded-lg p-4">
-                <summary className="cursor-pointer font-bold text-ink">Privacy Policy</summary>
-                <p className="mt-3 leading-relaxed">
-                    When you contact us by WhatsApp, phone, email or the enquiry form, we receive the details you choose to
-                    share (such as your name, phone number and business information). We use them only to reply to your
-                    enquiry and deliver your project. We do not sell or share your details with third parties.
-                </p>
-            </details>
-            <details className="bg-card border border-ink/15 rounded-lg p-4">
-                <summary className="cursor-pointer font-bold text-ink">Terms of Service</summary>
-                <p className="mt-3 leading-relaxed">
-                    Project scope, price and timeline are agreed in writing (WhatsApp or email) before work starts. Content you
-                    provide must be yours to use. Support covers fixes and small updates within the agreed support period;
-                    larger changes are quoted separately.
-                </p>
-            </details>
+    <section id="policies" className="py-10 md:py-14 bg-paper border-b border-ink/15">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
+            <div className="mb-5 flex items-end justify-between gap-4">
+                <div className="font-mono text-xs text-vermilion-text uppercase tracking-widest font-bold">
+                    [ LEGAL ]
+                </div>
+                <div className="font-mono text-[11px] text-ink-muted">Last updated: October 2026</div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start font-sans">
+                {POLICY_LIST.map((p) => (
+                    <details
+                        key={p.title}
+                        className="group bg-card border border-ink/15 rounded-xl shadow-mobile-soft open:border-ink/30 transition-colors"
+                    >
+                        <summary className="flex min-h-[56px] cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 font-display font-bold text-base text-ink [&::-webkit-details-marker]:hidden">
+                            <span>{p.title}</span>
+                            <ChevronDown className="w-5 h-5 text-vermilion-text transition-transform duration-300 group-open:rotate-180" />
+                        </summary>
+                        <div className="border-t border-ink/10 px-5 pb-5 pt-4">
+                            <ul className="space-y-2.5 text-sm leading-relaxed text-ink-muted">
+                                {p.points.map((pt) => (
+                                    <li key={pt} className="flex items-start gap-2.5">
+                                        <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-vermilion-text" />
+                                        <span>{pt}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                            <p className="mt-4 text-xs text-ink-muted">
+                                Questions? Email{' '}
+                                <a href={`mailto:${EMAIL}`} className="font-bold text-vermilion-text underline underline-offset-2">
+                                    {EMAIL}
+                                </a>
+                            </p>
+                        </div>
+                    </details>
+                ))}
+            </div>
         </div>
     </section>
 );
