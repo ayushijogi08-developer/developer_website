@@ -14,7 +14,7 @@ import {
   HERO_MOBILE_PROJECT_ID,
 } from '../data/config';
 import { PROJECTS_DATA } from '../data/projects';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ArrowDown } from 'lucide-react';
 import { Reveal } from '../components/motion/Reveal';
 import { Magnetic } from '../components/motion/Magnetic';
 import { CTA_CONFIG } from '../data/cta';
@@ -205,14 +205,16 @@ export const Hero: React.FC = () => {
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-col gap-3 mt-6">
-            <CtaButton cta={CTA_CONFIG.heroPrimary} className="w-full justify-center" />
-            <a
-              href="#work"
-              className="text-center font-sans font-semibold text-sm text-ink-muted underline underline-offset-4 decoration-ink/30 active:text-vermilion-text transition-colors min-h-[44px] flex items-center justify-center"
-            >
-              View Our Work ↓
-            </a>
+          <div className="flex flex-col gap-3 mt-7 pr-[3px]">
+            <CtaButton
+              cta={CTA_CONFIG.heroPrimary}
+              className="w-full !min-h-[52px]"
+            />
+            <CtaButton
+              cta={CTA_CONFIG.heroSecondary}
+              icon={<ArrowDown className="w-4 h-4" />}
+              className="w-full !min-h-[52px] bg-transparent"
+            />
           </div>
 
           {/* ── Mobile Visual Composition ── */}
