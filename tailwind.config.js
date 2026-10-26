@@ -26,6 +26,7 @@ export default {
         serif: ['Fraunces', 'serif'],
         sans: ['"General Sans"', '"Satoshi"', 'sans-serif'],
         mono: ['"JetBrains Mono"', '"Space Mono"', 'monospace'],
+        hindi: ['"Tiro Devanagari Hindi"', 'serif'], mono: ['"JetBrains Mono"', '"Space Mono"', 'monospace'],
       },
       borderRadius: {
         'stamp': '2px',

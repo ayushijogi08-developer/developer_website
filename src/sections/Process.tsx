@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { AnimatePresence, MotionConfig, motion, useReducedMotion } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { AnimatePresence, MotionConfig, motion, useInView, useReducedMotion } from 'framer-motion';
 import { Check, Gift, MapPin, MessageCircle, Package, Phone, ShoppingBag, Star } from 'lucide-react';
 import { PROCESS_DATA } from '../data/siteData';
 import { getSectionConfig } from '../config/sectionsConfig';
@@ -298,6 +298,9 @@ export const Process: React.FC = () => {
   const sectionInfo = getSectionConfig('process');
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  // becomes true the first time the steps come into view, and stays true afterwards
+  const started = useInView(wrapRef, { once: true, margin: '-20% 0px -20% 0px' });
 
   const next = () => setActive((a) => (a + 1) % PROCESS_DATA.length);
   const Visual = VISUALS[active];
@@ -328,7 +331,7 @@ export const Process: React.FC = () => {
             </div>
           </Reveal>
 
-          <div className="grid items-stretch gap-5 md:h-[380px] md:grid-cols-12 md:gap-8">
+          <div ref={wrapRef} className="grid items-stretch gap-5 md:h-[380px] md:grid-cols-12 md:gap-8">
             {/* Step list */}
             <div role="tablist" aria-label="Process steps" className="flex min-h-[390px] flex-col gap-2 md:col-span-5 md:min-h-0">
               {PROCESS_DATA.map((item, i) => {
@@ -381,6 +384,7 @@ export const Process: React.FC = () => {
                           className="block h-full origin-left bg-vermilion-text"
                           style={{
                             animation: `processFill ${STEP_MS}ms linear forwards`,
+                            animationPlayState: started ? 'running' : 'paused',
                           }}
                         />
                       </span>

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { getSectionConfig } from '../config/sectionsConfig';
-import { Check, Sparkles, X, Globe, Server, Info, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Check, Sparkles, X, Globe, Server, Info } from 'lucide-react';
 import { Reveal } from '../components/motion/Reveal';
 import { type CtaConfig, CTA_CONFIG } from '../data/cta';
 import { CtaButton } from '../components/CtaButton';
@@ -175,7 +175,7 @@ const toNum = (s: string) => Number(s.replace(/[^\d]/g, ''));
 const formatINR = (n: number) => `₹${n.toLocaleString('en-IN')}`;
 
 // Price for a single small edit when the client has no Care plan
-const ONE_OFF_EDIT_PRICE = '₹500';
+const ONE_OFF_EDIT_PRICE = '₹499';
 
 const MAINTENANCE: {
   name: string;
@@ -389,13 +389,13 @@ export const Pricing: React.FC = () => {
                   }
                 }}
                 className={`w-full relative ${isSelected ? 'flex' : 'hidden md:flex'} flex-col rounded-3xl transition-all duration-500 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 ${isSelected
-                  ? 'bg-gradient-to-b from-white to-card border border-vermilion-text/40 ring-1 ring-vermilion-text/30 shadow-[0_30px_60px_-30px_rgba(194,47,23,0.45)] md:-translate-y-2 z-20'
+                  ? 'bg-white border border-ink/15 shadow-[0_8px_30px_-12px_rgba(17,17,16,0.18)] md:bg-gradient-to-b md:from-white md:to-card md:border-vermilion-text/40 md:ring-1 md:ring-vermilion-text/30 md:shadow-[0_30px_60px_-30px_rgba(194,47,23,0.45)] md:-translate-y-2 z-20'
                   : 'bg-card/90 border border-ink/10 shadow-mobile-soft hover:-translate-y-1 hover:border-ink/25 hover:shadow-[0_24px_48px_-28px_rgba(17,17,16,0.3)] z-10'
                   }`}
               >
                 {/* Accent line on the selected card */}
                 <div
-                  className={`absolute inset-x-8 top-0 h-[3px] rounded-b-full bg-gradient-to-r from-vermilion via-vermilion-text to-vermilion-light transition-opacity duration-500 ${isSelected ? 'opacity-100' : 'opacity-0'}`}
+                  className={`hidden md:block absolute inset-x-8 top-0 h-[3px] rounded-b-full bg-gradient-to-r from-vermilion via-vermilion-text to-vermilion-light transition-opacity duration-500 ${isSelected ? 'opacity-100' : 'opacity-0'}`}
                 />
 
                 {(plan.recommended || isSelected) && (
@@ -406,19 +406,19 @@ export const Pricing: React.FC = () => {
                 )}
 
                 {/* Header: name, who it is for, price, quick facts */}
-                <div className="px-4 pt-4 pb-2 sm:px-5 md:pt-3 md:pb-1.5">
-                  <h3 className="font-display font-black text-lg sm:text-xl md:text-lg tracking-tight text-ink">{plan.name}</h3>
-                  <p className="mt-0.5 font-sans text-xs leading-snug text-ink-muted min-h-[28px] md:min-h-[22px]">
+                <div className="px-5 pt-6 pb-3 sm:px-6 md:px-5 md:pt-3 md:pb-1.5">
+                  <h3 className="font-display font-black text-xl md:text-lg tracking-tight text-ink">{plan.name}</h3>
+                  <p className="mt-1 font-sans text-sm md:text-xs leading-snug text-ink-muted md:min-h-[22px]">
                     {plan.idealFor}
                   </p>
 
-                  <div className="mt-2 md:mt-1.5 flex flex-wrap items-baseline gap-x-1.5">
+                  <div className="mt-4 md:mt-1.5 flex flex-wrap items-baseline gap-x-1.5">
                     {isFrom && (
                       <span className="font-mono text-xs font-bold uppercase tracking-wider text-ink-muted">From</span>
                     )}
                     <RollingPrice
                       value={mainPrice}
-                      className="font-display font-black text-[1.85rem] sm:text-[2rem] md:text-[1.8rem] leading-none tracking-tight text-vermilion-text"
+                      className="font-display font-black text-[2.5rem] sm:text-[2.75rem] md:text-[1.8rem] leading-none tracking-tight text-ink md:text-vermilion-text"
                     />
                     {upTo && (
                       <span className="inline-flex font-display font-bold text-sm text-ink-muted">
@@ -427,46 +427,46 @@ export const Pricing: React.FC = () => {
                       </span>
                     )}
                   </div>
-                  <div className="mt-0.5 font-mono text-[9.5px] text-ink-muted">{plan.priceNote}</div>
+                  <div className="mt-1.5 font-sans text-sm md:mt-0.5 md:font-mono md:text-[9.5px] text-ink-muted">{plan.priceNote}</div>
 
-                  <dl className={`mt-2 md:mt-1.5 grid divide-x divide-ink/10 rounded-xl border border-ink/10 bg-white/60 ${plan.delivery ? 'grid-cols-3' : 'grid-cols-2'}`}>
+                  <dl className={`mt-5 md:mt-1.5 grid divide-x divide-ink/10 rounded-xl border border-ink/10 bg-white/60 ${plan.delivery ? 'grid-cols-3' : 'grid-cols-2'}`}>
                     {stats.map(([label, value]) => (
-                      <div key={label} className="px-2.5 py-1">
-                        <dt className="font-mono text-[8.5px] uppercase tracking-wider text-ink-muted">{label}</dt>
-                        <dd className="mt-0.5 font-display font-bold text-xs text-ink">{value}</dd>
+                      <div key={label} className="px-3.5 py-2.5 md:px-2.5 md:py-1">
+                        <dt className="font-mono text-[10px] md:text-[8.5px] uppercase tracking-wider text-ink-muted">{label}</dt>
+                        <dd className="mt-0.5 font-display font-bold text-sm md:text-xs text-ink">{value}</dd>
                       </div>
                     ))}
                   </dl>
                 </div>
 
                 {/* Features + CTA */}
-                <div className="flex-1 flex flex-col justify-between px-4 pb-3 sm:px-5 md:pb-2.5">
-                  <div className="border-t border-ink/10 pt-2.5 md:pt-1.5">
-                    <p className="mb-1.5 font-mono text-[8.5px] uppercase tracking-[0.18em] text-ink-muted">What is included</p>
-                    <ul className="space-y-1.5 md:space-y-0.5">
+                <div className="flex-1 flex flex-col justify-between px-5 pb-5 sm:px-6 md:px-5 md:pb-2.5">
+                  <div className="border-t border-ink/10 pt-5 md:pt-1.5">
+                    <p className="mb-3 md:mb-1.5 font-mono text-[11px] md:text-[8.5px] uppercase tracking-[0.18em] text-ink-muted">What is included</p>
+                    <ul className="space-y-3 md:space-y-0.5">
                       {plan.features.map((feature) => (
                         <li key={feature} className="flex items-start gap-2">
                           <Check
-                            className={`mt-0.5 w-3 h-3 flex-shrink-0 ${isSelected ? 'text-vermilion-text' : 'text-ink/60'}`}
+                            className={`mt-1 w-4 h-4 md:mt-0.5 md:w-3 md:h-3 flex-shrink-0 ${isSelected ? 'text-vermilion-text' : 'text-ink/60'}`}
                             strokeWidth={2.5}
                           />
-                          <span className="font-sans text-xs leading-snug text-ink/80">{feature}</span>
+                          <span className="font-sans text-sm md:text-xs leading-snug text-ink/80">{feature}</span>
                         </li>
                       ))}
                       {plan.excluded?.map((item) => (
                         <li key={item} className="flex items-start gap-2 opacity-60">
-                          <X className="mt-0.5 w-3 h-3 flex-shrink-0 text-ink/60" strokeWidth={2.5} />
-                          <span className="font-sans text-xs leading-snug text-ink/80 line-through">{item}</span>
+                          <X className="mt-1 w-4 h-4 md:mt-0.5 md:w-3 md:h-3 flex-shrink-0 text-ink/60" strokeWidth={2.5} />
+                          <span className="font-sans text-sm md:text-xs leading-snug text-ink/80 line-through">{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="pt-2.5 md:pt-1.5">
+                  <div className="pt-6 md:pt-1.5">
                     <CtaButton
                       cta={buildCta(plan)}
                       variant={isSelected ? 'primary' : 'outline'}
-                      className="w-full justify-center min-h-[34px] md:min-h-[32px] py-1 text-xs"
+                      className="w-full justify-center min-h-[52px] md:min-h-[32px] py-3 md:py-1 text-base md:text-xs"
                     />
                   </div>
                 </div>
@@ -476,21 +476,21 @@ export const Pricing: React.FC = () => {
         </div>
 
         {/* Consultation & Transparent Pricing Note — Full width matching the 3 cards grid */}
-        <div className="mt-6 w-full rounded-2xl border border-ink/10 bg-card p-4 sm:px-5 sm:py-3 shadow-mobile-soft">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left">
+        <div className="mt-6 w-full rounded-2xl border border-ink/10 bg-card p-5 sm:px-5 sm:py-3 shadow-mobile-soft">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div>
-              <p className="font-display font-bold text-sm sm:text-base text-ink">
+              <p className="font-display font-bold text-base text-ink">
                 Not sure which plan fits your business?
               </p>
-              <p className="mt-0.5 font-sans text-xs sm:text-sm text-ink-muted">
+              <p className="mt-1 font-sans text-sm text-ink-muted">
                 Tell me about your business and goals — I’ll recommend the exact right plan.
               </p>
             </div>
-            <CtaButton cta={CTA_CONFIG.heroPrimary} className="justify-center whitespace-nowrap shrink-0 min-h-[34px] py-1.5 text-xs sm:text-sm" />
+            <CtaButton cta={CTA_CONFIG.heroPrimary} className="w-full sm:w-auto justify-center whitespace-nowrap shrink-0 min-h-[48px] sm:min-h-[34px] py-2.5 sm:py-1.5 text-sm" />
           </div>
 
-          <div className="mt-2.5 pt-2.5 border-t border-ink/10 flex flex-col md:flex-row md:items-center justify-between gap-2.5 text-center sm:text-left">
-            <div className="flex items-center justify-center sm:justify-start gap-2 font-mono text-[11px] text-ink-muted shrink-0 whitespace-nowrap">
+          <div className="mt-4 pt-4 sm:mt-2.5 sm:pt-2.5 border-t border-ink/10 flex flex-col md:flex-row md:items-center justify-between gap-2.5 text-center sm:text-left">
+            <div className="hidden md:flex items-center justify-center sm:justify-start gap-2 font-mono text-[11px] text-ink-muted shrink-0 whitespace-nowrap">
               <span className="w-1.5 h-1.5 rounded-full bg-vermilion-text shrink-0" />
               <span>
                 Static from <strong className="font-bold text-ink">₹9,999</strong> · Dynamic from <strong className="font-bold text-ink">₹19,999</strong>
@@ -559,10 +559,7 @@ export const Pricing: React.FC = () => {
             <div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-vermilion-text">
               Optional care plans
             </div>
-            <p className="mx-auto mt-2 max-w-xl font-sans text-sm leading-relaxed text-ink-muted">
-              After your included first year. Message me on WhatsApp and changes are done within 24 hours,
-              with backups and monitoring included.
-            </p>
+
 
             <div className="mt-5 flex justify-center">
               <div
@@ -612,9 +609,8 @@ export const Pricing: React.FC = () => {
                   role="tab"
                   aria-selected={selectedCare === m.name}
                   onClick={() => setSelectedCare(m.name)}
-                  className={`min-h-[38px] rounded-full px-5 py-2 font-mono text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                    selectedCare === m.name ? 'bg-vermilion-text text-paper' : 'text-ink'
-                  }`}
+                  className={`min-h-[38px] rounded-full px-5 py-2 font-mono text-[11px] font-bold uppercase tracking-wider transition-colors ${selectedCare === m.name ? 'bg-vermilion-text text-paper' : 'text-ink'
+                    }`}
                 >
                   {m.name.replace('Care ', '')}
                 </button>
@@ -644,8 +640,8 @@ export const Pricing: React.FC = () => {
                     }
                   }}
                   className={`relative ${isActive ? 'flex' : 'hidden sm:flex'} flex-col rounded-3xl border bg-gradient-to-b from-white to-card p-5 sm:p-7 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 transition-all duration-300 ${isActive
-                      ? 'border-vermilion-text/40 ring-1 ring-vermilion-text/30 shadow-[0_30px_60px_-30px_rgba(194,47,23,0.45)]'
-                      : 'border-ink/10 shadow-mobile-soft hover:border-ink/25'
+                    ? 'border-vermilion-text/40 ring-1 ring-vermilion-text/30 shadow-[0_30px_60px_-30px_rgba(194,47,23,0.45)]'
+                    : 'border-ink/10 shadow-mobile-soft hover:border-ink/25'
                     }`}
                 >
                   {isActive && (
@@ -704,15 +700,14 @@ export const Pricing: React.FC = () => {
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-6 rounded-2xl border border-ink/10 bg-card px-5 py-4 text-center sm:text-left shadow-mobile-soft">
             <p className="font-display font-bold text-sm sm:text-base text-ink">Don&apos;t need a plan right now?</p>
             <p className="font-sans text-xs sm:text-sm text-ink-muted">
-              One-off changes are <strong className="font-bold text-ink">{ONE_OFF_EDIT_PRICE} per edit</strong>, with a 3 to 5
-              working day turnaround.
+              One-off changes start from <strong className="font-bold text-ink">{ONE_OFF_EDIT_PRICE} per edit</strong>, depending
+              on the work involved.
             </p>
           </div>
 
           {/* Terms */}
           <p className="mx-auto mt-4 max-w-3xl text-center font-sans text-[11px] leading-relaxed text-ink-muted/80">
-            Care plans have a minimum term of 3 months, paid in advance. Unused edits do not carry over. An edit is a
-            small change such as text, prices or photos. New pages and new features are quoted separately.
+            Care plans have a minimum term of 3 months, paid in advance. Unused edits do not carry over.
           </p>
         </div>
 
