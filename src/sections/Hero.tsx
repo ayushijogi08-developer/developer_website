@@ -421,15 +421,6 @@ export const Hero: React.FC = () => {
                 </p>
 
 
-                {/* Small Copy Fix: Balanced and Shortened Founder Note */}
-                <Reveal delay={0.5}>
-                  <div className="pt-2 font-mono text-xs text-ink-muted">
-                    <div className="inline-flex items-center gap-2 bg-paper-dark/60 border border-ink/15 py-2 px-3 rounded-stamp text-ink [text-wrap:balance]">
-                      <span className="w-2 h-2 rounded-full bg-vermilion flex-shrink-0" />
-                      <span><strong>Darshan Jogi, founder.</strong> Message me directly.</span>
-                    </div>
-                  </div>
-                </Reveal>
               </div>
 
               {/* Right Hero Visual: Real Live Screenshots */}
@@ -559,11 +550,7 @@ export const Hero: React.FC = () => {
 
       </section>
 
-      {/* ── Author Intro Strip (mobile) ── */}
-      <div className="md:hidden bg-paper-dark/50 border-b border-ink/10 px-5 py-3 flex items-center gap-2 font-mono text-[11px] text-ink-muted [text-wrap:balance]">
-        <span className="w-2 h-2 rounded-full bg-vermilion flex-shrink-0" />
-        <span><strong className="text-ink">Darshan Jogi, founder.</strong> Message me directly.</span>
-      </div>
+
     </>
   );
 };

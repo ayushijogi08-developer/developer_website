@@ -215,7 +215,50 @@ export const Pricing: React.FC = () => {
   const [siteType, setSiteType] = useState<SiteType>('static');
   const [selected, setSelected] = useState<string>('Standard');
   const [selectedCare, setSelectedCare] = useState<string>('Care Plus');
-  const [billing, setBilling] = useState<BillingCycle>('monthly');
+  const [billing, setBilling] = useState<BillingCycle>('yearly');
+
+  // Care plans: swipe row on mobile, kept in sync with the Basic / Plus / Pro tabs
+  const careScrollRef = useRef<HTMLDivElement>(null);
+  const careCardRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const careTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const careFirstRun = useRef(true);
+
+  const scrollToCare = (name: string, smooth = true) => {
+    const container = careScrollRef.current;
+    const card = careCardRefs.current[name];
+    if (!container || !card || container.scrollWidth <= container.clientWidth) return;
+    container.scrollTo({
+      left: card.offsetLeft - (container.clientWidth - card.offsetWidth) / 2,
+      behavior: smooth ? 'smooth' : 'auto',
+    });
+  };
+
+  const handleCareScroll = () => {
+    if (careTimer.current) clearTimeout(careTimer.current);
+    careTimer.current = setTimeout(() => {
+      const container = careScrollRef.current;
+      if (!container || container.scrollWidth <= container.clientWidth) return;
+      const centre = container.scrollLeft + container.clientWidth / 2;
+      let closest = selectedCare;
+      let min = Infinity;
+      MAINTENANCE.forEach((m) => {
+        const el = careCardRefs.current[m.name];
+        if (!el) return;
+        const d = Math.abs(el.offsetLeft + el.offsetWidth / 2 - centre);
+        if (d < min) {
+          min = d;
+          closest = m.name;
+        }
+      });
+      if (closest !== selectedCare) setSelectedCare(closest);
+    }, 120);
+  };
+
+  // Whenever the selected care plan changes (tab tap, card tap or swipe), centre its card
+  useEffect(() => {
+    scrollToCare(selectedCare, !careFirstRun.current);
+    careFirstRun.current = false;
+  }, [selectedCare]);
 
   const plans = PLANS[siteType];
 
@@ -358,7 +401,7 @@ export const Pricing: React.FC = () => {
         <div
           ref={scrollRef}
           onScroll={handleScroll}
-          className="relative grid grid-cols-1 gap-5 pt-5 pb-2 md:grid-cols-3 md:pt-3 md:pb-1 items-stretch"
+          className="relative flex overflow-x-auto snap-x snap-mandatory gap-4 scrollbar-none pt-5 pb-5 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:pt-3 md:pb-1 items-stretch"
         >
           {plans.map((plan) => {
             const isSelected = selected === plan.name;
@@ -388,7 +431,7 @@ export const Pricing: React.FC = () => {
                     setSelected(plan.name);
                   }
                 }}
-                className={`w-full relative ${isSelected ? 'flex' : 'hidden md:flex'} flex-col rounded-3xl transition-all duration-500 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 ${isSelected
+                className={`w-full flex-shrink-0 snap-center md:w-auto md:flex-shrink relative flex flex-col rounded-3xl transition-all duration-500 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 ${isSelected
                   ? 'bg-white border border-ink/15 shadow-[0_8px_30px_-12px_rgba(17,17,16,0.18)] md:bg-gradient-to-b md:from-white md:to-card md:border-vermilion-text/40 md:ring-1 md:ring-vermilion-text/30 md:shadow-[0_30px_60px_-30px_rgba(194,47,23,0.45)] md:-translate-y-2 z-20'
                   : 'bg-card/90 border border-ink/10 shadow-mobile-soft hover:-translate-y-1 hover:border-ink/25 hover:shadow-[0_24px_48px_-28px_rgba(17,17,16,0.3)] z-10'
                   }`}
@@ -618,7 +661,9 @@ export const Pricing: React.FC = () => {
             </div>
           </div>
 
-          <div className="mt-8 sm:mt-9 grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch">
+          <div ref={careScrollRef}
+            onScroll={handleCareScroll}
+            className="relative mt-8 sm:mt-9 flex overflow-x-auto snap-x snap-mandatory gap-4 scrollbar-none pt-5 pb-5 sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible sm:pt-0 sm:pb-0 items-stretch">
             {MAINTENANCE.map((m) => {
               const cycle = BILLING_OPTIONS.find((o) => o.id === billing)!;
               const amount = m.prices[billing];
@@ -632,6 +677,7 @@ export const Pricing: React.FC = () => {
                   role="button"
                   tabIndex={0}
                   aria-pressed={isActive}
+                  ref={(el) => { careCardRefs.current[m.name] = el; }}
                   onClick={() => setSelectedCare(m.name)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -639,7 +685,7 @@ export const Pricing: React.FC = () => {
                       setSelectedCare(m.name);
                     }
                   }}
-                  className={`relative ${isActive ? 'flex' : 'hidden sm:flex'} flex-col rounded-3xl border bg-gradient-to-b from-white to-card p-5 sm:p-7 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 transition-all duration-300 ${isActive
+                  className={`w-full flex-shrink-0 snap-center sm:w-auto sm:flex-shrink relative flex flex-col rounded-3xl border bg-gradient-to-b from-white to-card p-5 sm:p-7 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 transition-all duration-300 ${isActive
                     ? 'border-vermilion-text/40 ring-1 ring-vermilion-text/30 shadow-[0_30px_60px_-30px_rgba(194,47,23,0.45)]'
                     : 'border-ink/10 shadow-mobile-soft hover:border-ink/25'
                     }`}
