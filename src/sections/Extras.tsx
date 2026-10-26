@@ -140,6 +140,7 @@ export const Policies: React.FC = () => (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start font-sans">
                 {/* ─── PRIVACY POLICY ACCORDION ─── */}
                 <details
+                    data-lenis-prevent
                     className="group bg-card border border-ink/15 rounded-xl shadow-mobile-soft open:border-ink/30 transition-colors"
                 >
                     <summary className="flex min-h-[58px] cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 font-display font-bold text-base text-ink select-none [&::-webkit-details-marker]:hidden">
@@ -150,7 +151,10 @@ export const Policies: React.FC = () => (
                         <ChevronDown className="w-5 h-5 text-vermilion-text transition-transform duration-300 group-open:rotate-180" />
                     </summary>
 
-                    <div className="border-t border-ink/10 px-5 pb-6 pt-5 max-h-[560px] overflow-y-auto pr-3 dropdown-scroll text-ink space-y-4">
+                    <div
+                        data-lenis-prevent
+                        className="border-t border-ink/10 px-5 pb-6 pt-5 max-h-[65vh] sm:max-h-[560px] overflow-y-auto overscroll-contain pr-3 dropdown-scroll text-ink space-y-4 touch-pan-y"
+                    >
                         <div className="border-b border-ink/10 pb-3">
                             <p className="font-mono text-xs text-ink-muted">Kunj Technologies · Last updated: October 26, 2026</p>
                             <p className="mt-2 text-xs sm:text-sm text-ink-muted leading-relaxed">
@@ -322,6 +326,7 @@ export const Policies: React.FC = () => (
 
                 {/* ─── TERMS OF SERVICE ACCORDION ─── */}
                 <details
+                    data-lenis-prevent
                     className="group bg-card border border-ink/15 rounded-xl shadow-mobile-soft open:border-ink/30 transition-colors"
                 >
                     <summary className="flex min-h-[58px] cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 font-display font-bold text-base text-ink select-none [&::-webkit-details-marker]:hidden">
@@ -332,7 +337,10 @@ export const Policies: React.FC = () => (
                         <ChevronDown className="w-5 h-5 text-vermilion-text transition-transform duration-300 group-open:rotate-180" />
                     </summary>
 
-                    <div className="border-t border-ink/10 px-5 pb-6 pt-5 max-h-[560px] overflow-y-auto pr-3 dropdown-scroll text-ink space-y-4">
+                    <div
+                        data-lenis-prevent
+                        className="border-t border-ink/10 px-5 pb-6 pt-5 max-h-[65vh] sm:max-h-[560px] overflow-y-auto overscroll-contain pr-3 dropdown-scroll text-ink space-y-4 touch-pan-y"
+                    >
                         <div className="border-b border-ink/10 pb-3">
                             <p className="font-mono text-xs text-ink-muted">Kunj Technologies · Last updated: October 26, 2026</p>
                             <p className="mt-2 text-xs sm:text-sm text-ink-muted leading-relaxed">
