@@ -215,7 +215,7 @@ export const Pricing: React.FC = () => {
   const [siteType, setSiteType] = useState<SiteType>('static');
   const [selected, setSelected] = useState<string>('Standard');
   const [selectedCare, setSelectedCare] = useState<string>('Care Plus');
-  const [billing, setBilling] = useState<BillingCycle>('yearly');
+  const [billing, setBilling] = useState<BillingCycle>('monthly');
 
   const plans = PLANS[siteType];
 
