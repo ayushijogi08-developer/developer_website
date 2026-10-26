@@ -401,7 +401,8 @@ export const Pricing: React.FC = () => {
         <div
           ref={scrollRef}
           onScroll={handleScroll}
-          className="relative flex overflow-x-auto snap-x snap-mandatory gap-4 scrollbar-none pt-5 pb-5 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:pt-3 md:pb-1 items-stretch"
+          data-lenis-prevent
+          className="relative flex overflow-x-auto snap-x snap-mandatory gap-3.5 sm:gap-4 scrollbar-none pt-5 pb-6 -mx-5 px-5 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:pt-3 md:pb-1 items-stretch"
         >
           {plans.map((plan) => {
             const isSelected = selected === plan.name;
@@ -424,14 +425,18 @@ export const Pricing: React.FC = () => {
                 role="button"
                 tabIndex={0}
                 aria-pressed={isSelected}
-                onClick={() => setSelected(plan.name)}
+                onClick={() => {
+                  setSelected(plan.name);
+                  scrollToPlan(plan.name);
+                }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     setSelected(plan.name);
+                    scrollToPlan(plan.name);
                   }
                 }}
-                className={`w-full flex-shrink-0 snap-center md:w-auto md:flex-shrink relative flex flex-col rounded-3xl transition-all duration-500 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 ${isSelected
+                className={`w-[82%] sm:w-[85%] md:w-auto flex-shrink-0 snap-center md:flex-shrink relative flex flex-col rounded-3xl transition-all duration-500 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 ${isSelected
                   ? 'bg-white border border-ink/15 shadow-[0_8px_30px_-12px_rgba(17,17,16,0.18)] md:bg-gradient-to-b md:from-white md:to-card md:border-vermilion-text/40 md:ring-1 md:ring-vermilion-text/30 md:shadow-[0_30px_60px_-30px_rgba(194,47,23,0.45)] md:-translate-y-2 z-20'
                   : 'bg-card/90 border border-ink/10 shadow-mobile-soft hover:-translate-y-1 hover:border-ink/25 hover:shadow-[0_24px_48px_-28px_rgba(17,17,16,0.3)] z-10'
                   }`}
@@ -661,9 +666,12 @@ export const Pricing: React.FC = () => {
             </div>
           </div>
 
-          <div ref={careScrollRef}
+          <div
+            ref={careScrollRef}
             onScroll={handleCareScroll}
-            className="relative mt-8 sm:mt-9 flex overflow-x-auto snap-x snap-mandatory gap-4 scrollbar-none pt-5 pb-5 sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible sm:pt-0 sm:pb-0 items-stretch">
+            data-lenis-prevent
+            className="relative mt-8 sm:mt-9 flex overflow-x-auto snap-x snap-mandatory gap-3.5 sm:gap-4 scrollbar-none pt-5 pb-6 -mx-5 px-5 sm:-mx-6 sm:px-6 sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible sm:pt-0 sm:pb-0 items-stretch"
+          >
             {MAINTENANCE.map((m) => {
               const cycle = BILLING_OPTIONS.find((o) => o.id === billing)!;
               const amount = m.prices[billing];
@@ -678,14 +686,18 @@ export const Pricing: React.FC = () => {
                   tabIndex={0}
                   aria-pressed={isActive}
                   ref={(el) => { careCardRefs.current[m.name] = el; }}
-                  onClick={() => setSelectedCare(m.name)}
+                  onClick={() => {
+                    setSelectedCare(m.name);
+                    scrollToCare(m.name);
+                  }}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
                       setSelectedCare(m.name);
+                      scrollToCare(m.name);
                     }
                   }}
-                  className={`w-full flex-shrink-0 snap-center sm:w-auto sm:flex-shrink relative flex flex-col rounded-3xl border bg-gradient-to-b from-white to-card p-5 sm:p-7 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 transition-all duration-300 ${isActive
+                  className={`w-[82%] sm:w-auto flex-shrink-0 snap-center sm:flex-shrink relative flex flex-col rounded-3xl border bg-gradient-to-b from-white to-card p-5 sm:p-7 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 transition-all duration-300 ${isActive
                     ? 'border-vermilion-text/40 ring-1 ring-vermilion-text/30 shadow-[0_30px_60px_-30px_rgba(194,47,23,0.45)]'
                     : 'border-ink/10 shadow-mobile-soft hover:border-ink/25'
                     }`}
