@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from '../data/siteData';
-import { PhoneCall } from 'lucide-react';
 import { WhatsAppIcon } from './icons/WhatsAppIcon';
 
 export const FloatingActions: React.FC = () => {
@@ -41,48 +40,18 @@ export const FloatingActions: React.FC = () => {
   }, []);
 
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace('+', '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-  const callUrl = `tel:${WHATSAPP_NUMBER}`;
 
   if (hidden || keyboardOpen) return null;
 
   return (
-    <>
-      {/* Desktop Floating WhatsApp Button — Official WhatsApp Brand Colors & Icon */}
-      <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat with us on WhatsApp"
-        className="hidden md:flex fixed bottom-6 right-6 z-50 bg-[#25D366] text-white hover:bg-[#20ba5a] p-3.5 rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all items-center justify-center border border-white/20"
-      >
-        <WhatsAppIcon className="w-6 h-6 fill-white" />
-      </a>
-
-      {/* Mobile Sticky Bottom Action Bar — 52px, glass-free, safe-area padding */}
-      <div
-        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-ink text-paper px-5 py-1.5 border-t border-paper/10 flex items-center gap-3 bottom-action-bar"
-        style={{ height: '52px' }}
-      >
-        {/* Call — outline style */}
-        <a
-          href={callUrl}
-          className="flex-1 min-h-[44px] flex items-center justify-center gap-2 bg-transparent text-paper font-sans font-bold text-[13px] rounded-badge border border-paper/30 active:scale-95 transition-transform"
-        >
-          <PhoneCall className="w-4 h-4" />
-          <span>Call</span>
-        </a>
-
-        {/* WhatsApp — primary red */}
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-[1.4] min-h-[44px] flex items-center justify-center gap-2 bg-vermilion-text text-paper font-sans font-bold text-[13px] rounded-badge border border-ink active:scale-95 transition-transform"
-        >
-          <WhatsAppIcon className="w-4 h-4 fill-current" />
-          <span>WhatsApp</span>
-        </a>
-      </div>
-    </>
+    <a
+      href={whatsappUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat with us on WhatsApp"
+      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 bg-[#25D366] text-white hover:bg-[#20ba5a] p-3.5 sm:p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all flex items-center justify-center border border-white/20"
+    >
+      <WhatsAppIcon className="w-6 h-6 sm:w-7 sm:h-7 fill-white" />
+    </a>
   );
 };
