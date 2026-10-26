@@ -204,18 +204,6 @@ export const Hero: React.FC = () => {
             </span>
           </p>
 
-          {/* CTAs */}
-          <div className="flex flex-col gap-3 mt-7 pr-[3px]">
-            <CtaButton
-              cta={CTA_CONFIG.heroPrimary}
-              className="w-full !min-h-[52px]"
-            />
-            <CtaButton
-              cta={CTA_CONFIG.heroSecondary}
-              icon={<ArrowDown className="w-4 h-4" />}
-              className="w-full !min-h-[52px] bg-transparent"
-            />
-          </div>
 
           {/* ── Mobile Visual Composition ── */}
           <div
@@ -296,6 +284,15 @@ export const Hero: React.FC = () => {
                 <span>View projects</span>
                 <ArrowUpRight className="w-3 h-3" />
               </a>
+            </div>
+
+            <div className="flex flex-col gap-3 mt-5 pr-[3px]">
+              <CtaButton cta={CTA_CONFIG.heroPrimary} className="w-full !min-h-[52px]" />
+              <CtaButton
+                cta={CTA_CONFIG.heroSecondary}
+                icon={<ArrowDown className="w-4 h-4" />}
+                className="w-full !min-h-[52px] bg-transparent"
+              />
             </div>
           </div>
         </div>
@@ -379,16 +376,6 @@ export const Hero: React.FC = () => {
                   </span>
                 </p>
 
-                {/* Primary CTA (Red) & Secondary CTA (Outline/Ink) */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-                  <Magnetic strength={0.25}>
-                    <CtaButton cta={CTA_CONFIG.heroPrimary} />
-                  </Magnetic>
-
-                  <Magnetic strength={0.25}>
-                    <CtaButton cta={CTA_CONFIG.heroSecondary} showIcon={false} />
-                  </Magnetic>
-                </div>
 
                 {/* Small Copy Fix: Balanced and Shortened Founder Note */}
                 <Reveal delay={0.5}>
@@ -509,6 +496,15 @@ export const Hero: React.FC = () => {
                       <span>View projects</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
                     </a>
+                  </div>
+
+                  <div className="mt-6 flex flex-wrap items-center gap-4">
+                    <Magnetic strength={0.25}>
+                      <CtaButton cta={CTA_CONFIG.heroPrimary} />
+                    </Magnetic>
+                    <Magnetic strength={0.25}>
+                      <CtaButton cta={CTA_CONFIG.heroSecondary} showIcon={false} />
+                    </Magnetic>
                   </div>
                 </div>
               </div>
