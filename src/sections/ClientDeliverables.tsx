@@ -71,6 +71,7 @@ export const ClientDeliverables: React.FC = () => {
   const [phoneError, setPhoneError] = useState('');
   const [industryError, setIndustryError] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [waUrl, setWaUrl] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -107,8 +108,7 @@ export const ClientDeliverables: React.FC = () => {
   }, []);
 
   const validatePhone = (phoneStr: string) => {
-    const cleanPhone = phoneStr.replace(/[^0-9+]/g, '');
-    return cleanPhone.length >= 10;
+    return /^[0-9]{10}$/.test(phoneStr);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -133,6 +133,7 @@ export const ClientDeliverables: React.FC = () => {
 
     // // CHANGED: Secure external window open with noopener,noreferrer
     window.open(targetUrl, '_blank', 'noopener,noreferrer');
+    setWaUrl(targetUrl);
     setFormSubmitted(true);
   };
 
@@ -214,36 +215,55 @@ export const ClientDeliverables: React.FC = () => {
           {/* Form Container */}
           <div className="lg:col-span-7">
             <Reveal delay={0.2}>
-              <div className="bg-paper text-ink p-5 sm:p-7 rounded-lg border border-ink/30 shadow-mobile-soft">
+              <div className="bg-paper text-ink p-5 sm:p-7 rounded-lg border border-ink/30 shadow-mobile-soft lg:min-h-[560px] flex flex-col justify-center">
               <AnimatePresence mode="wait">
                 {formSubmitted ? (
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
                     transition={{ duration: 0.35 }}
-                    className="py-6 text-center space-y-4 font-sans"
+                    className="py-8 sm:py-10 px-2 text-center font-sans flex flex-col items-center"
                   >
-                    <div className="w-12 h-12 bg-emerald-700 text-paper rounded-full flex items-center justify-center mx-auto shadow-sm">
-                      <CheckCircle2 className="w-7 h-7" />
+                    <div className="w-14 h-14 bg-emerald-700 text-paper rounded-full flex items-center justify-center shadow-sm">
+                      <CheckCircle2 className="w-8 h-8" />
                     </div>
-                    <h4 className="font-display font-bold text-lg sm:text-xl text-ink">
-                      We will message you on WhatsApp shortly.
+
+                    <h4 className="mt-5 font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-ink">
+                      Thank you, {formData.name.split(' ')[0]}!
                     </h4>
-                    <p className="text-xs sm:text-sm text-ink-muted max-w-xs mx-auto">
-                      Your project inquiry has been logged. You can also email us at{' '}
-                      <a href={`mailto:${EMAIL}`} className="text-vermilion-text underline font-bold">{EMAIL}</a>.
+
+                    <p className="mt-3 text-sm sm:text-base text-ink-muted max-w-md leading-relaxed">
+                      Your details are ready in WhatsApp. Tap <strong className="text-ink">Send</strong> in
+                      the chat to deliver your enquiry. We reply within 1 hour.
                     </p>
 
-                    <div className="pt-3">
-                      <button
-                        onClick={resetForm}
-                        className="w-full sm:w-auto min-h-[44px] bg-paper-dark hover:bg-paper text-ink font-bold text-xs px-5 py-3 rounded-badge border border-ink/30 flex items-center justify-center gap-2 mx-auto"
+                    <div className="mt-6 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                      <a
+                        href={waUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="min-h-[46px] inline-flex items-center justify-center gap-2 bg-vermilion-text hover:bg-vermilion-dark text-paper font-bold text-sm px-6 py-3 rounded-badge border-2 border-ink shadow-stamp transition-all"
                       >
-                        <RefreshCw className="w-4 h-4" />
-                        <span>Send Another Inquiry</span>
-                      </button>
+                        <Send className="w-4 h-4" />
+                        <span>Open WhatsApp</span>
+                      </a>
+                      <a
+                        href={`mailto:${EMAIL}`}
+                        className="min-h-[46px] inline-flex items-center justify-center gap-2 bg-paper-dark/60 hover:bg-paper-dark text-ink font-bold text-sm px-6 py-3 rounded-badge border border-ink/30 transition-colors"
+                      >
+                        <Mail className="w-4 h-4" />
+                        <span>Email instead</span>
+                      </a>
                     </div>
+
+                    <button
+                      onClick={resetForm}
+                      className="mt-5 inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-ink-muted hover:text-vermilion-text transition-colors min-h-[44px]"
+                    >
+                      <RefreshCw className="w-4 h-4" />
+                      <span>Send another enquiry</span>
+                    </button>
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4 font-sans" noValidate>
@@ -277,16 +297,18 @@ export const ClientDeliverables: React.FC = () => {
                       <input
                         id="input-phone"
                         type="tel"
-                        inputMode="tel"
+                        inputMode="numeric"
+                        maxLength={10}
+                        pattern="[0-9]{10}"
                         autoComplete="tel"
                         required
                         value={formData.phone}
                         onChange={(e) => {
-                          setFormData({ ...formData, phone: e.target.value });
+                          setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 10) });
                           if (phoneError) setPhoneError('');
                         }}
                         onFocus={handleInputFocus}
-                        placeholder="e.g. +91 98765 43210"
+                        placeholder="10-digit mobile number, e.g. 9876543210"
                         className={`w-full bg-card border p-3 rounded-badge font-sans text-base text-ink placeholder:text-ink-muted focus:outline-none transition-all duration-200 min-h-[46px] ${phoneError ? 'border-red-600 focus:ring-2 focus:ring-red-200' : 'border-ink/30 focus:border-vermilion-text focus:ring-2 focus:ring-vermilion/20'
                           }`}
                       />
@@ -363,7 +385,10 @@ export const ClientDeliverables: React.FC = () => {
                             transition={{ duration: 0.15, ease: 'easeOut' }}
                             role="listbox"
                             aria-labelledby="input-industry-label"
-                            className="absolute top-[calc(100%+6px)] left-0 right-0 z-50 bg-paper border-2 border-ink rounded-xl shadow-stamp shadow-2xl p-1.5 max-h-[320px] overflow-y-auto space-y-1"
+                            data-lenis-prevent
+                            onWheel={(e) => e.stopPropagation()}
+                            onTouchMove={(e) => e.stopPropagation()}
+                            className="absolute top-[calc(100%+6px)] left-0 right-0 z-50 bg-paper border-2 border-ink rounded-xl shadow-stamp shadow-2xl p-1.5 max-h-[300px] overflow-y-auto space-y-1 overscroll-contain dropdown-scroll"
                           >
                             <div className="px-2.5 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-ink-muted flex items-center justify-between border-b border-ink/10 pb-1.5 mb-1">
                               <span>Choose Your Industry</span>

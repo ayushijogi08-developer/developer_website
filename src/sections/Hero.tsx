@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion';
 import { HERO_DATA } from '../data/siteData';
 import {
   HERO_DESKTOP_IMAGE,
@@ -20,27 +20,44 @@ import { Magnetic } from '../components/motion/Magnetic';
 import { CTA_CONFIG } from '../data/cta';
 import { CtaButton } from '../components/CtaButton';
 
-const Words: React.FC<{ text: string; delay?: number; step?: number }> = ({
+const Words: React.FC<{
+  text: string;
+  delay?: number;
+  step?: number;
+  className?: string;
+}> = ({
   text,
   delay = 0,
   step = 0.12,
-}) => (
-  <>
-    {text.split(' ').map((word, i) => (
-      <span key={i} className="inline-block overflow-hidden align-bottom">
-        <motion.span
-          initial={{ y: '100%', opacity: 0 }}
-          animate={{ y: '0%', opacity: 1 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: delay + i * step }}
-          className="inline-block"
-        >
-          {word}
-        </motion.span>
-        {'\u00A0'}
-      </span>
-    ))}
-  </>
-);
+  className = "inline-block",
+}) => {
+  const shouldReduceMotion = useReducedMotion();
+  const words = text.split(/\s+/).filter(Boolean);
+
+  return (
+    <>
+      {words.map((word, i) => (
+        <React.Fragment key={i}>
+          <span className="inline-block overflow-hidden pb-1 -mb-1 align-bottom">
+            <motion.span
+              initial={shouldReduceMotion ? { y: '0%', opacity: 1 } : { y: '100%', opacity: 0 }}
+              animate={{ y: '0%', opacity: 1 }}
+              transition={{
+                duration: shouldReduceMotion ? 0 : 0.5,
+                ease: [0.22, 1, 0.36, 1],
+                delay: shouldReduceMotion ? 0 : delay + i * step,
+              }}
+              className={className}
+            >
+              {word}
+            </motion.span>
+          </span>
+          {i < words.length - 1 ? ' ' : ''}
+        </React.Fragment>
+      ))}
+    </>
+  );
+};
 
 export const Hero: React.FC = () => {
   const rawX = useMotionValue(0);
@@ -175,15 +192,17 @@ export const Hero: React.FC = () => {
             </h1>
           </div>
 
-          {/* Subline */}
-          <Reveal delay={0.3}>
-            <p className="text-base font-sans text-ink-muted leading-[1.6] mt-5 max-w-[340px]">
-              {HERO_DATA.subheading}{' '}
-              <span className="font-hindi italic text-vermilion-text font-semibold">
-                {HERO_DATA.subheadingHindi}
-              </span>
-            </p>
-          </Reveal>
+          {/* Subline with hero reveal */}
+          <p className="text-base font-sans text-ink-muted leading-[1.6] mt-5 max-w-[340px]">
+            <Words text={HERO_DATA.subheading} delay={0.8} step={0.035} />{' '}
+            <span className="font-hindi italic text-vermilion-text font-semibold inline-block">
+              <Words
+                text={HERO_DATA.subheadingHindi}
+                delay={0.8 + HERO_DATA.subheading.split(/\s+/).filter(Boolean).length * 0.035}
+                step={0.07}
+              />
+            </span>
+          </p>
 
           {/* CTAs */}
           <div className="flex flex-col gap-3 mt-6">
@@ -280,12 +299,12 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* ═══ DESKTOP HERO (md+) ═══ */}
-        <div className="hidden md:block">
-          <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10 w-full pt-36 pb-24">
+        <div className="hidden md:flex md:flex-1 md:items-center">
+          <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10 w-full pt-28 pb-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
 
               {/* Left Headline & Actions */}
-              <div className="lg:col-span-6 xl:col-span-6 space-y-6">
+              <div className="lg:col-span-7 space-y-5">
                 <Reveal delay={0.1}>
                   <div className="flex flex-wrap items-center gap-3">
                     <motion.span
@@ -304,7 +323,7 @@ export const Hero: React.FC = () => {
                 </Reveal>
 
                 {/* Single H1 with line by line clip mask reveal */}
-                <h1 className="font-display font-black text-[clamp(2.25rem,8vw,4.5rem)] text-ink leading-[0.98] tracking-tight uppercase space-y-1.5 overflow-hidden">
+                <h1 className="font-display font-black text-[clamp(2.25rem,min(5.4vw,9vh),4.5rem)] text-ink leading-[0.98] tracking-tight uppercase space-y-1.5 overflow-hidden">
                   <div className="overflow-hidden">
                     <motion.span
                       initial={{ y: '100%', opacity: 0 }}
@@ -346,14 +365,17 @@ export const Hero: React.FC = () => {
                   </div>
                 </h1>
 
-                <Reveal delay={0.4}>
-                  <p className="text-base sm:text-lg md:text-xl font-sans text-ink-muted max-w-2xl leading-relaxed">
-                    {HERO_DATA.subheading}{' '}
-                    <span className="font-hindi italic text-vermilion-text font-semibold">
-                      {HERO_DATA.subheadingHindi}
-                    </span>
-                  </p>
-                </Reveal>
+                {/* Subline with hero reveal */}
+                <p className="text-base sm:text-lg md:text-xl font-sans text-ink-muted max-w-2xl leading-relaxed">
+                  <Words text={HERO_DATA.subheading} delay={0.85} step={0.035} />{' '}
+                  <span className="font-hindi italic text-vermilion-text font-semibold inline-block">
+                    <Words
+                      text={HERO_DATA.subheadingHindi}
+                      delay={0.85 + HERO_DATA.subheading.split(/\s+/).filter(Boolean).length * 0.035}
+                      step={0.07}
+                    />
+                  </span>
+                </p>
 
                 {/* Primary CTA (Red) & Secondary CTA (Outline/Ink) */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
@@ -378,7 +400,7 @@ export const Hero: React.FC = () => {
               </div>
 
               {/* Right Hero Visual: Real Live Screenshots */}
-              <div className="lg:col-span-6 xl:col-span-6 relative mt-6 lg:mt-0">
+              <div className="lg:col-span-5 relative mt-6 lg:mt-0">
                 <div
                   className="relative w-full max-w-[530px] xl:max-w-[570px] mx-auto lg:mr-auto lg:ml-0 hero-preview-pause"
                   style={{
