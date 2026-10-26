@@ -70,13 +70,13 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
           <div className="flex items-center justify-between gap-4">
 
             {/* Brand Logo - Official black lettering for light header */}
-            <a href="#" className="flex items-center shrink-0 group py-1" aria-label={BRAND_NAME}>
+            <a href="#" className="flex items-center shrink-0 group py-1 -ml-5 sm:ml-0" aria-label={BRAND_NAME}>
               <img
                 src={mobileMenuOpen ? BRAND_LOGO_WHITE : BRAND_LOGO}
                 alt={BRAND_NAME}
                 width={160}
                 height={114}
-                className={`w-auto object-contain shrink-0 group-hover:scale-105 transition-all duration-300 ${isScrolled ? 'h-12 sm:h-14 md:h-16' : 'h-14 sm:h-20 md:h-[84px] lg:h-[92px]'
+                className={`w-auto object-contain shrink-0 group-hover:scale-105 transition-all duration-300 ${isScrolled ? 'h-14 sm:h-14 md:h-16' : 'h-[72px] sm:h-20 md:h-[84px] lg:h-[92px]'
                   }`}
               />
             </a>

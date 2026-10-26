@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from '../data/siteData';
-import { PhoneCall, MessageSquare } from 'lucide-react';
+import { PhoneCall } from 'lucide-react';
+import { WhatsAppIcon } from './icons/WhatsAppIcon';
 
 export const FloatingActions: React.FC = () => {
   const [hidden, setHidden] = useState(false);
@@ -46,15 +47,15 @@ export const FloatingActions: React.FC = () => {
 
   return (
     <>
-      {/* Desktop Floating WhatsApp Button — Small, quiet icon button (green outline) */}
+      {/* Desktop Floating WhatsApp Button — Official WhatsApp Brand Colors & Icon */}
       <a
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with us on WhatsApp"
-        className="hidden md:flex fixed bottom-6 right-6 z-50 bg-paper/95 text-emerald-700 hover:text-paper hover:bg-emerald-700 p-3 rounded-full border-2 border-emerald-700 shadow-sm hover:scale-105 transition-all items-center justify-center backdrop-blur-md"
+        className="hidden md:flex fixed bottom-6 right-6 z-50 bg-[#25D366] text-white hover:bg-[#20ba5a] p-3.5 rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all items-center justify-center border border-white/20"
       >
-        <MessageSquare className="w-5 h-5" />
+        <WhatsAppIcon className="w-6 h-6 fill-white" />
       </a>
 
       {/* Mobile Sticky Bottom Action Bar — 52px, glass-free, safe-area padding */}
@@ -78,7 +79,7 @@ export const FloatingActions: React.FC = () => {
           rel="noopener noreferrer"
           className="flex-[1.4] min-h-[44px] flex items-center justify-center gap-2 bg-vermilion-text text-paper font-sans font-bold text-[13px] rounded-badge border border-ink active:scale-95 transition-transform"
         >
-          <MessageSquare className="w-4 h-4" />
+          <WhatsAppIcon className="w-4 h-4 fill-current" />
           <span>WhatsApp</span>
         </a>
       </div>

@@ -122,7 +122,7 @@ export const Hero: React.FC = () => {
         style={{ minHeight: '100svh' }}
       >
         {/* ═══ MOBILE HERO (< md) ═══ */}
-        <div className="md:hidden flex flex-col flex-1 pt-28 pb-6 px-5">
+        <div className="md:hidden flex flex-col flex-1 pt-32 pb-6 px-5">
           {/* Tagline */}
           <Reveal delay={0.05}>
             <div className="font-mono text-[12px] text-vermilion-text uppercase tracking-widest font-bold mt-2">
