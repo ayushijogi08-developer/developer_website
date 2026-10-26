@@ -234,19 +234,30 @@ export const ClientDeliverables: React.FC = () => {
                     </h4>
 
                     <p className="mt-3 text-sm sm:text-base text-ink-muted max-w-md leading-relaxed">
-                      Your details are ready in WhatsApp. Tap <strong className="text-ink">Send</strong> in
-                      the chat to deliver your enquiry. We reply within 1 hour.
+                      Your enquiry is ready in WhatsApp. Already sent it? You’re all set, and we reply
+                      within 1 hour.
+                    </p>
+                    <p className="mt-2 text-xs text-ink-muted max-w-md">
+                      WhatsApp didn’t open, or you haven’t sent it yet?{' '}
+                      <a
+                        href={waUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-bold text-vermilion-text underline underline-offset-2"
+                      >
+                        Open it with my details
+                      </a>
                     </p>
 
                     <div className="mt-6 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                       <a
-                        href={waUrl}
+                        href={`https://wa.me/${WHATSAPP_NUMBER.replace('+', '')}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="min-h-[46px] inline-flex items-center justify-center gap-2 bg-vermilion-text hover:bg-vermilion-dark text-paper font-bold text-sm px-6 py-3 rounded-badge border-2 border-ink shadow-stamp transition-all"
                       >
                         <Send className="w-4 h-4" />
-                        <span>Open WhatsApp</span>
+                        <span>Open WhatsApp chat</span>
                       </a>
                       <a
                         href={`mailto:${EMAIL}`}
