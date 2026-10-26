@@ -508,7 +508,7 @@ export const Pricing: React.FC = () => {
         </div>
 
         {/* Domain, hosting & maintenance */}
-        <div id="domain-hosting" className="mt-14 md:mt-20">
+        <div id="domain-hosting" className="mt-10 md:mt-20">
           <div className="mb-6 pb-3 border-b border-ink/15">
             <div className="font-mono text-xs text-vermilion-text uppercase tracking-widest mb-1.5 font-bold">
               [ DOMAIN, HOSTING & MAINTENANCE ]
@@ -520,36 +520,36 @@ export const Pricing: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {RUNNING_COSTS.map(({ icon: Icon, title, desc, rows, note }) => (
-              <div key={title} className="group relative overflow-hidden rounded-3xl border border-ink/10 bg-gradient-to-b from-white to-card p-6 sm:p-7 shadow-[0_24px_50px_-30px_rgba(17,17,16,0.35)] transition-all duration-500 hover:-translate-y-1 hover:border-vermilion-text/30">
+              <div key={title} className="group relative overflow-hidden rounded-3xl border border-ink/10 bg-gradient-to-b from-white to-card p-4 sm:p-7 shadow-[0_24px_50px_-30px_rgba(17,17,16,0.35)] transition-all duration-500 hover:-translate-y-1 hover:border-vermilion-text/30">
                 <div className="absolute inset-x-8 top-0 h-[3px] rounded-b-full bg-gradient-to-r from-vermilion via-vermilion-text to-vermilion-light" />
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-vermilion to-vermilion-text text-paper shadow-md">
                       <Icon className="w-5 h-5" />
                     </span>
-                    <h4 className="font-display font-black text-xl tracking-tight text-ink">{title}</h4>
+                    <h4 className="font-display font-black text-lg sm:text-xl whitespace-nowrap tracking-tight text-ink">{title}</h4>
                   </div>
-                  <span className="whitespace-nowrap rounded-full border border-vermilion-text/30 bg-vermilion-text/5 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-vermilion-text">
+                  <span className="whitespace-nowrap rounded-full border border-vermilion-text/30 bg-vermilion-text/5 px-2.5 py-0.5 sm:px-3 sm:py-1 font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-vermilion-text">
                     Year 1 included
                   </span>
                 </div>
 
                 <p className="mt-3 font-sans text-sm leading-relaxed text-ink-muted">{desc}</p>
 
-                <dl className="mt-5 divide-y divide-ink/10 rounded-xl border border-ink/10 bg-white/60">
+                <dl className="mt-3 sm:mt-5 divide-y divide-ink/10 rounded-xl border border-ink/10 bg-white/60">
                   {rows.map((r) => (
-                    <div key={r.label} className="flex flex-col gap-1 px-4 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                    <div key={r.label} className="flex flex-row items-center justify-between gap-3 px-3 py-2.5 sm:px-4 sm:py-3 sm:items-baseline sm:gap-4">
                       <dt className="font-sans text-sm text-ink-muted">
                         {r.label}
                         <span className="block font-mono text-[10px] uppercase tracking-wider text-ink-muted/70">{r.hint}</span>
                       </dt>
-                      <dd className="font-display font-bold text-base sm:text-lg text-ink sm:text-right">{r.value}</dd>
+                      <dd className="font-display font-bold text-sm sm:text-lg text-ink text-right">{r.value}</dd>
                     </div>
                   ))}
                 </dl>
 
                 {note && (
-                  <p className="mt-4 flex items-start gap-2 font-sans text-sm text-ink-muted">
+                  <p className="mt-3 flex items-start gap-2 font-sans text-xs sm:text-sm text-ink-muted">
                     <Check className="mt-0.5 w-4 h-4 flex-shrink-0 text-vermilion-text" strokeWidth={2.5} />
                     <span>{note}</span>
                   </p>
@@ -559,7 +559,7 @@ export const Pricing: React.FC = () => {
           </div>
 
           {/* ───── Care plans ───── */}
-          <div className="mt-14 md:mt-16 text-center">
+          <div className="mt-10 md:mt-16 text-center">
             <div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-vermilion-text">
               Optional care plans
             </div>
@@ -606,7 +606,7 @@ export const Pricing: React.FC = () => {
             </p>
           </div>
 
-          <div className="mt-9 grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch">
+          <div className="mt-6 sm:mt-9 flex sm:grid sm:grid-cols-3 gap-4 sm:gap-6 items-stretch overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none -mx-5 px-5 sm:mx-0 sm:px-0 pt-4 pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {MAINTENANCE.map((m) => {
               const cycle = BILLING_OPTIONS.find((o) => o.id === billing)!;
               const amount = m.prices[billing];
@@ -627,7 +627,7 @@ export const Pricing: React.FC = () => {
                       setSelectedCare(m.name);
                     }
                   }}
-                  className={`relative flex flex-col rounded-3xl border bg-gradient-to-b from-white to-card p-6 sm:p-7 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 transition-all duration-300 ${isActive
+                  className={`relative flex flex-col w-[80%] shrink-0 snap-center sm:w-auto sm:shrink rounded-3xl border bg-gradient-to-b from-white to-card p-5 sm:p-7 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 transition-all duration-300 ${isActive
                       ? 'border-vermilion-text/40 ring-1 ring-vermilion-text/30 shadow-[0_30px_60px_-30px_rgba(194,47,23,0.45)]'
                       : 'border-ink/10 shadow-mobile-soft hover:border-ink/25'
                     }`}
@@ -649,7 +649,7 @@ export const Pricing: React.FC = () => {
                   <div className="mt-3 flex items-baseline gap-1.5">
                     <RollingPrice
                       value={amount}
-                      className="font-display font-black text-[2.4rem] leading-none tracking-tight text-vermilion-text"
+                      className="font-display font-black text-[2rem] sm:text-[2.4rem] leading-none tracking-tight text-vermilion-text"
                     />
                     <span className="font-mono text-xs text-ink-muted">/ {cycle.per}</span>
                   </div>
@@ -671,7 +671,7 @@ export const Pricing: React.FC = () => {
                     )}
                   </div>
 
-                  <ul className="mt-5 flex-1 space-y-3 border-t border-ink/10 pt-5 font-sans text-sm text-ink/80">
+                  <ul className="mt-4 sm:mt-5 flex-1 space-y-2.5 sm:space-y-3 border-t border-ink/10 pt-4 sm:pt-5 font-sans text-sm text-ink/80">
                     {(billing === 'yearly' ? [...m.points, m.yearlyBonus] : m.points).map((pt) => (
                       <li key={pt} className="flex items-start gap-3">
                         <Check className="mt-0.5 w-4 h-4 flex-shrink-0 text-vermilion-text" strokeWidth={2.5} />
@@ -684,8 +684,12 @@ export const Pricing: React.FC = () => {
             })}
           </div>
 
+          <p className="sm:hidden -mt-3 mb-3 text-center font-mono text-[10px] uppercase tracking-wider text-ink-muted">
+            Swipe to compare plans →
+          </p>
+
           {/* No plan option */}
-          <div className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-6 rounded-2xl border border-ink/10 bg-card px-5 py-4 text-center sm:text-left shadow-mobile-soft">
+          <div className="mt-2 sm:mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-6 rounded-2xl border border-ink/10 bg-card px-5 py-4 text-center sm:text-left shadow-mobile-soft">
             <p className="font-display font-bold text-sm sm:text-base text-ink">Don&apos;t need a plan right now?</p>
             <p className="font-sans text-xs sm:text-sm text-ink-muted">
               One-off changes are <strong className="font-bold text-ink">{ONE_OFF_EDIT_PRICE} per edit</strong>, with a 3 to 5
