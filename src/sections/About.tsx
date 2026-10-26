@@ -18,9 +18,9 @@ export const About: React.FC = () => {
             <div className="font-mono text-xs text-vermilion-text uppercase tracking-widest mb-1.5 font-bold">
               [ SECTION {sectionInfo.number} ] • ABOUT
             </div>
-            <h2 className="font-display font-black text-[clamp(1.85rem,6vw,3.75rem)] uppercase tracking-tight text-ink leading-none">
+            <h2 className="font-display font-black text-[clamp(1.4rem,5vw,3.75rem)] uppercase tracking-tight text-ink leading-none">
               Direct Communication.{' '}
-              <span className="font-serif italic font-normal text-vermilion-text lowercase block sm:inline">
+              <span className="font-serif italic font-normal text-vermilion-text lowercase inline">
                 zero middleman.
               </span>
             </h2>

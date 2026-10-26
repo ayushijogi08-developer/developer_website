@@ -52,9 +52,9 @@ export const WhatYouGet: React.FC = () => {
                 <span className="w-2 h-2 rounded-full bg-vermilion-text inline-block" />
                 [ SECTION {sectionInfo.number} ] • WHAT YOU GET
               </div>
-              <h2 className="font-display font-black text-[clamp(1.85rem,6vw,3.5rem)] uppercase tracking-tight text-ink leading-tight">
+              <h2 className="font-display font-black text-[clamp(1.5rem,5.5vw,3.5rem)] uppercase tracking-tight text-ink leading-tight">
                 Everything{' '}
-                <span className="font-serif italic font-normal text-vermilion-text lowercase block sm:inline">
+                <span className="font-serif italic font-normal text-vermilion-text lowercase inline">
                   included.
                 </span>
               </h2>

@@ -283,9 +283,9 @@ export const Pricing: React.FC = () => {
               <div className="font-mono text-xs text-vermilion-text uppercase tracking-widest mb-1 font-bold">
                 [ SECTION {sectionInfo.number} ] • PRICING
               </div>
-              <h2 className="font-display font-black text-[clamp(1.75rem,4.5vw,2.75rem)] uppercase tracking-tight text-ink leading-none">
+              <h2 className="font-display font-black text-[clamp(1.5rem,5.5vw,2.75rem)] uppercase tracking-tight text-ink leading-none">
                 Simple{' '}
-                <span className="font-serif italic font-normal text-vermilion-text lowercase block sm:inline">
+                <span className="font-serif italic font-normal text-vermilion-text lowercase inline">
                   pricing.
                 </span>
               </h2>

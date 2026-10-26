@@ -45,9 +45,9 @@ export const Portfolio: React.FC = () => {
             </div>
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
               <div>
-                <h2 className="font-display font-black text-[clamp(1.85rem,6vw,3.75rem)] uppercase tracking-tight text-paper leading-none">
+                <h2 className="font-display font-black text-[clamp(1.5rem,5.5vw,3.75rem)] uppercase tracking-tight text-paper leading-none">
                   Websites{' '}
-                  <span className="font-serif italic font-normal text-vermilion-light lowercase block sm:inline">
+                  <span className="font-serif italic font-normal text-vermilion-light lowercase inline">
                     Built to Order.
                   </span>
                 </h2>

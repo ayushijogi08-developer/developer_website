@@ -20,6 +20,28 @@ import { Magnetic } from '../components/motion/Magnetic';
 import { CTA_CONFIG } from '../data/cta';
 import { CtaButton } from '../components/CtaButton';
 
+const Words: React.FC<{ text: string; delay?: number; step?: number }> = ({
+  text,
+  delay = 0,
+  step = 0.12,
+}) => (
+  <>
+    {text.split(' ').map((word, i) => (
+      <span key={i} className="inline-block overflow-hidden align-bottom">
+        <motion.span
+          initial={{ y: '100%', opacity: 0 }}
+          animate={{ y: '0%', opacity: 1 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: delay + i * step }}
+          className="inline-block"
+        >
+          {word}
+        </motion.span>
+        {'\u00A0'}
+      </span>
+    ))}
+  </>
+);
+
 export const Hero: React.FC = () => {
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
@@ -100,7 +122,7 @@ export const Hero: React.FC = () => {
         style={{ minHeight: '100svh' }}
       >
         {/* ═══ MOBILE HERO (< md) ═══ */}
-        <div className="md:hidden flex flex-col justify-between flex-1 pt-20 pb-4 px-5">
+        <div className="md:hidden flex flex-col flex-1 pt-28 pb-6 px-5">
           {/* Tagline */}
           <Reveal delay={0.05}>
             <div className="font-mono text-[12px] text-vermilion-text uppercase tracking-widest font-bold mt-2">
@@ -118,7 +140,7 @@ export const Hero: React.FC = () => {
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                   className="block"
                 >
-                  {HERO_DATA.headlineMain}
+                  <Words text={HERO_DATA.headlineMain} delay={0.1} />
                 </motion.span>
               </div>
 
@@ -130,7 +152,7 @@ export const Hero: React.FC = () => {
                   className="block"
                 >
                   <span className="relative inline-block font-serif italic font-normal text-vermilion-text lowercase">
-                    {HERO_DATA.headlineAccent}
+                    <Words text={HERO_DATA.headlineAccent} delay={0.6} />
                     <svg
                       className="absolute left-0 -bottom-1.5 w-full h-2.5 text-vermilion-text pointer-events-none"
                       viewBox="0 0 200 12"
@@ -144,7 +166,7 @@ export const Hero: React.FC = () => {
                         strokeLinecap="round"
                         initial={{ pathLength: 0 }}
                         animate={{ pathLength: 1 }}
-                        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
+                        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 1.1 }}
                       />
                     </svg>
                   </span>
@@ -155,13 +177,16 @@ export const Hero: React.FC = () => {
 
           {/* Subline */}
           <Reveal delay={0.3}>
-            <p className="text-base font-sans text-ink-muted leading-[1.6] mt-3 max-w-[340px]">
-              {HERO_DATA.subheading}
+            <p className="text-base font-sans text-ink-muted leading-[1.6] mt-5 max-w-[340px]">
+              {HERO_DATA.subheading}{' '}
+              <span className="font-hindi italic text-vermilion-text font-semibold">
+                {HERO_DATA.subheadingHindi}
+              </span>
             </p>
           </Reveal>
 
           {/* CTAs */}
-          <div className="flex flex-col gap-3 mt-5">
+          <div className="flex flex-col gap-3 mt-6">
             <CtaButton cta={CTA_CONFIG.heroPrimary} className="w-full justify-center" />
             <a
               href="#work"
@@ -287,7 +312,7 @@ export const Hero: React.FC = () => {
                       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
                       className="block"
                     >
-                      {HERO_DATA.headlineMain}
+                      <Words text={HERO_DATA.headlineMain} delay={0.1} />
                     </motion.span>
                   </div>
 
@@ -299,7 +324,7 @@ export const Hero: React.FC = () => {
                       className="block"
                     >
                       <span className="relative inline-block font-serif italic font-normal text-vermilion-text lowercase">
-                        {HERO_DATA.headlineAccent}
+                        <Words text={HERO_DATA.headlineAccent} delay={0.6} />
                         <svg
                           className="absolute left-0 -bottom-2 w-full h-3 text-vermilion-text pointer-events-none"
                           viewBox="0 0 200 12"
@@ -313,7 +338,7 @@ export const Hero: React.FC = () => {
                             strokeLinecap="round"
                             initial={{ pathLength: 0 }}
                             animate={{ pathLength: 1 }}
-                            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.75 }}
+                            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 1.1 }}
                           />
                         </svg>
                       </span>
@@ -323,7 +348,10 @@ export const Hero: React.FC = () => {
 
                 <Reveal delay={0.4}>
                   <p className="text-base sm:text-lg md:text-xl font-sans text-ink-muted max-w-2xl leading-relaxed">
-                    {HERO_DATA.subheading}
+                    {HERO_DATA.subheading}{' '}
+                    <span className="font-hindi italic text-vermilion-text font-semibold">
+                      {HERO_DATA.subheadingHindi}
+                    </span>
                   </p>
                 </Reveal>
 

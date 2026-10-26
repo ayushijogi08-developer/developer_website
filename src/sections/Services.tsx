@@ -28,9 +28,9 @@ export const Services: React.FC = () => {
               [ SECTION {sectionInfo.number} ] • SERVICES
             </div>
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
-              <h2 className="font-display font-black text-[clamp(2rem,7vw,4rem)] uppercase tracking-tight text-ink leading-none">
+              <h2 className="font-display font-black text-[clamp(1.45rem,5.5vw,4rem)] uppercase tracking-tight text-ink leading-none">
                 Websites for{' '}
-                <span className="font-serif italic font-normal text-vermilion-text lowercase block sm:inline">
+                <span className="font-serif italic font-normal text-vermilion-text lowercase inline">
                   every trade.
                 </span>
               </h2>

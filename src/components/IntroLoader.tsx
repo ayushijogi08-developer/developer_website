@@ -21,7 +21,7 @@ export const IntroLoader: React.FC<{ onComplete: () => void }> = ({ onComplete }
         }
         return prev + 20; // ~125ms total load for ultra-fast <800ms experience
       });
-    }, 25);
+    }, 150);
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -51,10 +51,10 @@ export const IntroLoader: React.FC<{ onComplete: () => void }> = ({ onComplete }
     >
       <div className="flex justify-between items-center text-xs md:text-sm tracking-widest text-paper-dark border-b border-paper/20 pb-4">
         <span className="flex items-center gap-2">
-          <motion.span 
+          <motion.span
             animate={{ scale: [1, 1.3, 1] }}
             transition={{ repeat: Infinity, duration: 0.8 }}
-            className="w-2.5 h-2.5 rounded-full bg-vermilion" 
+            className="w-2.5 h-2.5 rounded-full bg-vermilion"
           />
           LOADING (TAP ANYWHERE TO SKIP)
         </span>
@@ -62,7 +62,7 @@ export const IntroLoader: React.FC<{ onComplete: () => void }> = ({ onComplete }
       </div>
 
       <div className="my-auto max-w-4xl">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -78,15 +78,15 @@ export const IntroLoader: React.FC<{ onComplete: () => void }> = ({ onComplete }
           <span className="px-2 py-0.5 border border-vermilion/40 rounded-badge">{BRAND_NAME.toUpperCase()}</span>
           <span>[ 00 / 01 ]</span>
         </motion.div>
-        
+
         <div className="overflow-hidden">
-          <motion.h2 
+          <motion.h2
             initial={{ y: "100%", opacity: 0 }}
             animate={{ y: "0%", opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
             className="font-display text-3xl md:text-6xl lg:text-7xl font-bold uppercase leading-tight tracking-tight"
           >
-            "YOUR SHOP IS OPEN 10 HOURS A DAY. <br className="hidden sm:block"/>
+            "YOUR SHOP IS OPEN 10 HOURS A DAY. <br className="hidden sm:block" />
             <span className="font-serif italic font-normal text-vermilion lowercase">your website</span> IS OPEN 24."
           </motion.h2>
         </div>
@@ -97,7 +97,7 @@ export const IntroLoader: React.FC<{ onComplete: () => void }> = ({ onComplete }
           <span className="text-4xl md:text-6xl font-bold font-display tracking-tighter tabular-nums">{percent}%</span>
           <span className="block text-xs text-paper-dark font-sans uppercase mt-1">TAP ANYWHERE TO ENTER ↵</span>
         </div>
-        
+
         <button
           onClick={(e) => {
             e.stopPropagation();

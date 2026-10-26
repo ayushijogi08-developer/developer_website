@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { AnimatePresence, MotionConfig, motion, useInView, useReducedMotion } from 'framer-motion';
+import React, { useState } from 'react';
+import { AnimatePresence, MotionConfig, motion, useReducedMotion } from 'framer-motion';
 import { Check, Gift, MapPin, MessageCircle, Package, Phone, ShoppingBag, Star } from 'lucide-react';
 import { PROCESS_DATA } from '../data/siteData';
 import { getSectionConfig } from '../config/sectionsConfig';
@@ -297,12 +297,8 @@ const URLS = [
 export const Process: React.FC = () => {
   const sectionInfo = getSectionConfig('process');
   const reduce = useReducedMotion();
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(wrapRef, { margin: '-20% 0px -20% 0px' });
   const [active, setActive] = useState(0);
-  const [hover, setHover] = useState(false);
 
-  const paused = hover || !inView;
   const next = () => setActive((a) => (a + 1) % PROCESS_DATA.length);
   const Visual = VISUALS[active];
 
@@ -319,9 +315,9 @@ export const Process: React.FC = () => {
                 [ SECTION {sectionInfo.number} ] • HOW IT WORKS
               </div>
               <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-                <h2 className="font-display text-[clamp(1.85rem,6vw,3.5rem)] font-black uppercase leading-none tracking-tight text-ink">
+                <h2 className="font-display text-[clamp(1.5rem,5.5vw,3.5rem)] font-black uppercase leading-none tracking-tight text-ink">
                   Five Simple{' '}
-                  <span className="block font-serif font-normal lowercase italic text-vermilion-text sm:inline">
+                  <span className="font-serif font-normal lowercase italic text-vermilion-text inline">
                     steps.
                   </span>
                 </h2>
@@ -332,14 +328,9 @@ export const Process: React.FC = () => {
             </div>
           </Reveal>
 
-          <div
-            ref={wrapRef}
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
-            className="grid items-stretch gap-5 md:grid-cols-12 md:gap-8"
-          >
+          <div className="grid items-stretch gap-5 md:h-[380px] md:grid-cols-12 md:gap-8">
             {/* Step list */}
-            <div role="tablist" aria-label="Process steps" className="flex flex-col gap-2 md:col-span-5">
+            <div role="tablist" aria-label="Process steps" className="flex min-h-[390px] flex-col gap-2 md:col-span-5 md:min-h-0">
               {PROCESS_DATA.map((item, i) => {
                 const isActive = i === active;
                 const done = i < active;
@@ -390,7 +381,6 @@ export const Process: React.FC = () => {
                           className="block h-full origin-left bg-vermilion-text"
                           style={{
                             animation: `processFill ${STEP_MS}ms linear forwards`,
-                            animationPlayState: paused ? 'paused' : 'running',
                           }}
                         />
                       </span>

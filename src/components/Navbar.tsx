@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BRAND_NAME, BRAND_LOGO, NAV_LINKS, WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from '../data/siteData';
-import { PhoneCall, Menu, X, ArrowUpRight, MessageSquare } from 'lucide-react';
+import { BRAND_NAME, BRAND_LOGO, BRAND_LOGO_WHITE, NAV_LINKS } from '../data/siteData';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { Magnetic } from './motion/Magnetic';
 import { triggerFormCta, CTA_CONFIG } from '../data/cta';
 
@@ -9,19 +9,22 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
+
   const lastScrollY = useRef(0);
   const scrollYBeforeMenu = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       setIsScrolled(currentScrollY > 40);
 
-      if (currentScrollY > lastScrollY.current && currentScrollY > 120) {
+      const delta = currentScrollY - lastScrollY.current;
+      if (Math.abs(delta) < 8) return; // ignore tiny jitter
+
+      if (delta > 0 && currentScrollY > 120) {
         setIsVisible(false);
-      } else {
+      } else if (delta < 0 || currentScrollY <= 120) {
         setIsVisible(true);
       }
       lastScrollY.current = currentScrollY;
@@ -56,30 +59,25 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
     return () => window.removeEventListener('keydown', handleEsc);
   }, [mobileMenuOpen, closeMenu]);
 
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace('+', '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform ${
-          isVisible ? 'translate-y-0' : '-translate-y-full'
-        } ${
-          isScrolled ? 'py-3 bg-paper/90 backdrop-blur-md border-b border-ink/10 shadow-sm' : 'py-5 md:py-5 bg-transparent'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform ${isVisible ? 'translate-y-0' : '-translate-y-full'
+          } ${isScrolled ? 'py-3 bg-paper/90 backdrop-blur-md border-b border-ink/10 shadow-sm' : 'py-3 md:py-5 bg-transparent'
+          }`}
       >
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
-            
+
             {/* Brand Logo - Official black lettering for light header */}
             <a href="#" className="flex items-center shrink-0 group py-1" aria-label={BRAND_NAME}>
               <img
-                src={BRAND_LOGO}
+                src={mobileMenuOpen ? BRAND_LOGO_WHITE : BRAND_LOGO}
                 alt={BRAND_NAME}
                 width={160}
                 height={114}
-                className={`w-auto object-contain shrink-0 group-hover:scale-105 transition-all duration-300 ${
-                  isScrolled ? 'h-12 sm:h-14 md:h-16' : 'h-16 sm:h-20 md:h-[84px] lg:h-[92px]'
-                }`}
+                className={`w-auto object-contain shrink-0 group-hover:scale-105 transition-all duration-300 ${isScrolled ? 'h-12 sm:h-14 md:h-16' : 'h-14 sm:h-20 md:h-[84px] lg:h-[92px]'
+                  }`}
               />
             </a>
 
@@ -92,15 +90,13 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
                   <a
                     key={link.name}
                     href={link.href}
-                    className={`relative py-1 group transition-colors ${
-                      isActive ? 'text-vermilion-text font-bold' : 'hover:text-vermilion-text'
-                    }`}
+                    className={`relative py-1 group transition-colors ${isActive ? 'text-vermilion-text font-bold' : 'hover:text-vermilion-text'
+                      }`}
                   >
                     {link.name}
                     <span
-                      className={`absolute left-0 bottom-0 h-[2px] bg-vermilion-text transition-all duration-300 ${
-                        isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                      }`}
+                      className={`absolute left-0 bottom-0 h-[2px] bg-vermilion-text transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                        }`}
                     />
                   </a>
                 );
@@ -128,7 +124,10 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
               {/* Mobile hamburger — 44×44px touch target */}
               <button
                 onClick={() => mobileMenuOpen ? closeMenu() : openMenu()}
-                className="lg:hidden min-h-[44px] min-w-[44px] p-2.5 bg-paper-dark/60 border border-ink/20 rounded-badge text-ink active:bg-ink active:text-paper transition-colors flex items-center justify-center"
+                className={`lg:hidden min-h-[44px] min-w-[44px] p-2.5 border rounded-badge transition-colors flex items-center justify-center ${mobileMenuOpen
+                    ? 'bg-paper/10 border-paper/30 text-paper'
+                    : 'bg-paper-dark/60 border-ink/20 text-ink active:bg-ink active:text-paper'
+                  }`}
                 aria-label="Toggle Menu"
                 aria-expanded={mobileMenuOpen}
               >
@@ -147,7 +146,8 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
             animate={{ opacity: 1, clipPath: 'inset(0 0 0% 0)' }}
             exit={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="fixed inset-0 z-40 bg-ink text-paper pt-24 pb-8 px-5 flex flex-col justify-between lg:hidden font-sans overflow-y-auto"
+            data-lenis-prevent
+            className="fixed inset-0 z-40 bg-ink text-paper pt-28 pb-20 px-5 flex flex-col justify-between lg:hidden font-sans overflow-y-auto overscroll-contain"
           >
             <div className="flex flex-col gap-1">
               <span className="font-mono text-[12px] text-vermilion-light tracking-widest uppercase font-bold mb-2">
@@ -169,26 +169,8 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
               ))}
             </div>
 
-            <div className="space-y-3 pt-6 border-t border-paper/20 mt-auto">
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 bg-vermilion text-paper font-bold py-3.5 rounded-badge border border-paper/30 text-base min-h-[48px] active:scale-95 transition-transform"
-              >
-                <MessageSquare className="w-5 h-5" />
-                <span>WhatsApp Us</span>
-              </a>
-              <a
-                href={`tel:${WHATSAPP_NUMBER}`}
-                className="w-full flex items-center justify-center gap-2 bg-paper/10 text-paper font-bold py-3.5 rounded-badge border border-paper/20 text-base min-h-[48px] active:scale-95 transition-transform"
-              >
-                <PhoneCall className="w-5 h-5" />
-                <span>Call Now</span>
-              </a>
-              <div className="text-center font-mono text-[12px] text-paper/40 pt-1">
-                DIRECT FOUNDER CONTACT
-              </div>
+            <div className="pt-4 border-t border-paper/10 mt-auto text-center font-mono text-[11px] text-paper/40 tracking-wider">
+              DIRECT FOUNDER CONTACT
             </div>
           </motion.div>
         )}

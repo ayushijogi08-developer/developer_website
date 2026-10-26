@@ -160,9 +160,9 @@ export const ClientDeliverables: React.FC = () => {
             <div className="font-mono text-xs text-vermilion-text uppercase tracking-widest mb-1.5 font-bold">
               [ SECTION {sectionInfo.number} ] • CONTACT
             </div>
-            <h2 className="font-display font-black text-[clamp(1.85rem,6vw,3.5rem)] uppercase tracking-tight text-ink leading-none">
+            <h2 className="font-display font-black text-[clamp(1.5rem,5.5vw,3.5rem)] uppercase tracking-tight text-ink leading-none">
               Let's Build{' '}
-              <span className="font-serif italic font-normal text-vermilion-text lowercase block sm:inline">
+              <span className="font-serif italic font-normal text-vermilion-text lowercase inline">
                 your site.
               </span>
             </h2>

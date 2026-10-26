@@ -24,9 +24,9 @@ export const FAQ: React.FC = () => {
             <div className="font-mono text-xs text-vermilion-text uppercase tracking-widest mb-1.5 font-bold">
               [ SECTION {sectionInfo.number} ] • FAQ
             </div>
-            <h2 className="font-display font-black text-[clamp(1.85rem,6vw,3.5rem)] uppercase tracking-tight text-ink leading-tight">
+            <h2 className="font-display font-black text-[clamp(1.45rem,5.5vw,3.5rem)] uppercase tracking-tight text-ink leading-tight">
               Clear Answers to{' '}
-              <span className="font-serif italic font-normal text-vermilion-text lowercase block sm:inline">
+              <span className="font-serif italic font-normal text-vermilion-text lowercase inline">
                 common questions.
               </span>
             </h2>
