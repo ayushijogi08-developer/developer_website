@@ -604,9 +604,29 @@ export const Pricing: React.FC = () => {
                   ? 'Save 10% compared to monthly billing.'
                   : 'Switch to yearly and get 2 months free.'}
             </p>
+
+            <div
+              className="mt-5 inline-flex rounded-full border border-ink/20 bg-card p-1 sm:hidden"
+              role="tablist"
+              aria-label="Care plan"
+            >
+              {MAINTENANCE.map((m) => (
+                <button
+                  key={m.name}
+                  role="tab"
+                  aria-selected={selectedCare === m.name}
+                  onClick={() => setSelectedCare(m.name)}
+                  className={`min-h-[38px] rounded-full px-5 py-2 font-mono text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                    selectedCare === m.name ? 'bg-vermilion-text text-paper' : 'text-ink'
+                  }`}
+                >
+                  {m.name.replace('Care ', '')}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-6 sm:mt-9 flex sm:grid sm:grid-cols-3 gap-4 sm:gap-6 items-stretch overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none -mx-5 px-5 sm:mx-0 sm:px-0 pt-4 pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mt-8 sm:mt-9 grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch">
             {MAINTENANCE.map((m) => {
               const cycle = BILLING_OPTIONS.find((o) => o.id === billing)!;
               const amount = m.prices[billing];
@@ -627,7 +647,7 @@ export const Pricing: React.FC = () => {
                       setSelectedCare(m.name);
                     }
                   }}
-                  className={`relative flex flex-col w-[80%] shrink-0 snap-center sm:w-auto sm:shrink rounded-3xl border bg-gradient-to-b from-white to-card p-5 sm:p-7 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 transition-all duration-300 ${isActive
+                  className={`relative ${isActive ? 'flex' : 'hidden sm:flex'} flex-col rounded-3xl border bg-gradient-to-b from-white to-card p-5 sm:p-7 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 transition-all duration-300 ${isActive
                       ? 'border-vermilion-text/40 ring-1 ring-vermilion-text/30 shadow-[0_30px_60px_-30px_rgba(194,47,23,0.45)]'
                       : 'border-ink/10 shadow-mobile-soft hover:border-ink/25'
                     }`}
@@ -684,12 +704,8 @@ export const Pricing: React.FC = () => {
             })}
           </div>
 
-          <p className="sm:hidden -mt-3 mb-3 text-center font-mono text-[10px] uppercase tracking-wider text-ink-muted">
-            Swipe to compare plans →
-          </p>
-
           {/* No plan option */}
-          <div className="mt-2 sm:mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-6 rounded-2xl border border-ink/10 bg-card px-5 py-4 text-center sm:text-left shadow-mobile-soft">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-6 rounded-2xl border border-ink/10 bg-card px-5 py-4 text-center sm:text-left shadow-mobile-soft">
             <p className="font-display font-bold text-sm sm:text-base text-ink">Don&apos;t need a plan right now?</p>
             <p className="font-sans text-xs sm:text-sm text-ink-muted">
               One-off changes are <strong className="font-bold text-ink">{ONE_OFF_EDIT_PRICE} per edit</strong>, with a 3 to 5
