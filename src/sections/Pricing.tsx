@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { getSectionConfig } from '../config/sectionsConfig';
-import { Check, Sparkles, X, ChevronLeft, ChevronRight, Globe, Server, Info } from 'lucide-react';
+import { Check, Sparkles, X, Globe, Server, Info, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Reveal } from '../components/motion/Reveal';
 import { type CtaConfig, CTA_CONFIG } from '../data/cta';
 import { CtaButton } from '../components/CtaButton';
@@ -292,7 +292,7 @@ export const Pricing: React.FC = () => {
             </div>
 
             {/* Toggle + 1-Year Included Pill — integrated right next to header */}
-            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+            <div className="flex flex-wrap items-center justify-center md:justify-end gap-2.5 sm:gap-3 w-full md:w-auto">
               <div
                 className="inline-flex rounded-full border border-ink/20 bg-card p-1 shadow-mobile-soft"
                 role="tablist"
@@ -358,7 +358,7 @@ export const Pricing: React.FC = () => {
         <div
           ref={scrollRef}
           onScroll={handleScroll}
-          className="relative flex overflow-x-auto snap-x snap-mandatory scroll-px-5 gap-4 scrollbar-none pt-4 pb-6 -mx-5 px-5 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 md:pt-3 md:pb-1 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible items-stretch"
+          className="relative grid grid-cols-1 gap-5 pt-5 pb-2 md:grid-cols-3 md:pt-3 md:pb-1 items-stretch"
         >
           {plans.map((plan) => {
             const isSelected = selected === plan.name;
@@ -388,7 +388,7 @@ export const Pricing: React.FC = () => {
                     setSelected(plan.name);
                   }
                 }}
-                className={`w-[80vw] max-w-[340px] flex-shrink-0 snap-center md:w-auto md:max-w-none relative flex flex-col rounded-3xl transition-all duration-500 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 ${isSelected
+                className={`w-full relative ${isSelected ? 'flex' : 'hidden md:flex'} flex-col rounded-3xl transition-all duration-500 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 ${isSelected
                   ? 'bg-gradient-to-b from-white to-card border border-vermilion-text/40 ring-1 ring-vermilion-text/30 shadow-[0_30px_60px_-30px_rgba(194,47,23,0.45)] md:-translate-y-2 z-20'
                   : 'bg-card/90 border border-ink/10 shadow-mobile-soft hover:-translate-y-1 hover:border-ink/25 hover:shadow-[0_24px_48px_-28px_rgba(17,17,16,0.3)] z-10'
                   }`}
@@ -475,12 +475,8 @@ export const Pricing: React.FC = () => {
           })}
         </div>
 
-        <p className="md:hidden -mt-3 mb-3 flex items-center justify-center gap-1.5 font-mono text-[11px] text-ink-muted">
-          <ChevronLeft className="w-3.5 h-3.5" /> Swipe to compare plans <ChevronRight className="w-3.5 h-3.5" />
-        </p>
-
         {/* Consultation & Transparent Pricing Note — Full width matching the 3 cards grid */}
-        <div className="mt-3 w-full rounded-2xl border border-ink/10 bg-card p-3 sm:px-5 sm:py-3 shadow-mobile-soft">
+        <div className="mt-6 w-full rounded-2xl border border-ink/10 bg-card p-4 sm:px-5 sm:py-3 shadow-mobile-soft">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left">
             <div>
               <p className="font-display font-bold text-sm sm:text-base text-ink">
