@@ -11,7 +11,6 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const lastScrollY = useRef(0);
-  const scrollYBeforeMenu = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,19 +33,21 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when menu is open
+  // Lock body scroll cleanly when menu is open without breaking document flow
   const openMenu = useCallback(() => {
-    scrollYBeforeMenu.current = window.scrollY;
     document.body.classList.add('menu-open');
-    document.body.style.top = `-${scrollYBeforeMenu.current}px`;
+    const lenis = (window as any).__lenis;
+    if (lenis && typeof lenis.stop === 'function') {
+      lenis.stop();
+    }
     setMobileMenuOpen(true);
   }, []);
 
-  const closeMenu = useCallback((restoreScroll = true) => {
+  const closeMenu = useCallback(() => {
     document.body.classList.remove('menu-open');
-    document.body.style.top = '';
-    if (restoreScroll) {
-      window.scrollTo(0, scrollYBeforeMenu.current);
+    const lenis = (window as any).__lenis;
+    if (lenis && typeof lenis.start === 'function') {
+      lenis.start();
     }
     setMobileMenuOpen(false);
   }, []);
@@ -54,26 +55,38 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
 
-    // 1. Release body lock without restoring previous scroll position
-    closeMenu(false);
+    // 1. Close mobile menu cleanly if open
+    closeMenu();
 
-    // 2. Target element scroll
+    // 2. Identify target
+    if (href === '#' || href === '#hero') {
+      requestAnimationFrame(() => {
+        const lenis = (window as any).__lenis;
+        if (lenis && typeof lenis.scrollTo === 'function') {
+          lenis.start();
+          lenis.targetScroll = NaN;
+          lenis.scrollTo(0, { offset: 0, force: true });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.history.pushState(null, '', '#');
+      });
+      return;
+    }
+
     const targetElement = document.querySelector(href);
     if (!targetElement) return;
 
+    // 3. Scroll to target section cleanly with 0 offset so the previous section never leaks
     requestAnimationFrame(() => {
       const lenis = (window as any).__lenis;
-      if (typeof lenis?.scrollTo === 'function') {
-        lenis.scrollTo(href, { offset: -80 });
+      if (lenis && typeof lenis.scrollTo === 'function') {
+        lenis.start();
+        // Reset targetScroll so tapping the same link repeatedly always triggers a scroll
+        lenis.targetScroll = NaN;
+        lenis.scrollTo(targetElement, { offset: 0, force: true });
       } else {
-        const headerOffset = 80;
-        const rect = targetElement.getBoundingClientRect();
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const targetPosition = rect.top + scrollTop - headerOffset;
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth',
-        });
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
       window.history.pushState(null, '', href);
     });
@@ -83,7 +96,7 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
   useEffect(() => {
     if (!mobileMenuOpen) return;
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeMenu(true);
+      if (e.key === 'Escape') closeMenu();
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
@@ -100,7 +113,12 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
           <div className="flex items-center justify-between gap-4">
 
             {/* Brand Logo - Official black lettering for light header */}
-            <a href="#" className="flex items-center shrink-0 group py-1 -ml-5 sm:ml-0" aria-label={BRAND_NAME}>
+            <a
+              href="#"
+              onClick={(e) => handleNavClick(e, '#')}
+              className="flex items-center shrink-0 group py-1 -ml-5 sm:ml-0"
+              aria-label={BRAND_NAME}
+            >
               <img
                 src={mobileMenuOpen ? BRAND_LOGO_WHITE : BRAND_LOGO}
                 alt={BRAND_NAME}
@@ -120,6 +138,7 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
                   <a
                     key={link.name}
                     href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
                     className={`relative py-1 group transition-colors ${isActive ? 'text-vermilion-text font-bold' : 'hover:text-vermilion-text'
                       }`}
                   >
@@ -153,7 +172,7 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
 
               {/* Mobile hamburger — 44×44px touch target */}
               <button
-                onClick={() => (mobileMenuOpen ? closeMenu(true) : openMenu())}
+                onClick={() => (mobileMenuOpen ? closeMenu() : openMenu())}
                 className={`lg:hidden min-h-[44px] min-w-[44px] p-2.5 border rounded-badge transition-colors flex items-center justify-center ${mobileMenuOpen
                   ? 'bg-paper/10 border-paper/30 text-paper'
                   : 'bg-paper-dark/60 border-ink/20 text-ink active:bg-ink active:text-paper'

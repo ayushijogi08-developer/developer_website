@@ -203,7 +203,7 @@ const TERMS: PolicySection[] = [
     },
     {
         title: 'Hosting and support',
-        text: 'Domain and hosting setup, plus 1 year of WhatsApp support for fixes and small updates, are provided as described in the "After launch" section of this website. New features, redesigns and support beyond that period are charged separately.',
+        text: 'Domain and hosting setup, plus 1 year of WhatsApp support for fixes and small updates, are provided as described in the "After launch" section of this website. New features, redesigns and support beyond that period are charged separately. Care Plan monthly content edits cover text changes, image swaps, and minor adjustments. They do not roll over to subsequent months, nor do they include building new pages, custom feature development, or full-scale graphic design work.',
     },
     {
         title: 'No guarantee of results',

@@ -15,13 +15,13 @@
   }
 
   section[id] {
-    scroll-margin-top: 85px;
+    scroll-margin-top: 0px;
   }
 
   /* ── Mobile-first section padding ── */
   @media (max-width: 767px) {
     section[id] {
-      scroll-margin-top: 80px;
+      scroll-margin-top: 0px;
     }
   }
 }
@@ -138,9 +138,7 @@ html.lenis body {
 
 body.menu-open {
   overflow: hidden;
-  position: fixed;
-  width: 100%;
-  height: 100%;
+  touch-action: none;
 }
 
 /* ══════════════════════════════════════════
