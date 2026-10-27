@@ -75,7 +75,7 @@ export const About: React.FC = () => {
           {/* Direct WhatsApp Text Link */}
           <Reveal delay={0.4}>
             <div className="pt-2">
-              <CtaButton cta={CTA_CONFIG.aboutTertiary} />
+              <CtaButton cta={CTA_CONFIG.aboutTertiary} className="inline-block py-2.5" />
             </div>
           </Reveal>
 

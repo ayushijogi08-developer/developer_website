@@ -94,7 +94,7 @@ export const Portfolio: React.FC = () => {
                     {/* Details Trigger Button */}
                     <button
                       onClick={() => setActiveSheetProject(project)}
-                      className="text-xs font-mono font-bold text-vermilion-light hover:underline flex items-center gap-1 min-h-[32px] px-1"
+                      className="text-xs font-mono font-bold text-vermilion-light hover:underline flex items-center gap-1 min-h-[44px] px-1"
                     >
                       <Info className="w-3.5 h-3.5" />
                       <span>Details</span>

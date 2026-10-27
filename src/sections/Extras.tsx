@@ -231,9 +231,9 @@ const PolicyBody: React.FC<{ intro: string; sections: PolicySection[] }> = ({ in
         <p className="text-xs sm:text-sm text-ink-muted leading-relaxed">{intro}</p>
         {sections.map((s, i) => (
             <div key={s.title} className="space-y-1.5">
-                <h4 className="font-display font-bold text-sm text-ink uppercase tracking-tight">
+                <h3 className="font-display font-bold text-sm text-ink uppercase tracking-tight">
                     {i + 1}. {s.title}
-                </h4>
+                </h3>
                 {s.text && <p className="text-xs sm:text-sm text-ink-muted leading-relaxed">{s.text}</p>}
                 {s.list && (
                     <ul className="text-xs sm:text-sm text-ink-muted space-y-1 list-disc pl-4">

@@ -68,6 +68,7 @@ const BUSINESS_TYPES: BusinessTypeOption[] = [
 export const ClientDeliverables: React.FC = () => {
   const sectionInfo = getSectionConfig('contact');
   const [formData, setFormData] = useState({ name: '', phone: '', industry: '', webOrMaps: '', message: '' });
+  const [nameError, setNameError] = useState('');
   const [phoneError, setPhoneError] = useState('');
   const [industryError, setIndustryError] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -108,12 +109,17 @@ export const ClientDeliverables: React.FC = () => {
   }, []);
 
   const validatePhone = (phoneStr: string) => {
-    return /^[0-9]{10}$/.test(phoneStr);
+    return /^[6-9][0-9]{9}$/.test(phoneStr);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim()) return;
+    if (!formData.name.trim()) {
+      setNameError('Please enter your name.');
+      document.getElementById('input-name')?.focus();
+      return;
+    }
+    setNameError('');
 
     if (!formData.industry) {
       setIndustryError('Please select your business type.');
@@ -122,7 +128,7 @@ export const ClientDeliverables: React.FC = () => {
     setIndustryError('');
 
     if (!validatePhone(formData.phone)) {
-      setPhoneError('Please enter a valid 10-digit mobile number.');
+      setPhoneError('Please enter a valid 10-digit mobile number starting with 6, 7, 8 or 9.');
       return;
     }
     setPhoneError('');
@@ -140,6 +146,7 @@ export const ClientDeliverables: React.FC = () => {
   const resetForm = () => {
     setFormData({ name: '', phone: '', industry: '', webOrMaps: '', message: '' });
     setFormSubmitted(false);
+    setNameError('');
     setPhoneError('');
     setIndustryError('');
   };
@@ -293,11 +300,19 @@ export const ClientDeliverables: React.FC = () => {
                         required
                         autoComplete="name"
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        onChange={(e) => {
+                          setFormData({ ...formData, name: e.target.value });
+                          if (nameError) setNameError('');
+                        }}
                         onFocus={handleInputFocus}
                         placeholder="e.g. Ramesh Patel / Shivam Construction"
                         className="w-full bg-card border border-ink/30 p-3 rounded-badge font-sans text-base text-ink placeholder:text-ink-muted focus:outline-none focus:border-vermilion-text focus:ring-2 focus:ring-vermilion/20 transition-all duration-200 min-h-[46px]"
                       />
+                      {nameError && (
+                        <span className="text-vermilion-text text-xs font-mono font-bold block mt-1" role="alert">
+                          {nameError}
+                        </span>
+                      )}
                     </div>
 
                     {/* Phone Number */}

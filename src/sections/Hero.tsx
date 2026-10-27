@@ -31,33 +31,33 @@ const Words: React.FC<{
   step = 0.12,
   className = "inline-block",
 }) => {
-  const shouldReduceMotion = useReducedMotion();
-  const words = text.split(/\s+/).filter(Boolean);
+    const shouldReduceMotion = useReducedMotion();
+    const words = text.split(/\s+/).filter(Boolean);
 
-  return (
-    <>
-      {words.map((word, i) => (
-        <React.Fragment key={i}>
-          <span className="inline-block overflow-hidden pb-1 -mb-1 align-bottom">
-            <motion.span
-              initial={shouldReduceMotion ? { y: '0%', opacity: 1 } : { y: '100%', opacity: 0 }}
-              animate={{ y: '0%', opacity: 1 }}
-              transition={{
-                duration: shouldReduceMotion ? 0 : 0.5,
-                ease: [0.22, 1, 0.36, 1],
-                delay: shouldReduceMotion ? 0 : delay + i * step,
-              }}
-              className={className}
-            >
-              {word}
-            </motion.span>
-          </span>
-          {i < words.length - 1 ? ' ' : ''}
-        </React.Fragment>
-      ))}
-    </>
-  );
-};
+    return (
+      <>
+        {words.map((word, i) => (
+          <React.Fragment key={i}>
+            <span className="inline-block overflow-hidden pb-1 -mb-1 align-bottom">
+              <motion.span
+                initial={shouldReduceMotion ? { y: '0%', opacity: 1 } : { y: '100%', opacity: 0 }}
+                animate={{ y: '0%', opacity: 1 }}
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: shouldReduceMotion ? 0 : delay + i * step,
+                }}
+                className={className}
+              >
+                {word}
+              </motion.span>
+            </span>
+            {i < words.length - 1 ? ' ' : ''}
+          </React.Fragment>
+        ))}
+      </>
+    );
+  };
 
 export const Hero: React.FC = () => {
   const rawX = useMotionValue(0);
@@ -239,7 +239,7 @@ export const Hero: React.FC = () => {
           {/* Subline with hero reveal */}
           <p className="text-base font-sans text-ink-muted leading-[1.6] mt-5 max-w-[340px]">
             <Words text={HERO_DATA.subheading} delay={0.8} step={0.035} />{' '}
-            <span className="font-hindi italic text-vermilion-text font-semibold inline-block">
+            <span className="font-hindi italic text-vermilion-text font-semibold inline-block" lang="hi">
               <Words
                 text={HERO_DATA.subheadingHindi}
                 delay={0.8 + HERO_DATA.subheading.split(/\s+/).filter(Boolean).length * 0.035}
@@ -411,7 +411,7 @@ export const Hero: React.FC = () => {
                 {/* Subline with hero reveal */}
                 <p className="text-base sm:text-lg md:text-xl font-sans text-ink-muted max-w-2xl leading-relaxed">
                   <Words text={HERO_DATA.subheading} delay={0.85} step={0.035} />{' '}
-                  <span className="font-hindi italic text-vermilion-text font-semibold inline-block">
+                  <span className="font-hindi italic text-vermilion-text font-semibold inline-block" lang="hi">
                     <Words
                       text={HERO_DATA.subheadingHindi}
                       delay={0.85 + HERO_DATA.subheading.split(/\s+/).filter(Boolean).length * 0.035}

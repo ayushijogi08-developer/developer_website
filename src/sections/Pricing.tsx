@@ -346,7 +346,7 @@ export const Pricing: React.FC = () => {
                     role="tab"
                     aria-selected={siteType === t}
                     onClick={() => setSiteType(t)}
-                    className={`px-3.5 sm:px-4 py-1.5 rounded-full font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-colors min-h-[34px] ${siteType === t ? 'bg-ink text-paper shadow-sm' : 'text-ink hover:bg-ink/10'
+                    className={`px-3.5 sm:px-4 py-1.5 rounded-full font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-colors min-h-[44px] ${siteType === t ? 'bg-ink text-paper shadow-sm' : 'text-ink hover:bg-ink/10'
                       }`}
                   >
                     {t === 'static' ? 'Static Website' : 'Dynamic Website'}
@@ -400,7 +400,6 @@ export const Pricing: React.FC = () => {
         <div
           ref={scrollRef}
           onScroll={handleScroll}
-          data-lenis-prevent
           className="relative flex overflow-x-auto snap-x snap-mandatory gap-3.5 sm:gap-4 scrollbar-none pt-5 pb-6 -mx-5 px-5 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:pt-3 md:pb-1 items-stretch"
         >
           {plans.map((plan) => {
@@ -421,19 +420,9 @@ export const Pricing: React.FC = () => {
                 ref={(el) => {
                   cardRefs.current[plan.name] = el;
                 }}
-                role="button"
-                tabIndex={0}
-                aria-pressed={isSelected}
                 onClick={() => {
                   setSelected(plan.name);
                   scrollToPlan(plan.name);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setSelected(plan.name);
-                    scrollToPlan(plan.name);
-                  }
                 }}
                 className={`w-[82%] sm:w-[85%] md:w-auto flex-shrink-0 snap-center md:flex-shrink relative flex flex-col rounded-3xl transition-all duration-500 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-vermilion/40 ${isSelected
                   ? 'bg-white border border-ink/15 shadow-[0_8px_30px_-12px_rgba(17,17,16,0.18)] md:bg-gradient-to-b md:from-white md:to-card md:border-vermilion-text/40 md:ring-1 md:ring-vermilion-text/30 md:shadow-[0_30px_60px_-30px_rgba(194,47,23,0.45)] md:-translate-y-2 z-20'
@@ -620,7 +609,7 @@ export const Pricing: React.FC = () => {
                     role="tab"
                     aria-selected={billing === o.id}
                     onClick={() => setBilling(o.id)}
-                    className={`flex items-center gap-1.5 px-3.5 sm:px-5 py-2 rounded-full font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-colors min-h-[38px] ${billing === o.id ? 'bg-ink text-paper shadow-sm' : 'text-ink hover:bg-ink/10'
+                    className={`flex items-center gap-1.5 px-3.5 sm:px-5 py-2 rounded-full font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-colors min-h-[44px] ${billing === o.id ? 'bg-ink text-paper shadow-sm' : 'text-ink hover:bg-ink/10'
                       }`}
                   >
                     {o.label}
@@ -666,7 +655,6 @@ export const Pricing: React.FC = () => {
           <div
             ref={careScrollRef}
             onScroll={handleCareScroll}
-            data-lenis-prevent
             className="relative mt-8 sm:mt-9 flex overflow-x-auto snap-x snap-mandatory gap-3.5 sm:gap-4 scrollbar-none pt-5 pb-6 -mx-5 px-5 sm:-mx-6 sm:px-6 sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible sm:pt-0 sm:pb-0 items-stretch"
           >
             {MAINTENANCE.map((m) => {

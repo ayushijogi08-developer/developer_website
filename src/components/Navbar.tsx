@@ -42,18 +42,48 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
     setMobileMenuOpen(true);
   }, []);
 
-  const closeMenu = useCallback(() => {
+  const closeMenu = useCallback((restoreScroll = true) => {
     document.body.classList.remove('menu-open');
     document.body.style.top = '';
-    window.scrollTo(0, scrollYBeforeMenu.current);
+    if (restoreScroll) {
+      window.scrollTo(0, scrollYBeforeMenu.current);
+    }
     setMobileMenuOpen(false);
   }, []);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+
+    // 1. Release body lock without restoring previous scroll position
+    closeMenu(false);
+
+    // 2. Target element scroll
+    const targetElement = document.querySelector(href);
+    if (!targetElement) return;
+
+    requestAnimationFrame(() => {
+      const lenis = (window as any).__lenis;
+      if (typeof lenis?.scrollTo === 'function') {
+        lenis.scrollTo(href, { offset: -80 });
+      } else {
+        const headerOffset = 80;
+        const rect = targetElement.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const targetPosition = rect.top + scrollTop - headerOffset;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth',
+        });
+      }
+      window.history.pushState(null, '', href);
+    });
+  };
 
   // Close on Esc
   useEffect(() => {
     if (!mobileMenuOpen) return;
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeMenu();
+      if (e.key === 'Escape') closeMenu(true);
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
@@ -123,7 +153,7 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
 
               {/* Mobile hamburger — 44×44px touch target */}
               <button
-                onClick={() => mobileMenuOpen ? closeMenu() : openMenu()}
+                onClick={() => (mobileMenuOpen ? closeMenu(true) : openMenu())}
                 className={`lg:hidden min-h-[44px] min-w-[44px] p-2.5 border rounded-badge transition-colors flex items-center justify-center ${mobileMenuOpen
                   ? 'bg-paper/10 border-paper/30 text-paper'
                   : 'bg-paper-dark/60 border-ink/20 text-ink active:bg-ink active:text-paper'
@@ -157,19 +187,19 @@ export const Navbar: React.FC<{ activeSectionId?: string }> = ({ activeSectionId
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  onClick={() => closeMenu()}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.35, delay: 0.05 + idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
                   className="font-display font-bold text-[clamp(1.25rem,5vw,1.75rem)] uppercase tracking-tight text-paper active:text-vermilion flex items-center justify-between border-b border-paper/10 py-3.5 min-h-[48px]"
                 >
                   <span>{link.name}</span>
-                  <span className="font-mono text-sm text-paper/40 font-normal">0{idx + 1}</span>
+                  <span className="font-mono text-sm text-paper/70 font-normal">0{idx + 1}</span>
                 </motion.a>
               ))}
             </div>
 
-            <div className="pt-4 border-t border-paper/10 mt-auto text-center font-mono text-[11px] text-paper/40 tracking-wider">
+            <div className="pt-4 border-t border-paper/10 mt-auto text-center font-mono text-[11px] text-paper/70 tracking-wider">
               DIRECT FOUNDER CONTACT
             </div>
           </motion.div>

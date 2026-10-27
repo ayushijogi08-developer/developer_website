@@ -43,12 +43,12 @@ export {
 
 export const NAV_LINKS = [
   { name: "Home", href: "#hero" },
-  { name: "Services", href: "#services" },
   { name: "Our Work", href: "#work" },
+  { name: "Services", href: "#services" },
   { name: "What You Get", href: "#included" },
   { name: "Process", href: "#process" },
-  { name: "Pricing", href: "#pricing" },
   { name: "About", href: "#about" },
+  { name: "Pricing", href: "#pricing" },
   { name: "Contact", href: "#contact" },
 ];
 

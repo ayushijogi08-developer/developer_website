@@ -74,48 +74,12 @@ export const CTA_CONFIG = {
     whatsappMessage: `Hi ${BRAND_NAME}! I'm ready to start with step 1 (discovery and requirements) for my business website.`,
   },
 
-  pricingStarter: {
-    id: 'cta-pricing-starter',
-    label: 'Start with Starter',
-    style: 'outline',
-    destination: '#contact',
-    prefillMessage: 'I am interested in starting with the Starter Website plan (₹9,999).',
-    whatsappMessage: `Hi ${BRAND_NAME}! I want to start with the Starter Website plan (₹9,999).`,
-  },
-
-  pricingBusiness: {
-    id: 'cta-pricing-business',
-    label: 'Start with Business',
-    style: 'primary',
-    destination: '#contact',
-    prefillMessage: 'I am interested in starting with the Business Growth plan (₹19,999).',
-    whatsappMessage: `Hi ${BRAND_NAME}! I want to start with the Business Growth plan (₹19,999).`,
-  },
-
-  pricingPremium: {
-    id: 'cta-pricing-premium',
-    label: 'Start with Premium',
-    style: 'outline',
-    destination: '#contact',
-    prefillMessage: 'I am interested in starting with the Custom Scale / Premium plan (₹39,999).',
-    whatsappMessage: `Hi ${BRAND_NAME}! I want to start with the Custom Scale / Premium plan (₹39,999).`,
-  },
-
   aboutTertiary: {
     id: 'cta-about-tertiary',
     label: 'Message Darshan on WhatsApp →',
     style: 'link',
     destination: 'whatsapp',
     whatsappMessage: `Hi Darshan! I saw your about note and would like to talk directly about a website project.`,
-  },
-
-  firstClientsOffer: {
-    id: 'cta-first-clients-offer',
-    label: 'Claim the first-client offer',
-    style: 'primary',
-    destination: '#contact',
-    prefillMessage: 'I want to claim the founding first-client offer with discounted pricing.',
-    whatsappMessage: `Hi ${BRAND_NAME}! I would like to claim the founding first-client offer.`,
   },
 
   contactSubmit: {

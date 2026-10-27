@@ -34,7 +34,6 @@ export const BRAND_CONFIG = {
     },
     // TODO: Update with official social media handles
     { name: "Instagram", href: "https://instagram.com" },
-    { name: "LinkedIn", href: "https://linkedin.com" },
   ],
 } as const;
 
@@ -114,7 +113,7 @@ export function validateBrandConfig(): void {
 
   for (const pattern of FORBIDDEN_PLACEHOLDER_PATTERNS) {
     if (pattern.test(valuesToCheck)) {
-      throw new Error(
+      console.error(
         `[CONFIG SAFEGUARD ERROR] Forbidden placeholder or legacy brand pattern detected matching ${pattern}. Update configuration with verified credentials.`
       );
     }

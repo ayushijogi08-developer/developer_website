@@ -1,4 +1,5 @@
 
+import { useState, useEffect } from 'react';
 import { useLenis } from './hooks/useLenis';
 import { Navbar } from './components/Navbar';
 import { Hero } from './sections/Hero';
@@ -17,19 +18,53 @@ import { FloatingActions } from './components/FloatingActions';
 
 
 export function App() {
-
+  const [activeId, setActiveId] = useState<string>('');
 
   // Enable Lenis smooth momentum scrolling
   useLenis();
 
+  useEffect(() => {
+    const sectionIds = [
+      '#hero',
+      '#work',
+      '#services',
+      '#included',
+      '#process',
+      '#about',
+      '#pricing',
+      '#faq',
+      '#contact',
+    ];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: '-40% 0px -55% 0px',
+      }
+    );
+
+    sectionIds.forEach((selector) => {
+      const el = document.querySelector(selector);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
-    <div className="min-h-screen bg-paper text-ink font-sans selection:bg-vermilion selection:text-paper relative pb-16 md:pb-0">
+    <div className="min-h-screen bg-paper text-ink font-sans selection:bg-vermilion selection:text-paper relative">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-ink focus:text-paper focus:px-4 focus:py-2">Skip to content</a>
+      <Navbar activeSectionId={activeId} />
 
-
-      <Navbar />
-
-      <main>
+      <main id="main">
         <Hero />
         <IntroVideo />
         <Portfolio />

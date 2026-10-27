@@ -118,7 +118,7 @@ export const Services: React.FC = () => {
 
             {/* Tertiary Action under Services List */}
             <div className="pt-2">
-              <CtaButton cta={CTA_CONFIG.servicesTertiary} />
+              <CtaButton cta={CTA_CONFIG.servicesTertiary} className="inline-block py-2.5" />
             </div>
           </div>
 

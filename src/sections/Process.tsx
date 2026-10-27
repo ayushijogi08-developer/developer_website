@@ -429,7 +429,7 @@ export const Process: React.FC = () => {
           {/* Tertiary Action */}
           <Reveal delay={0.2}>
             <div className="mt-6 flex items-center justify-start md:mt-8">
-              <CtaButton cta={CTA_CONFIG.processTertiary} />
+              <CtaButton cta={CTA_CONFIG.processTertiary} className="inline-block py-2.5" />
             </div>
           </Reveal>
         </div>

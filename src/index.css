@@ -21,7 +21,7 @@
   /* ── Mobile-first section padding ── */
   @media (max-width: 767px) {
     section[id] {
-      scroll-margin-top: 64px;
+      scroll-margin-top: 80px;
     }
   }
 }
@@ -240,14 +240,6 @@ body.menu-open {
   animation-play-state: paused;
 }
 
-
-@media (prefers-reduced-motion: reduce) {
-
-  .animate-mockup-float,
-  .animate-mockup-content-scroll {
-    animation: none !important;
-  }
-}
 
 .scrollbar-none {
   scrollbar-width: none;

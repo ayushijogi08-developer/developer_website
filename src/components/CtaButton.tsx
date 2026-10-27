@@ -52,7 +52,7 @@ export const CtaButton: React.FC<CtaButtonProps> = ({
         onClick={handleClick}
         target={cta.destination === 'whatsapp' ? '_blank' : undefined}
         rel={cta.destination === 'whatsapp' ? 'noopener,noreferrer' : undefined}
-        className={`inline-flex items-center gap-1.5 font-sans font-bold text-sm sm:text-base text-vermilion-text hover:text-vermilion-dark hover:underline underline-offset-4 transition-colors group cursor-pointer ${className}`}
+        className={`inline-flex items-center gap-1.5 font-sans font-bold text-sm sm:text-base text-vermilion-text hover:text-vermilion-dark hover:underline underline-offset-4 transition-colors group cursor-pointer inline-block py-2.5 ${className}`}
       >
         <span>{labelWithoutArrow}</span>
         {showIcon && (icon || <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />)}
